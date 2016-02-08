@@ -17,12 +17,18 @@ public class Feeder extends Subsystem {
     public Feeder(){
     outsidefeeder=new VictorSP(RobotMap.outsideFeeder);
     insidefeeder=new VictorSP(RobotMap.insideFeeder);
-    		
-    	
+    		    	
     }
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
+    }
+    public void outsidefeederset(double speed){
+    	outsidefeeder.set(speed);
+    }
+    public void insidefeederset(double speed){
+    	insidefeeder.set(speed);
+    	
     }
 }
 
