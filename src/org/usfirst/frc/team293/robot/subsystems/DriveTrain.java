@@ -1,11 +1,13 @@
 package org.usfirst.frc.team293.robot.subsystems;
 
 import org.usfirst.frc.team293.robot.RobotMap;
+import org.usfirst.frc.team293.robot.Serial;
 import org.usfirst.frc.team293.robot.commands.TankDriveWithJoystick;
 
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
 import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
+import edu.wpi.first.wpilibj.SerialPort.Port;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.TalonSRX;
@@ -20,6 +22,8 @@ public class DriveTrain extends Subsystem {
 	private CANTalon lifterMotor;    // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	RobotDrive drive;
+	Serial pi;//The IMU Data
+	
 	public DriveTrain(){
 		super();
 		leftMotor=new VictorSP(RobotMap.leftMotor);
@@ -27,10 +31,12 @@ public class DriveTrain extends Subsystem {
 		drive = new RobotDrive(leftMotor,rightMotor);
 		
 		lifterMotor=new CANTalon(RobotMap.lifterMotor);
-		lifterMotor.changeControlMode(TalonControlMode.Position);//Change control mode of talon, default is PercentVbus (-1.0 to 1.0)
+		//lifterMotor.changeControlMode(TalonControlMode.Position);//Change control mode of talon, default is PercentVbus (-1.0 to 1.0)
     	lifterMotor.setFeedbackDevice(FeedbackDevice.AnalogPot); //Set the feedback device that is hooked up to the talon
-    	lifterMotor.setPID(3, 0.001, 0.0); //Set the PID constants (p, i, d)
+    	//lifterMotor.setPID(3, 0.001, 0.0); //Set the PID constants (p, i, d)
     	//shooterwheel.setF(.4);//what we think it should be 
+    	
+       pi = new Serial(Port.kOnboard);//rs232
 		
 		
 	}
@@ -41,9 +47,31 @@ public class DriveTrain extends Subsystem {
     }
 	public void drive(double left, double right) {
 		drive.tankDrive(left, right);
+		
 	}
-	public void setdrivetrain(int setpoint){
-		lifterMotor.setSetpoint(setpoint);
+	public void liftdrivetrain(){
+		lifterMotor.set(.5);
+		if(lifterMotor.getAnalogInRaw()==2.5){
+			lifterMotor.set(0);
+		}
+	}
+	public void dropdrivetrain(){
+		lifterMotor.set(-.5);
+		if(lifterMotor.getAnalogInRaw()==0){
+			lifterMotor.set(0);
+		}
+	}
+	public void lift(){
+		lifterMotor.set(1);
+		if(lifterMotor.getAnalogInRaw()==0){
+			lifterMotor.set(0);
+		}
+		//lifterMotor.get		//probably should use this....
+		//lifterMotor.set(0);//https://wpilib.screenstepslive.com/s/3120/m/7912/l/85776-analog-triggers  
+	}
+	
+	public void drivestraight(){//paste in PID stuff here
+		pi.getData();
 	}
 	
 	

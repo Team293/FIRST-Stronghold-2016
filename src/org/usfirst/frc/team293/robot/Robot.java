@@ -1,6 +1,12 @@
 
 package org.usfirst.frc.team293.robot;
 
+import org.usfirst.frc.team293.robot.subsystems.DriveTrain;
+import org.usfirst.frc.team293.robot.subsystems.Feeder;
+import org.usfirst.frc.team293.robot.subsystems.Hood;
+import org.usfirst.frc.team293.robot.subsystems.ShooterRotation;
+import org.usfirst.frc.team293.robot.subsystems.ShooterWheel;
+
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -21,6 +27,11 @@ public class Robot extends IterativeRobot {
 
 	//public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static OI oi;
+	public static DriveTrain drivetrain;
+	public static Feeder feeder;
+	public static Hood wrist;
+	public static ShooterRotation claw;
+	public static ShooterWheel shooterwheel;
 
     Command autonomousCommand;
     SendableChooser chooser;
@@ -68,6 +79,9 @@ public class Robot extends IterativeRobot {
     }
 
     public void teleopInit() {
+    	
+       
+
 		// This makes sure that the autonomous stops running when
         // teleop starts running. If you want the autonomous to 
         // continue until interrupted by another command, remove
