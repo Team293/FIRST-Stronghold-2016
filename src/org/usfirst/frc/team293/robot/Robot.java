@@ -1,6 +1,7 @@
 
 package org.usfirst.frc.team293.robot;
 
+import org.usfirst.frc.team293.robot.commands.Aim;
 import org.usfirst.frc.team293.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team293.robot.subsystems.DriverCamera;
 import org.usfirst.frc.team293.robot.subsystems.Feeder;
@@ -34,6 +35,7 @@ public class Robot extends IterativeRobot {
 	public static Hood wrist;
 	public static ShooterRotation claw;
 	public static ShooterWheel shooterwheel;
+	public static Aim aim;
 
     Command autonomousCommand;
     SendableChooser chooser;

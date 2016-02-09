@@ -18,6 +18,7 @@ public class OI {
 	 private Joystick launchpad=new Joystick(2);
 	 
 	 SpikeLEDButton button=new SpikeLEDButton(launchpad,0,1);
+	 
 	 public OI(){
     //// CREATING BUTTONS
     // One type of button is a joystick button which is any button on a joystick.

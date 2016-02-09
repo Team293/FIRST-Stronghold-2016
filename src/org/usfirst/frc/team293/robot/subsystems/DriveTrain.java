@@ -54,7 +54,7 @@ public class DriveTrain extends Subsystem {
 		lifterMotor.set(.5);
 		if (lifterMotor.getAnalogInRaw() == 2.5) {
 			lifterMotor.set(0);
-		}
+		}	
 	}
 
 	public void dropdrivetrain() {

@@ -32,9 +32,9 @@ public class ShooterWheel extends Subsystem {
 		// setDefaultCommand(new MySpecialCommand());
 	}
 
-	public void setShooterRPM(int rpm) {
+	public void setShooterRPM() {
 		shooterwheel.enableControl();
-		shooterwheel.setSetpoint(rpm);
+		shooterwheel.setSetpoint(2400);
 	}
 
 	public void disableShooter() {
