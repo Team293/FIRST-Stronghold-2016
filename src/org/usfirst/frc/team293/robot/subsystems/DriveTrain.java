@@ -21,27 +21,27 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class DriveTrain extends PIDSubsystem {
 	private SpeedController leftMotor, rightMotor;
-	 // Put methods for controlling this subsystem
+	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
 	RobotDrive drive;
-	
+
 	PIDController autoDrivePID;
 	Serial pi;// The IMU Data
 
 	public DriveTrain() {
-		super("PIDRobotDrive",0,0,0);
-		
+		super("PIDRobotDrive", 0, 0, 0);
+
 		setAbsoluteTolerance(0.03);
-		setSetpoint(0.0);				// target
+		setSetpoint(0.0); // target
 		autoDrivePID = getPIDController();
 		autoDrivePID.setContinuous(false);
 
-		//gyro = new Gyro(1);
+		// gyro = new Gyro(1);
 		leftMotor = new VictorSP(RobotMap.leftMotor);
 		rightMotor = new VictorSP(RobotMap.rightMotor);
 		drive = new RobotDrive(leftMotor, rightMotor);
-		 drive.setExpiration(0.1);
-		 drive.setSensitivity(1.0);
+		drive.setExpiration(0.1);
+		drive.setSensitivity(1.0);
 
 		pi = new Serial(Port.kOnboard);// rs232
 
@@ -55,33 +55,30 @@ public class DriveTrain extends PIDSubsystem {
 		drive.tankDrive(left, right);
 	}
 
-
 	public void drivestraight() {// paste in PID stuff here
 		pi.getData();
 	}
 
-
 	public void setPID(double p, double i, double d) {
 		autoDrivePID.setPID(p, i, d);
 	}
-	
+
 	protected double returnPIDInput() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
-	@Override
-	protected void usePIDOutput(double output) {
-		drive.drive(-1, output);
-		// TODO Auto-generated method stub		
-	}
-	public void enablestraightdrive(){
+	public void enablestraightdrive() {
 		autoDrivePID.enable();
 	}
-	public void disablestraightdrive(){
+
+	public void disablestraightdrive() {
 		autoDrivePID.disable();
 	}
-	
-	
+
+	@Override
+	protected void usePIDOutput(double arg0) {
+		// TODO Auto-generated method stub
+	}
 
 }

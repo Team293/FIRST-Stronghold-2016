@@ -21,25 +21,22 @@ public class RobotMap {
      shooterRotation=2,
      lifterMotor=3;
      
+     //TalonSRX Sensors
+     /*
+     Shooter Encoder
+     shooterRotation Potentionmeter
+     Hood Potentiometer
+     drivetrainLifterMotor Potentiometer
+     
+     */
+     
+     
      //Sensors
      public static int
      //digital sensors
      leftEncoderone=0,
      leftEncodertwo=1,
      rightEncoderone=2,
-     rightEncodertwo=3;
-     
-     //TalonSRX Sensors
-     /*
-     Shooter Encoder
-     shooterRotation Potentionmeter and two limits
-     Hood Potentiometer and limits
-     drivetrain LifterMotor Potentiometer
-     
-     */
-     
-     
-     
-     
-    
+     rightEncodertwo=3,
+     opticallimit=4;  
 }

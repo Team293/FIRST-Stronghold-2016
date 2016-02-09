@@ -1,6 +1,7 @@
 package org.usfirst.frc.team293.robot.subsystems;
 
 import org.usfirst.frc.team293.robot.RobotMap;
+import org.usfirst.frc.team293.robot.commands.HoodRestPosition;
 
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
@@ -11,7 +12,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  *
  */
 public class Hood extends Subsystem {
-	private CANTalon Hood;
+	private static CANTalon Hood;
 
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
@@ -26,11 +27,12 @@ public class Hood extends Subsystem {
 	}
 
 	public void initDefaultCommand() {
+		
 		// Set the default command for a subsystem here.
-		// setDefaultCommand(new MySpecialCommand());
+		 setDefaultCommand(new HoodRestPosition());
 	}
 
-	public void setsetpoint(double setpoint) {
+	public static void setsetpoint(double setpoint) {
 		Hood.set(setpoint);
 	}
 }

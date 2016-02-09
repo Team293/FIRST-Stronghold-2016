@@ -1,25 +1,22 @@
 package org.usfirst.frc.team293.robot.commands;
 
 import org.usfirst.frc.team293.robot.Robot;
-import org.usfirst.frc.team293.robot.subsystems.ShooterWheel;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class RunShooterWheel extends Command {
+public class Climb extends Command {
 
-    public RunShooterWheel() {
-    	requires(Robot.shooterwheel);
+    public Climb() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
+    	requires(Robot.lifterdrivetrain);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    Robot.shooterwheel.setShooterRPM();
-    Robot.drivercamera.Lookup();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -28,7 +25,7 @@ public class RunShooterWheel extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+        return false;
     }
 
     // Called once after isFinished returns true

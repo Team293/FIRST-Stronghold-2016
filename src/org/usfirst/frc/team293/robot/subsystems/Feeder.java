@@ -20,6 +20,7 @@ public class Feeder extends Subsystem {
 	public Feeder() {
 		outsidefeeder = new VictorSP(RobotMap.outsideFeeder);
 		insidefeeder = new VictorSP(RobotMap.insideFeeder);
+		opticallimit=new DigitalInput(RobotMap.opticallimit);
 
 	}
 

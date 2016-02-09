@@ -1,25 +1,24 @@
 package org.usfirst.frc.team293.robot.commands;
 
 import org.usfirst.frc.team293.robot.Robot;
-import org.usfirst.frc.team293.robot.subsystems.ShooterWheel;
+import org.usfirst.frc.team293.robot.subsystems.Hood;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class RunShooterWheel extends Command {
+public class HoodRestPosition extends Command {
 
-    public RunShooterWheel() {
-    	requires(Robot.shooterwheel);
+    public HoodRestPosition() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
+    	requires(Robot.hood);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    Robot.shooterwheel.setShooterRPM();
-    Robot.drivercamera.Lookup();
+    	Hood.setsetpoint(10);
     }
 
     // Called repeatedly when this Command is scheduled to run

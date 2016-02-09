@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class LifterDriveTrain extends Subsystem {
 	private CANTalon lifterMotor;
+	boolean state;
     public LifterDriveTrain(){
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
@@ -19,31 +20,42 @@ public class LifterDriveTrain extends Subsystem {
 	// control mode of talon, default is PercentVbus (-1.0 to 1.0)
 	lifterMotor.setFeedbackDevice(FeedbackDevice.AnalogPot);
 	
+	
+	
     }
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
     }
 
-	public void liftdrivetrain() {
+	public boolean startliftdrivetrain() {
 		lifterMotor.set(.5);
-		if (lifterMotor.getAnalogInRaw() == 2.5) {
-			lifterMotor.set(0);
-		}	
+		state=false;
+		return state;
+	}
+	public boolean stopliftdrivetrain(){
+		if (lifterMotor.getAnalogInRaw()>2.5) {
+			state=true;
+		}
+		return state;
 	}
 
-	public void dropdrivetrain() {
+	public boolean startdropdrivetrain() {
 		lifterMotor.set(-.5);
-		if (lifterMotor.getAnalogInRaw() == 0) {
-			lifterMotor.set(0);
+		state=false;
+		return state;
+	}
+	
+	public boolean stopdropdrivetrain(){
+		if (.01<lifterMotor.getAnalogInRaw()) {
+			state=true;
 		}
+		return state;
 	}
 
 	public void lift() {
 		lifterMotor.set(1);
-		if (lifterMotor.getAnalogInRaw() == 0) {
-			lifterMotor.set(0);
-		}
+
 		// lifterMotor.get //probably should use this....
 		// lifterMotor.set(0);//https://wpilib.screenstepslive.com/s/3120/m/7912/l/85776-analog-triggers
 	}

@@ -1,10 +1,19 @@
 package org.usfirst.frc.team293.robot;
 
 import org.usfirst.frc.team293.robot.commands.Aim;
+import org.usfirst.frc.team293.robot.commands.DropCenterWheel;
+import org.usfirst.frc.team293.robot.commands.Feeding;
+import org.usfirst.frc.team293.robot.commands.Fire;
+import org.usfirst.frc.team293.robot.commands.LiftCenterWheel;
+import org.usfirst.frc.team293.robot.commands.LowGoal;
+import org.usfirst.frc.team293.robot.commands.RunShooterWheel;
+import org.usfirst.frc.team293.robot.commands.ShootHighGoal;
+import org.usfirst.frc.team293.robot.commands.StopShooterWheel;
 import org.usfirst.frc.team293.spikelibrary.SpikeLEDButton;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 
 /**
@@ -16,10 +25,23 @@ public class OI {
 	 private Joystick joy2=new Joystick(1);
 	 
 	 private Joystick launchpad=new Joystick(2);
-	 
-	 SpikeLEDButton button=new SpikeLEDButton(launchpad,0,1);
+
 	 
 	 public OI(){
+	JoystickButton feederbutton=new JoystickButton(launchpad,1);
+	JoystickButton lowgoalbutton=new JoystickButton(launchpad,2);
+	JoystickButton highgoalshoot=new JoystickButton(launchpad,3);
+	JoystickButton manualshoot=new JoystickButton(launchpad,4);
+	JoystickButton setshooterwheel=new JoystickButton(launchpad,5);
+	JoystickButton climb=new JoystickButton(launchpad,6);
+	JoystickButton centerwheellift=new JoystickButton(launchpad,7);
+	
+	JoystickButton portcullis=new JoystickButton(launchpad,8);
+	JoystickButton chevaldefrise=new JoystickButton(launchpad,9);
+	JoystickButton drawbridge=new JoystickButton(launchpad,10);
+	JoystickButton sallyport=new JoystickButton(launchpad,11);
+	
+	
     //// CREATING BUTTONS
     // One type of button is a joystick button which is any button on a joystick.
     // You create one by telling it which joystick it's on and which button
@@ -46,8 +68,18 @@ public class OI {
     // Start the command when the button is released  and let it run the command
     // until it is finished as determined by it's isFinished method.
     // button.whenReleased(new ExampleCommand());
+	 feederbutton.whenPressed(new Feeding());
+	 lowgoalbutton.whenPressed(new LowGoal());
 	 
-	
+	 setshooterwheel.whenPressed(new RunShooterWheel());
+	 setshooterwheel.whenReleased(new StopShooterWheel());
+	 
+	 centerwheellift.whenPressed(new LiftCenterWheel());
+	 centerwheellift.whenReleased(new DropCenterWheel());
+	 
+	 highgoalshoot.whenPressed(new ShootHighGoal());
+	 
+	 manualshoot.whenPressed(new Fire());
 	 }
 	    public double getJoystick1() {
 	        return joy1.getY();

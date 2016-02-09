@@ -11,11 +11,11 @@ public class DriverCamera extends Subsystem {
 
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
-	void StraightAhead() {
+	public void StraightAhead() {
 		drivercamera.set(0);
 	}
 
-	void Lookup() {
+	public void Lookup() {
 		drivercamera.set(.7);
 	}
 

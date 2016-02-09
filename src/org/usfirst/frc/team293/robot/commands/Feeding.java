@@ -34,6 +34,7 @@ public class Feeding extends Command {
     // Called once after isFinished returns true
     protected void end() {
     	Robot.feeder.outsidefeederset(0);
+    	Robot.drivercamera.Lookup();
     }
 
     // Called when another command which requires one or more of the same

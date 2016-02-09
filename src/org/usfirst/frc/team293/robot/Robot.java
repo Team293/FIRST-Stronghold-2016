@@ -2,10 +2,14 @@
 package org.usfirst.frc.team293.robot;
 
 import org.usfirst.frc.team293.robot.commands.Aim;
+import org.usfirst.frc.team293.robot.commands.HoodRestPosition;
+import org.usfirst.frc.team293.robot.commands.LookDown;
 import org.usfirst.frc.team293.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team293.robot.subsystems.DriverCamera;
 import org.usfirst.frc.team293.robot.subsystems.Feeder;
 import org.usfirst.frc.team293.robot.subsystems.Hood;
+import org.usfirst.frc.team293.robot.subsystems.LifterDriveTrain;
+import org.usfirst.frc.team293.robot.subsystems.Logging;
 import org.usfirst.frc.team293.robot.subsystems.ShooterRotation;
 import org.usfirst.frc.team293.robot.subsystems.ShooterWheel;
 
@@ -32,11 +36,13 @@ public class Robot extends IterativeRobot {
 	public static DriverCamera drivercamera;
 	public static DriveTrain drivetrain;
 	public static Feeder feeder;
-	public static Hood wrist;
+	public static Hood hood;
 	public static ShooterRotation claw;
 	public static ShooterWheel shooterwheel;
 	public static Aim aim;
 	public static LifterDriveTrain lifterdrivetrain;
+	public static HoodRestPosition hoodrestposition;
+	public static LookDown lookdown;
 
     Command autonomousCommand;
     SendableChooser chooser;
@@ -85,8 +91,6 @@ public class Robot extends IterativeRobot {
 
     public void teleopInit() {
     	
-       
-
 		// This makes sure that the autonomous stops running when
         // teleop starts running. If you want the autonomous to 
         // continue until interrupted by another command, remove
@@ -98,6 +102,7 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
+        //Logging.log;
     }
     
     /**
