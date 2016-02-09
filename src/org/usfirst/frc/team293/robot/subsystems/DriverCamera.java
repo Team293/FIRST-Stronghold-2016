@@ -7,20 +7,22 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  *
  */
 public class DriverCamera extends Subsystem {
-    Servo drivercamera;
-    // Put methods for controlling this subsystem
-    // here. Call these from Commands.
-    void Lookdown(){
-    	drivercamera.set(0);
-    }
-    void Lookup(){
-    	drivercamera.set(.7);
-    }
-    
-    public void initDefaultCommand() {
-    	
-        // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
-    }
-}
+	Servo drivercamera;
 
+	// Put methods for controlling this subsystem
+	// here. Call these from Commands.
+	void StraightAhead() {
+		drivercamera.set(0);
+	}
+
+	void Lookup() {
+		drivercamera.set(.7);
+	}
+
+
+	public void initDefaultCommand() {
+
+		// Set the default command for a subsystem here.
+		// setDefaultCommand(new MySpecialCommand());
+	}
+}

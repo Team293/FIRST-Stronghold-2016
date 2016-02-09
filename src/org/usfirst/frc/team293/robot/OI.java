@@ -1,5 +1,9 @@
 package org.usfirst.frc.team293.robot;
 
+import org.usfirst.frc.team293.robot.commands.Aim;
+import org.usfirst.frc.team293.spikelibrary.SpikeLEDButton;
+
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 
 
@@ -8,6 +12,13 @@ import edu.wpi.first.wpilibj.buttons.Button;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
+	 private Joystick joy1 = new Joystick(0);
+	 private Joystick joy2=new Joystick(1);
+	 
+	 private Joystick launchpad=new Joystick(2);
+	 
+	 SpikeLEDButton button=new SpikeLEDButton(launchpad,0,1);
+	 public OI(){
     //// CREATING BUTTONS
     // One type of button is a joystick button which is any button on a joystick.
     // You create one by telling it which joystick it's on and which button
@@ -26,7 +37,7 @@ public class OI {
     // Start the command when the button is pressed and let it run the command
     // until it is finished as determined by it's isFinished method.
     // button.whenPressed(new ExampleCommand());
-    
+   
     // Run the command while the button is being held down and interrupt it once
     // the button is released.
     // button.whileHeld(new ExampleCommand());
@@ -34,5 +45,14 @@ public class OI {
     // Start the command when the button is released  and let it run the command
     // until it is finished as determined by it's isFinished method.
     // button.whenReleased(new ExampleCommand());
+	 
+	
+	 }
+	    public double getJoystick1() {
+	        return joy1.getY();
+	    }
+	    public double getJoystick2(){
+	    	return joy2.getY();
+	    }
 }
 

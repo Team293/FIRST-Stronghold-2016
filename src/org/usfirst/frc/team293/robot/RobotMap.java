@@ -9,7 +9,7 @@ public class RobotMap {
 
 	//VictorSP Stuff
      public static int 
-     leftMotor = 0,  //spliiter
+     leftMotor = 0,  //splitter
      rightMotor = 1, //splitter
      outsideFeeder=2,
      insideFeeder=3;

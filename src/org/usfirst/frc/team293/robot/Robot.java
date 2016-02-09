@@ -2,6 +2,7 @@
 package org.usfirst.frc.team293.robot;
 
 import org.usfirst.frc.team293.robot.subsystems.DriveTrain;
+import org.usfirst.frc.team293.robot.subsystems.DriverCamera;
 import org.usfirst.frc.team293.robot.subsystems.Feeder;
 import org.usfirst.frc.team293.robot.subsystems.Hood;
 import org.usfirst.frc.team293.robot.subsystems.ShooterRotation;
@@ -27,6 +28,7 @@ public class Robot extends IterativeRobot {
 
 	//public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static OI oi;
+	public static DriverCamera drivercamera;
 	public static DriveTrain drivetrain;
 	public static Feeder feeder;
 	public static Hood wrist;

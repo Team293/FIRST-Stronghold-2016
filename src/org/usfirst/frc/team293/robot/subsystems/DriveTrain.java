@@ -18,64 +18,63 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  *
  */
 public class DriveTrain extends Subsystem {
-	private SpeedController leftMotor, rightMotor; 
-	private CANTalon lifterMotor;    // Put methods for controlling this subsystem
-    // here. Call these from Commands.
+	private SpeedController leftMotor, rightMotor;
+	private CANTalon lifterMotor; // Put methods for controlling this subsystem
+	// here. Call these from Commands.
 	RobotDrive drive;
-	Serial pi;//The IMU Data
-	
-	public DriveTrain(){
+	Serial pi;// The IMU Data
+
+	public DriveTrain() {
 		super();
-		leftMotor=new VictorSP(RobotMap.leftMotor);
-		rightMotor=new VictorSP(RobotMap.rightMotor);
-		drive = new RobotDrive(leftMotor,rightMotor);
-		
-		lifterMotor=new CANTalon(RobotMap.lifterMotor);
-		//lifterMotor.changeControlMode(TalonControlMode.Position);//Change control mode of talon, default is PercentVbus (-1.0 to 1.0)
-    	lifterMotor.setFeedbackDevice(FeedbackDevice.AnalogPot); //Set the feedback device that is hooked up to the talon
-    	//lifterMotor.setPID(3, 0.001, 0.0); //Set the PID constants (p, i, d)
-    	//shooterwheel.setF(.4);//what we think it should be 
-    	
-       pi = new Serial(Port.kOnboard);//rs232
-		
-		
+		leftMotor = new VictorSP(RobotMap.leftMotor);
+		rightMotor = new VictorSP(RobotMap.rightMotor);
+		drive = new RobotDrive(leftMotor, rightMotor);
+
+		lifterMotor = new CANTalon(RobotMap.lifterMotor);
+		// lifterMotor.changeControlMode(TalonControlMode.Position);//Change
+		// control mode of talon, default is PercentVbus (-1.0 to 1.0)
+		lifterMotor.setFeedbackDevice(FeedbackDevice.AnalogPot); 
+
+		pi = new Serial(Port.kOnboard);// rs232
+
 	}
-    public void initDefaultCommand() {
-    	setDefaultCommand(new TankDriveWithJoystick());
-        // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
-    }
+
+	public void initDefaultCommand() {
+		setDefaultCommand(new TankDriveWithJoystick());
+		// Set the default command for a subsystem here.
+		// setDefaultCommand(new MySpecialCommand());
+	}
+
 	public void drive(double left, double right) {
 		drive.tankDrive(left, right);
-		
+
 	}
-	public void liftdrivetrain(){
+
+	public void liftdrivetrain() {
 		lifterMotor.set(.5);
-		if(lifterMotor.getAnalogInRaw()==2.5){
+		if (lifterMotor.getAnalogInRaw() == 2.5) {
 			lifterMotor.set(0);
 		}
 	}
-	public void dropdrivetrain(){
+
+	public void dropdrivetrain() {
 		lifterMotor.set(-.5);
-		if(lifterMotor.getAnalogInRaw()==0){
+		if (lifterMotor.getAnalogInRaw() == 0) {
 			lifterMotor.set(0);
 		}
 	}
-	public void lift(){
+
+	public void lift() {
 		lifterMotor.set(1);
-		if(lifterMotor.getAnalogInRaw()==0){
+		if (lifterMotor.getAnalogInRaw() == 0) {
 			lifterMotor.set(0);
 		}
-		//lifterMotor.get		//probably should use this....
-		//lifterMotor.set(0);//https://wpilib.screenstepslive.com/s/3120/m/7912/l/85776-analog-triggers  
+		// lifterMotor.get //probably should use this....
+		// lifterMotor.set(0);//https://wpilib.screenstepslive.com/s/3120/m/7912/l/85776-analog-triggers
 	}
-	
-	public void drivestraight(){//paste in PID stuff here
+
+	public void drivestraight() {// paste in PID stuff here
 		pi.getData();
 	}
-	
-	
 
-	
 }
-
