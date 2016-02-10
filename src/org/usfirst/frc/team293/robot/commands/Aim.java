@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class Aim extends Command {
+public class Aim extends Command {//sets up the shooter to match the camera stuff.
 
     public Aim() {
         // Use requires() here to declare subsystem dependencies
