@@ -1,5 +1,7 @@
 package org.usfirst.frc.team293.robot.subsystems;
 
+import org.usfirst.frc.team293.robot.RobotMap;
+
 import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -7,7 +9,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  *
  */
 public class DriverCamera extends Subsystem {
-	Servo drivercamera;
+	Servo drivercamera=new Servo(RobotMap.drivercamera);
 
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.

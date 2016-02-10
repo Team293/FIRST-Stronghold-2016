@@ -29,7 +29,11 @@ public class RobotMap {
      drivetrainLifterMotor Potentiometer
      
      */
-     
+     //Servos
+     public static int
+     drivercamera=7,
+     horizontalvisioncamera=8,
+     verticalvisioncamera=9;
      
      //Sensors
      public static int

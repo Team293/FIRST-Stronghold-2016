@@ -7,17 +7,17 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class Aim extends Command {
+public class StartDriveStraight extends Command {
 
-    public Aim() {
+    public StartDriveStraight() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.hood);
-    	requires(Robot.shooterrotation);
+    	requires(Robot.drivetrain);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Robot.drivetrain.enablestraightdrive();
     }
 
     // Called repeatedly when this Command is scheduled to run

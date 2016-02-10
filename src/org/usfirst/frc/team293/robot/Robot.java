@@ -2,8 +2,10 @@
 package org.usfirst.frc.team293.robot;
 
 import org.usfirst.frc.team293.robot.commands.Aim;
+import org.usfirst.frc.team293.robot.commands.Autonomous;
 import org.usfirst.frc.team293.robot.commands.HoodRestPosition;
 import org.usfirst.frc.team293.robot.commands.LookDown;
+import org.usfirst.frc.team293.robot.subsystems.Camera;
 import org.usfirst.frc.team293.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team293.robot.subsystems.DriverCamera;
 import org.usfirst.frc.team293.robot.subsystems.Feeder;
@@ -37,14 +39,13 @@ public class Robot extends IterativeRobot {
 	public static DriveTrain drivetrain;
 	public static Feeder feeder;
 	public static Hood hood;
-	public static ShooterRotation claw;
+	public static ShooterRotation shooterrotation;
 	public static ShooterWheel shooterwheel;
-	public static Aim aim;
 	public static LifterDriveTrain lifterdrivetrain;
-	public static HoodRestPosition hoodrestposition;
-	public static LookDown lookdown;
-
-    Command autonomousCommand;
+	public static Camera Camera;
+	public static Logging logging;
+	
+   // Command autonomousCommand = new Autonomous();
     SendableChooser chooser;
 
     /**
@@ -52,8 +53,21 @@ public class Robot extends IterativeRobot {
      * used for any initialization code.
      */
     public void robotInit() {
-		oi = new OI();
-       
+		
+		
+        drivetrain = new DriveTrain();
+        
+        hood= new Hood();
+        lifterdrivetrain = new LifterDriveTrain();
+       // Camera=new Camera(null, null, null, 0, 0, null);
+        drivercamera=new DriverCamera();
+        feeder=new Feeder();
+        shooterrotation=new ShooterRotation();
+        shooterwheel=new ShooterWheel();
+        logging=new Logging();
+        
+        oi = new OI();
+ 
     }
 	
 	/**
@@ -79,7 +93,7 @@ public class Robot extends IterativeRobot {
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
     public void autonomousInit() {
-       
+    	// autonomousCommand.start();
     }
 
     /**
@@ -87,10 +101,11 @@ public class Robot extends IterativeRobot {
      */
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
+       
     }
 
     public void teleopInit() {
-    	
+    	//autonomousCommand.cancel();
 		// This makes sure that the autonomous stops running when
         // teleop starts running. If you want the autonomous to 
         // continue until interrupted by another command, remove

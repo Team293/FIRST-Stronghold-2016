@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.TalonSRX;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -29,14 +30,14 @@ public class DriveTrain extends PIDSubsystem {
 	Serial pi;// The IMU Data
 
 	public DriveTrain() {
-		super("PIDRobotDrive", 0, 0, 0);
+		super("PIDRobotDrive", .1, 0, 0);
 
 		setAbsoluteTolerance(0.03);
 		setSetpoint(0.0); // target
 		autoDrivePID = getPIDController();
 		autoDrivePID.setContinuous(false);
 
-		// gyro = new Gyro(1);
+		
 		leftMotor = new VictorSP(RobotMap.leftMotor);
 		rightMotor = new VictorSP(RobotMap.rightMotor);
 		drive = new RobotDrive(leftMotor, rightMotor);
@@ -55,17 +56,20 @@ public class DriveTrain extends PIDSubsystem {
 		drive.tankDrive(left, right);
 	}
 
-	public void drivestraight() {// paste in PID stuff here
-		pi.getData();
-	}
-
 	public void setPID(double p, double i, double d) {
-		autoDrivePID.setPID(p, i, d);
+		
 	}
 
 	protected double returnPIDInput() {
 		// TODO Auto-generated method stub
-		return 0;
+		String data= pi.getData();
+		
+		String[]tokens=data.split("=");
+		double heading=(Double.parseDouble(tokens[1].split("R")[0]));//Heading
+		SmartDashboard.putNumber("angle",heading);
+		return heading;
+			//return (Double.parseDouble(tokens[1].split("P")[0]));//Roll
+		//return (Double.parseDouble(tokens[1].split("H")[0]));//Pitch
 	}
 
 	public void enablestraightdrive() {
@@ -77,7 +81,8 @@ public class DriveTrain extends PIDSubsystem {
 	}
 
 	@Override
-	protected void usePIDOutput(double arg0) {
+	protected void usePIDOutput(double output) {
+		drive.drive(-.3, output);
 		// TODO Auto-generated method stub
 	}
 
