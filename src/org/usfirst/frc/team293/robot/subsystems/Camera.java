@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.Servo;
 /**
  *
  */
-public class Camera extends Subsystem {
+public class Camera extends Subsystem {//Danny's vision stuff
     
     // Put methods for controlling this subsystem
     // here. Call these from Commands.

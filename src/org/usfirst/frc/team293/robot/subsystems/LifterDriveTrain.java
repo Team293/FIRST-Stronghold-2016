@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 /**
  *
  */
-public class LifterDriveTrain extends Subsystem {
+public class LifterDriveTrain extends Subsystem {//the lifter center wheel on the drivetrain
 	private CANTalon lifterMotor;
 	boolean state;
     public LifterDriveTrain(){

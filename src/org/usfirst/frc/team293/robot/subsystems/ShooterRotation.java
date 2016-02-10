@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 /**
  *
  */
-public class ShooterRotation extends Subsystem {
+public class ShooterRotation extends Subsystem {//rotate the shooter and setup that PID
 	private CANTalon shooterrotation;
 
 	public ShooterRotation() {

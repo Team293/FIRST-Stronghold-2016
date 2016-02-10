@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 /**
  *
  */
-public class Logging extends Subsystem {
+public class Logging extends Subsystem {//for logging PDP current
     
     // Put methods for controlling this subsystem
     // here. Call these from Commands.

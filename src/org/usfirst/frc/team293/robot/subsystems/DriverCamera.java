@@ -8,17 +8,17 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 /**
  *
  */
-public class DriverCamera extends Subsystem {
+public class DriverCamera extends Subsystem {//Changes angle for camera for driver
 	Servo drivercamera=new Servo(RobotMap.drivercamera);
 
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
-	public void StraightAhead() {
-		drivercamera.set(0);
+	public void LookDown() {
+		drivercamera.set(-1);
 	}
 
 	public void Lookup() {
-		drivercamera.set(.7);
+		drivercamera.set(1);
 	}
 
 

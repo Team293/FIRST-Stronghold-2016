@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class Autonomous extends CommandGroup {
     
-    public  Autonomous() {
+    public  Autonomous() {//what is this going to do?  We have to work on IMU a lot.  Not sure how PID subsystem works
     	addSequential(new StartDriveStraight());
         // Add Commands here:
         // e.g. addSequential(new Command1());

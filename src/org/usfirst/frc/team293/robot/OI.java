@@ -21,6 +21,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
+	///////////instantiate joysticks
 	 private Joystick joy1 = new Joystick(0);
 	 private Joystick joy2=new Joystick(1);
 	 
@@ -28,18 +29,19 @@ public class OI {
 
 	 
 	 public OI(){
+		 /////////////////////instantiate buttons
 	JoystickButton feederbutton=new JoystickButton(launchpad,1);
 	JoystickButton lowgoalbutton=new JoystickButton(launchpad,2);
 	JoystickButton highgoalshoot=new JoystickButton(launchpad,3);
 	JoystickButton manualshoot=new JoystickButton(launchpad,4);
-	JoystickButton setshooterwheel=new JoystickButton(launchpad,5);
+	JoystickButton setshooterwheel=new JoystickButton(launchpad,11);
 	JoystickButton climb=new JoystickButton(launchpad,6);
 	JoystickButton centerwheellift=new JoystickButton(launchpad,7);
 	
 	JoystickButton portcullis=new JoystickButton(launchpad,8);
 	JoystickButton chevaldefrise=new JoystickButton(launchpad,9);
 	JoystickButton drawbridge=new JoystickButton(launchpad,10);
-	JoystickButton sallyport=new JoystickButton(launchpad,11);
+	JoystickButton sallyport=new JoystickButton(launchpad,5);
 	
 	
     //// CREATING BUTTONS
@@ -70,7 +72,7 @@ public class OI {
     // button.whenReleased(new ExampleCommand());
 	 
 	 lowgoalbutton.whenPressed(new LowGoal());
-	// feederbutton.whenPressed(new Feeding());
+	 feederbutton.whenPressed(new Feeding());
 	 setshooterwheel.whenPressed(new RunShooterWheel());
 	 setshooterwheel.whenReleased(new StopShooterWheel());
 	 

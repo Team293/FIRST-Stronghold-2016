@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class ShootHighGoal extends CommandGroup {
 
     public ShootHighGoal() {
-    	addParallel(new RunShooterWheel());
+    	//addParallel(new RunShooterWheel());
     	addSequential(new Aim());
     	addSequential(new Fire());
     	addSequential(new LookDown());

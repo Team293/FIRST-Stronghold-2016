@@ -34,6 +34,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Robot extends IterativeRobot {
 
 	//public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
+	///////////instantiate subsystems
 	public static OI oi;
 	public static DriverCamera drivercamera;
 	public static DriveTrain drivetrain;
@@ -45,7 +46,7 @@ public class Robot extends IterativeRobot {
 	public static Camera Camera;
 	public static Logging logging;
 	
-   // Command autonomousCommand = new Autonomous();
+    Command autonomousCommand;//instantiate auto command
     SendableChooser chooser;
 
     /**
@@ -54,7 +55,7 @@ public class Robot extends IterativeRobot {
      */
     public void robotInit() {
 		
-		
+///////////instantiate subsystems
         drivetrain = new DriveTrain();
         
         hood= new Hood();
@@ -67,7 +68,7 @@ public class Robot extends IterativeRobot {
         logging=new Logging();
         
         oi = new OI();
- 
+        autonomousCommand = new Autonomous();
     }
 	
 	/**
@@ -93,7 +94,7 @@ public class Robot extends IterativeRobot {
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
     public void autonomousInit() {
-    	// autonomousCommand.start();
+    	autonomousCommand.start();
     }
 
     /**
