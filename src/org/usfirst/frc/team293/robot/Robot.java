@@ -10,6 +10,7 @@ import org.usfirst.frc.team293.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team293.robot.subsystems.DriverCamera;
 import org.usfirst.frc.team293.robot.subsystems.Feeder;
 import org.usfirst.frc.team293.robot.subsystems.Hood;
+import org.usfirst.frc.team293.robot.subsystems.LEDButtons;
 import org.usfirst.frc.team293.robot.subsystems.LifterDriveTrain;
 import org.usfirst.frc.team293.robot.subsystems.Logging;
 import org.usfirst.frc.team293.robot.subsystems.ShooterRotation;
@@ -44,6 +45,7 @@ public class Robot extends IterativeRobot {
 	public static ShooterWheel shooterwheel;
 	public static LifterDriveTrain lifterdrivetrain;
 	public static Camera Camera;
+	public static LEDButtons ledbuttons;
 	public static Logging logging;
 	
     Command autonomousCommand;//instantiate auto command

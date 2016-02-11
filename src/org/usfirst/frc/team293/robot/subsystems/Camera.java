@@ -21,7 +21,7 @@ public class Camera extends Subsystem {//Danny's vision stuff
 	private int[] servoPins = new int[2];
 	Servo cameraServos[] = new Servo[2];
 	
-	private double xRange[] = {0.0, 1.0};
+	private static double xRange[] = {0.0, 1.0};
 	private double yRange[] = {0.15, 0.62};
 	
     private static double cameraHeight = 55.0;														//cm
@@ -30,7 +30,7 @@ public class Camera extends Subsystem {//Danny's vision stuff
     static double calibrationAngle = 0.4975;
     static double baseY = Math.toDegrees(Math.atan((goalHeight - cameraHeight)/calibrationDist)) + 170.0*calibrationAngle;
     
-    public double[] servoAngles = {(xRange[0] + xRange[1]) / 2.0, 0.5};				//initial Servo angles (0.0-1.0 scale)
+    public static double[] servoAngles = {(xRange[0] + xRange[1]) / 2.0, 0.5};				//initial Servo angles (0.0-1.0 scale)
     
     /*                         SWAGADELIC CAMERA STUFF                              */
     
@@ -139,12 +139,12 @@ public class Camera extends Subsystem {//Danny's vision stuff
     	lastServoSet = System.currentTimeMillis();
     }
     
-    public double getDistance(){
+    public static double getDistance(){
     	double rad = Math.toRadians(baseY - 170.0*servoAngles[1]);
     	return ((goalHeight - cameraHeight) / Math.tan(rad));
     }
     
-    public double getAzimuth(){
+    public static double getAzimuth(){
     	return (170.0*servoAngles[0] - 90.0);
     }
 }

@@ -18,7 +18,7 @@ public class HoodRestPosition extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Hood.setsetpoint(10);
+    	//Hood.setsetpoint(10);
     }
 
     // Called repeatedly when this Command is scheduled to run

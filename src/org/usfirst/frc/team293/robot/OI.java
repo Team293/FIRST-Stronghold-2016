@@ -4,6 +4,7 @@ import org.usfirst.frc.team293.robot.commands.Aim;
 import org.usfirst.frc.team293.robot.commands.DropCenterWheel;
 import org.usfirst.frc.team293.robot.commands.Feeding;
 import org.usfirst.frc.team293.robot.commands.Fire;
+import org.usfirst.frc.team293.robot.commands.LEDOn;
 import org.usfirst.frc.team293.robot.commands.LiftCenterWheel;
 import org.usfirst.frc.team293.robot.commands.LowGoal;
 import org.usfirst.frc.team293.robot.commands.RunShooterWheel;
@@ -25,7 +26,7 @@ public class OI {
 	 private Joystick joy1 = new Joystick(0);
 	 private Joystick joy2=new Joystick(1);
 	 
-	 private Joystick launchpad=new Joystick(2);
+	 public static Joystick launchpad=new Joystick(2);
 
 	 
 	 public OI(){
@@ -72,12 +73,13 @@ public class OI {
     // button.whenReleased(new ExampleCommand());
 	 
 	 lowgoalbutton.whenPressed(new LowGoal());
+	 lowgoalbutton.whenPressed(new LEDOn(1));
 	 feederbutton.whenPressed(new Feeding());
-	 setshooterwheel.whenPressed(new RunShooterWheel());
-	 setshooterwheel.whenReleased(new StopShooterWheel());
+	 setshooterwheel.whenActive(new RunShooterWheel());
+	 setshooterwheel.whenInactive(new StopShooterWheel());
 	 
-	 centerwheellift.whenPressed(new LiftCenterWheel());
-	 centerwheellift.whenReleased(new DropCenterWheel());
+	 centerwheellift.whenActive(new LiftCenterWheel());
+	 centerwheellift.whenInactive(new DropCenterWheel());
 	 
 	 highgoalshoot.whenPressed(new ShootHighGoal());
 	 
@@ -89,5 +91,6 @@ public class OI {
 	    public double getJoystick2(){
 	    	return joy2.getY();
 	    }
+	    
 }
 
