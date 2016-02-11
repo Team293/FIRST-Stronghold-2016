@@ -20,6 +20,7 @@ public class RunShooterWheel extends Command {
     protected void initialize() {
     Robot.shooterwheel.setShooterRPM();
     Robot.drivercamera.Lookup();
+    Robot.ledbuttons.flash(1);
     
     }
 

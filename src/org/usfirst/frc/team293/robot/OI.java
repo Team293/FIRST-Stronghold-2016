@@ -4,7 +4,7 @@ import org.usfirst.frc.team293.robot.commands.Aim;
 import org.usfirst.frc.team293.robot.commands.DropCenterWheel;
 import org.usfirst.frc.team293.robot.commands.Feeding;
 import org.usfirst.frc.team293.robot.commands.Fire;
-import org.usfirst.frc.team293.robot.commands.LEDOn;
+//import org.usfirst.frc.team293.robot.commands.LEDOn;
 import org.usfirst.frc.team293.robot.commands.LiftCenterWheel;
 import org.usfirst.frc.team293.robot.commands.LowGoal;
 import org.usfirst.frc.team293.robot.commands.RunShooterWheel;
@@ -73,7 +73,7 @@ public class OI {
     // button.whenReleased(new ExampleCommand());
 	 
 	 lowgoalbutton.whenPressed(new LowGoal());
-	 lowgoalbutton.whenPressed(new LEDOn(1));
+	 //lowgoalbutton.whenPressed(new LEDOn());
 	 feederbutton.whenPressed(new Feeding());
 	 setshooterwheel.whenActive(new RunShooterWheel());
 	 setshooterwheel.whenInactive(new StopShooterWheel());
@@ -90,6 +90,9 @@ public class OI {
 	    }
 	    public double getJoystick2(){
 	    	return joy2.getY();
+	    }
+	    public void flash(int port){
+	    	launchpad.setOutputs(port);
 	    }
 	    
 }
