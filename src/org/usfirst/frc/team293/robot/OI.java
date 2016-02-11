@@ -10,7 +10,6 @@ import org.usfirst.frc.team293.robot.commands.LowGoal;
 import org.usfirst.frc.team293.robot.commands.RunShooterWheel;
 import org.usfirst.frc.team293.robot.commands.ShootHighGoal;
 import org.usfirst.frc.team293.robot.commands.StopShooterWheel;
-import org.usfirst.frc.team293.spikelibrary.SpikeLEDButton;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
