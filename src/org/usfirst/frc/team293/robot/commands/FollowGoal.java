@@ -12,7 +12,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class FollowGoal extends Command {
 	private double[] xGainsFollow, yGainsFollow;
 	private long lastTime = System.currentTimeMillis();
-	private static int Dt = 100;
+	private static int Dt = 50;
+	private boolean lost = false;
+	private long timeLost = 0;
+	private int timeToLost = 500;
 	
     public FollowGoal(double[] xGains,double[] yGains) {
         // Use requires() here to declare subsystem dependencies
@@ -28,14 +31,24 @@ public class FollowGoal extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	boolean newData = Robot.Camera.getGoalCoordinates();
-    	if(newData || System.currentTimeMillis() - lastTime > Dt){
+    	int newData = Robot.Camera.getGoalCoordinates();
+    	if(newData == -1 && !lost){
+    		lost = true;
+    		timeLost = System.currentTimeMillis();
+    	}
+    	if(newData == 1 || System.currentTimeMillis() - lastTime > Dt && !lost){
     		Robot.Camera.updatePID(newData);
     		Robot.Camera.setServos();
     		SmartDashboard.putNumber("Azimuth", Robot.Camera.getAzimuth());
         	SmartDashboard.putNumber("Distance", Robot.Camera.getDistance());
+        	lost = false;
+    		lastTime = System.currentTimeMillis();
+    	}else if(lost && System.currentTimeMillis() - lastTime > Dt && System.currentTimeMillis() - timeLost > timeToLost){
+    		Robot.Camera.search();
+    		Robot.Camera.setServos();
     		lastTime = System.currentTimeMillis();
     	}
+    	SmartDashboard.putBoolean("Lost", lost);
     }
 
     // Make this return true when this Command no longer needs to run execute()

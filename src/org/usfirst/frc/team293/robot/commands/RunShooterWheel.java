@@ -12,6 +12,8 @@ public class RunShooterWheel extends Command {
 
     public RunShooterWheel() {
     	requires(Robot.shooterwheel);
+    	requires(Robot.ledbuttons);
+    	
     	// Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
@@ -20,7 +22,8 @@ public class RunShooterWheel extends Command {
     protected void initialize() {
     Robot.shooterwheel.setShooterRPM();
     Robot.drivercamera.Lookup();
-    Robot.ledbuttons.flash(1);
+	//Robot.ledbuttons.flash();
+//    Robot.ledbuttons.on();
     
     }
 

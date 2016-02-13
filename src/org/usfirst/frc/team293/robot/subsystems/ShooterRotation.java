@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class ShooterRotation extends Subsystem {//rotate the shooter and setup that PID
 	private CANTalon shooterrotation;
+	private static double[] rotateRange = {-10.0,10.0};
 
 	public ShooterRotation() {
 		super();
@@ -30,7 +31,11 @@ public class ShooterRotation extends Subsystem {//rotate the shooter and setup t
 	}
 
 	public void setsetpoint(double angle) {
+		angle = Math.min(Math.max(angle,rotateRange[0]), rotateRange[1]);			//Constrain Angle Value
 		shooterrotation.set(angle);
 	}
 	
+	public double getShooterAngle(){
+		return shooterrotation.getPosition();
+	}
 }

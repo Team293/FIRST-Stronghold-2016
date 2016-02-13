@@ -69,7 +69,7 @@ public class Robot extends IterativeRobot {
         shooterrotation=new ShooterRotation();
         shooterwheel=new ShooterWheel();
         logging=new Logging();
-        
+        ledbuttons= new LEDButtons(1);
         oi = new OI();
         autonomousCommand = new Autonomous();
     }

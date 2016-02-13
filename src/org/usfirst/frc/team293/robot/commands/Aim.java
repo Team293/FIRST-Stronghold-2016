@@ -3,6 +3,7 @@ package org.usfirst.frc.team293.robot.commands;
 import org.usfirst.frc.team293.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -22,10 +23,21 @@ public class Aim extends Command {//sets up the shooter to match the camera stuf
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	if(Robot.Camera.canSeeSwagadelia()){
+    		if(Robot.Camera.getAzimuth() <= 10.0){
+    			Robot.shooterrotation.setsetpoint(Robot.Camera.getAzimuth());
+    		}else{
+    			Robot.shooterrotation.setsetpoint(Robot.Camera.getAzimuth());
+    			Robot.drivetrain.turnToAngle(Robot.Camera.getAzimuth());
+    		}
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
+    	if(Math.abs(Robot.shooterrotation.getShooterAngle() - Robot.Camera.getAzimuth()) <= 1.0){
+    		return true;
+    	}
         return false;
     }
 
