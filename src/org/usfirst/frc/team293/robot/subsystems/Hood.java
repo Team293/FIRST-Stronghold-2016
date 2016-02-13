@@ -32,8 +32,8 @@ public class Hood extends Subsystem {//the hood that aims up and down and manipu
 		 setDefaultCommand(new HoodRestPosition());
 	}
 
-	public static void setposition() {
-		//double x=Camera.getDistance();
+	public static void setposition(double angle) {
+		Hood.set(angle);
 
 	}
 }
