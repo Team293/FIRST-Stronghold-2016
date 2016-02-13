@@ -27,16 +27,16 @@ public class DriveTrain extends PIDSubsystem {//drivetrain PID IMU NEEDS HELP
 	// here. Call these from Commands.
 	RobotDrive drive;
 	boolean driving = false;
-
+	double processedangle;
 	PIDController autoDrivePID;
 	Serial pi;// The IMU Data
 	
 	private double[] attitude = {-1.0,-1.0,-1.0};
 
 	public DriveTrain() {
-		super("PIDRobotDrive", 0.01, 0, 0);
+		super("PIDRobotDrive", .1, 0, 0);
 
-		setAbsoluteTolerance(0.03);
+		//setAbsoluteTolerance(0.03);
 		setSetpoint(0.0); // target
 		autoDrivePID = getPIDController();
 		autoDrivePID.setContinuous(false);
@@ -54,17 +54,24 @@ public class DriveTrain extends PIDSubsystem {//drivetrain PID IMU NEEDS HELP
 	}
 
 	public void initDefaultCommand() {
-		//setDefaultCommand(new TankDriveWithJoystick());
-		setDefaultCommand(new StartDriveStraight());
+		setDefaultCommand(new TankDriveWithJoystick());	
 	}
 
 	public void drive(double left, double right) {
 		//drive.tankDrive(left, right);
 		drive.arcadeDrive(left, right);
 	}
+	public void tankdrive(double left, double right){
+		drive.tankDrive(left, right);
+	}
 
 	public void setPID(double p, double i, double d) {
 		
+	}
+	public void initsensor(){
+		for(int i = 0;i < 3;i++){
+			attitude[i] = -1.0;
+		}
 	}
 
 	protected double returnPIDInput() {
@@ -74,13 +81,27 @@ public class DriveTrain extends PIDSubsystem {//drivetrain PID IMU NEEDS HELP
 			String[]tokens=data.split(",");
 			if(tokens.length == 3){
 				for(int i = 0;i < 3;i++){
-					attitude[i]=(Double.parseDouble(tokens[0]));//Heading
+					attitude[i]=(Double.parseDouble(tokens[0]));
 					System.out.println(tokens);
+
 				}
 			}
+			processedangle=attitude[0];
+			if(this.getSetpoint() - processedangle > 180){
+				processedangle+=360;
+			}else if(this.getSetpoint() - processedangle < -180){
+				processedangle-=360;
+			}
+			//while (attitude[0]<=-180) processedangle+=360;
+			//while (attitude[0]>180) processedangle-=360;
+			SmartDashboard.putNumber("angle",processedangle);
+			
+			
+		}else{
+			processedangle = attitude[0];
 		}
-		SmartDashboard.putNumber("angle",attitude[0]);
-		return attitude[0];
+		SmartDashboard.putNumber("attitude",attitude[0]);
+		return processedangle;
 			//return (Double.parseDouble(tokens[1].split("P")[0]));//Roll
 		//return (Double.parseDouble(tokens[1].split("H")[0]));//Pitch
 	}
@@ -97,10 +118,11 @@ public class DriveTrain extends PIDSubsystem {//drivetrain PID IMU NEEDS HELP
 	protected void usePIDOutput(double output) {
 		if(attitude[0] != -1.0){
 			if(!driving){
-				setSetpoint(attitude[0]);
+				this.setSetpoint(attitude[0]);
+				SmartDashboard.putNumber("setpoint", attitude[0]);
+				driving = true;
 			}
-			driving = true;
-			drive.drive(-0.35, output);
+			drive.drive(0.35, output);
 		}else{
 			driving = false;
 		}
