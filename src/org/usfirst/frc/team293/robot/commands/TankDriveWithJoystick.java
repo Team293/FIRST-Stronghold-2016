@@ -17,7 +17,7 @@ public class TankDriveWithJoystick extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.drivetrain.disable();
+    	//Robot.drivetrain.disable();
     }
 
     // Called repeatedly when this Command is scheduled to run

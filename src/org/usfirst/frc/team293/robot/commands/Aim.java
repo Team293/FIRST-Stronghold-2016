@@ -28,7 +28,7 @@ public class Aim extends Command {//sets up the shooter to match the camera stuf
     			Robot.shooterrotation.setsetpoint(Robot.Camera.getAzimuth());
     		}else{
     			Robot.shooterrotation.setsetpoint(Robot.Camera.getAzimuth());
-    			Robot.drivetrain.turnToAngle(Robot.Camera.getAzimuth());
+    			//Robot.drivetrain.turnToAngle(Robot.Camera.getAzimuth());
     		}
     	}
     }

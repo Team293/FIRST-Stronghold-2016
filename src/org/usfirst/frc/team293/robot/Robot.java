@@ -7,6 +7,7 @@ import org.usfirst.frc.team293.robot.commands.HoodRestPosition;
 import org.usfirst.frc.team293.robot.commands.LookDown;
 import org.usfirst.frc.team293.robot.subsystems.Camera;
 import org.usfirst.frc.team293.robot.subsystems.DriveTrain;
+import org.usfirst.frc.team293.robot.subsystems.DriveTrain1;
 import org.usfirst.frc.team293.robot.subsystems.DriverCamera;
 import org.usfirst.frc.team293.robot.subsystems.Feeder;
 import org.usfirst.frc.team293.robot.subsystems.Hood;
@@ -18,6 +19,7 @@ import org.usfirst.frc.team293.robot.subsystems.ShooterRotation;
 import org.usfirst.frc.team293.robot.subsystems.ShooterWheel;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -39,7 +41,7 @@ public class Robot extends IterativeRobot {
 	///////////instantiate subsystems
 	public static OI oi;
 	public static DriverCamera drivercamera;
-	public static DriveTrain drivetrain;
+	public static DriveTrain1 drivetrain;
 	public static Feeder feeder;
 	public static Hood hood;
 	public static ShooterRotation shooterrotation;
@@ -48,6 +50,8 @@ public class Robot extends IterativeRobot {
 	public static Camera Camera;
 	public static LEDButtons ledbuttons;
 	public static Logging logging;
+	
+	public static Preferences prefs;
 	
     Command autonomousCommand;//instantiate auto command
     SendableChooser chooser;
@@ -59,7 +63,7 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
 		
 ///////////instantiate subsystems
-        drivetrain = new DriveTrain();
+        drivetrain = new DriveTrain1(0.0);
         
         hood= new Hood();
         lifterdrivetrain = new LifterDriveTrain();

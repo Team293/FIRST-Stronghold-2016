@@ -116,7 +116,7 @@ public class Camera extends Subsystem {
     		if(Dt < 0.400){
     			derivative = (error[i] - lastError[i]) / Dt;
     		}
-    		integralError[i] += error[i];
+    		integralError[i] += error[i] * Dt;
     		integralError[i] = Math.min(Math.max(integralError[i],-1000.0), 1000.0);
     		if(i == 1){
     			SmartDashboard.putNumber("Center X", goalCoordinates[0]);
@@ -126,7 +126,7 @@ public class Camera extends Subsystem {
     			//SmartDashboard.putNumber("Error Y", error[1]);
     			//SmartDashboard.putNumber("outputValue Y", outputs[1]);
     		}
-    		outputs[i] = servoAngles[i] + PIDGains[i][0] * error[i] + PIDGains[i][1] * derivative + PIDGains[i][2] * integralError[i];
+    		outputs[i] = servoAngles[i] + PIDGains[i][0] * error[i] + PIDGains[i][1] * integralError[i] + PIDGains[i][2] * derivative;
     	}
     	this.setServoValues(outputs);
     	lastPIDUpdate = System.currentTimeMillis();
