@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  *
  */
-public class DriveTrain extends Subsystem {
+public class DriveTrain extends Subsystem {		//this does the TankDrive as well as the drivestraight for autonomous
 	private SpeedController leftMotor, rightMotor;
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
@@ -134,7 +134,7 @@ public class DriveTrain extends Subsystem {
 		SmartDashboard.putNumber("output", output);
 	}
 	
-	public void usePID() {
+	public void usePID() {		//Method for Driving
 		if(attitude[0] != -1.0){
 			if(!driving){
 				this.setSetpoint(attitude[0]);
@@ -148,7 +148,7 @@ public class DriveTrain extends Subsystem {
 		// TODO Auto-generated method stub
 	}
 
-	public void turnToAngle() {
+	public void turnToAngle() {			//Turning.  One wheel is set at the zero and the other is tasked at spinning.  Might not be the best, maybe they need opposite outputs......
 		drive.drive(0.0, output);
 		// TODO Auto-generated method stub
 		

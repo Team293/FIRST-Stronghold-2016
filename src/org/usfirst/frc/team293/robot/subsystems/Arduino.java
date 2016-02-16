@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 /**
  *
  */
-public class Arduino extends Subsystem {
+public class Arduino extends Subsystem {//How the heck does this work?  Where is the Arduino Code?  Is this going to be worthless to us?
 	
 	I2C arduino;
 	byte[] toSend = new byte[1];

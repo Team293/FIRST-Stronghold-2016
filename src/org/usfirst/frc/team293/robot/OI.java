@@ -51,7 +51,7 @@ public class OI {
 	 setshooterwheel.whenActive(new RunShooterWheel());
 	 setshooterwheel.whenInactive(new StopShooterWheel());
 	 
-	 centerwheellift.whenActive(new LiftCenterWheel());
+	 centerwheellift.whenPressed(new LiftCenterWheel());
 	 centerwheellift.whenInactive(new DropCenterWheel());
 	 
 	 highgoalshoot.whenPressed(new ShootHighGoal());

@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 /**
  *
  */
-public class Feeder extends Subsystem {//The pair of front feeders
+public class Feeder extends Subsystem {	//The pair of front feeders
 	private SpeedController outsidefeeder, insidefeeder;
 	private DigitalInput opticallimit;
 

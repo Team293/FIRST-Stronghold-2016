@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  *
  */
-public class LEDButtons extends Subsystem {
+public class LEDButtons extends Subsystem {		//Allows for the Launchpad LED buttons to light up
 	public int port;
 	public boolean status;
 	public long time;

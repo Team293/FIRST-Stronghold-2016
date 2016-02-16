@@ -16,7 +16,7 @@ public class ShooterWheel extends Subsystem {
 
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
-	public ShooterWheel() {//setup the PID on the shooterwheel
+	public ShooterWheel() {		//setup the PID on the shooterwheel Using a CANTalon
 		super();
 		shooterwheel = new CANTalon(RobotMap.shooterwheel);
 		shooterwheel.changeControlMode(TalonControlMode.Speed);

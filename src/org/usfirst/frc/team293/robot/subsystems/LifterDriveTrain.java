@@ -28,25 +28,25 @@ public class LifterDriveTrain extends Subsystem {//the lifter center wheel on th
         //setDefaultCommand(new MySpecialCommand());
     }
 
-	public boolean startliftdrivetrain() {
+	public boolean startliftdrivetrain() {			//This powers up the motor to start lifting
 		lifterMotor.set(.5);
 		state=false;
 		return state;
 	}
 	public boolean stopliftdrivetrain(){
-		if (lifterMotor.getAnalogInRaw()>2.5) {
+		if (lifterMotor.getAnalogInRaw()>2.5) {			//This stops the motor when the angle hits a certain value, which is the lifting position
 			state=true;
 		}
 		return state;
 	}
 
-	public boolean startdropdrivetrain() {
+	public boolean startdropdrivetrain() {			///This powers up the motor to start dropping the drivetrain
 		lifterMotor.set(-.5);
 		state=false;
 		return state;
 	}
 	
-	public boolean stopdropdrivetrain(){
+	public boolean stopdropdrivetrain(){			//This stops the motor when the angle hits a certain value
 		if (.01<lifterMotor.getAnalogInRaw()) {
 			state=true;
 		}

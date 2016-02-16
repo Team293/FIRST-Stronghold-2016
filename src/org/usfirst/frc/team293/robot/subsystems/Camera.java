@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.Servo;
 /**
  *
  */
-public class Camera extends Subsystem {
+public class Camera extends Subsystem {			//This manages the OpenCV camera by getting its coordinate values and outputting to the servos
     
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
@@ -51,7 +51,7 @@ public class Camera extends Subsystem {
 	private boolean foundGoal = false;
 	
 	public Camera(){
-		raspberryPi = new Serial(Port.kMXP,9600);
+		raspberryPi = new Serial(Port.kMXP,9600);		//Instantiates the Servos and Pi
     	servoPins[0] = 8;
     	servoPins[1] = 9;
     	for(int i = 0;i < 2;i++){
@@ -66,7 +66,7 @@ public class Camera extends Subsystem {
     	setDefaultCommand(new FollowGoal(PIDGains[0],PIDGains[1]));
     }
     
-    public int getGoalCoordinates(){
+    public int getGoalCoordinates(){	//Gets the coordinates from the Pi to setup the Rio
     	String x = raspberryPi.getData();
     	if(x != "null"){
     		String delims = "[ ]";
@@ -85,7 +85,7 @@ public class Camera extends Subsystem {
     	return 0;
     }
     
-    public void initializePID(double[] xGains,double[] yGains){
+    public void initializePID(double[] xGains,double[] yGains){	// Start the PID for the Camera Servos to the coordinates
     	for(int i = 0;i < 3;i++){
     		PIDGains[0][i] = xGains[i];
     	}
@@ -132,7 +132,7 @@ public class Camera extends Subsystem {
     	foundGoal = true;
     }
     
-    public void search(){
+    public void search(){		//If the camera can't find the goal, it needs to search around
     	double outputs[] = {0.0,0.0};
     	for(int i = 0;i < 2;i++){
     		if(servoAngles[i] + inc[i] < servoRangeSearch[i][0] && inc[i] < 0 ){
@@ -149,7 +149,7 @@ public class Camera extends Subsystem {
     	foundGoal = false;
     }
     
-    public void setServoValues(double[] vals){
+    public void setServoValues(double[] vals){		
     	vals[0] = Math.min(Math.max(vals[0],servoRange[0][0]), servoRange[0][1]);					//Constrain Servo Values
     	vals[1] = Math.min(Math.max(vals[1],servoRange[1][0]), servoRange[1][1]);
     	SmartDashboard.putNumber("yAngle", servoAngles[1]);
@@ -166,16 +166,16 @@ public class Camera extends Subsystem {
     	lastServoSet = System.currentTimeMillis();
     }
     
-    public double getDistance(){
+    public double getDistance(){		//Returns how far we are from the goal according to the camera
     	double rad = Math.toRadians(baseY - 170.0*servoAngles[1]);
     	return ((goalHeight - cameraHeight) / Math.tan(rad));//in inches
     }
     
-    public double getAzimuth(){
+    public double getAzimuth(){			//Tells us what angle we are at.
     	return (170.0*(servoAngles[0] + (1.0 - servoRange[0][1])/2.0) - 90.0);//degrees
     }
     
-    public boolean canSeeSwagadelia(){
+    public boolean canSeeSwagadelia(){		//returns if the camera can indeed see the goal or if its searching around
     	SmartDashboard.putBoolean("RobotCanSeeGoal", foundGoal);
     	return foundGoal;
     }
