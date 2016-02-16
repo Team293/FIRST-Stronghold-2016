@@ -38,8 +38,10 @@ public class Hood extends Subsystem {//the hood that aims up and down and manipu
 	}
 
 	public static void disable() {
-		Hood.disable();
-		
+		Hood.disable();	
+	}
+	public static void enable(){
+		Hood.enable();
 	}
 
 }

@@ -18,7 +18,7 @@ public class LifterDriveTrain extends Subsystem {//the lifter center wheel on th
 	lifterMotor = new CANTalon(RobotMap.lifterMotor);
 	// lifterMotor.changeControlMode(TalonControlMode.Position);//Change
 	// control mode of talon, default is PercentVbus (-1.0 to 1.0)
-	lifterMotor.setFeedbackDevice(FeedbackDevice.AnalogPot);
+	lifterMotor.setFeedbackDevice(FeedbackDevice.AnalogEncoder);
 	
 	
 	

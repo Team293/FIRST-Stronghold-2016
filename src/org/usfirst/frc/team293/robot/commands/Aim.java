@@ -15,7 +15,7 @@ public class Aim extends Command {// sets up the shooter to match the camera
 	double distance;
 	double angle;
 
-	public Aim() {
+	public Aim() {//auto aiming
 		requires(Robot.hood);
 		requires(Robot.shooterrotation);
 		requires(Robot.drivetrain);
