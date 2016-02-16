@@ -30,46 +30,20 @@ public class OI {
 	 
 	 public OI(){
 		 /////////////////////instantiate buttons
-	JoystickButton feederbutton=new JoystickButton(launchpad,1);
-	JoystickButton lowgoalbutton=new JoystickButton(launchpad,2);
-	JoystickButton highgoalshoot=new JoystickButton(launchpad,3);
+	JoystickButton feederbutton=new JoystickButton(launchpad,3);
+	JoystickButton lowgoalbutton=new JoystickButton(launchpad,5);
+	JoystickButton highgoalshoot=new JoystickButton(launchpad,2);
 	JoystickButton manualshoot=new JoystickButton(launchpad,4);
 	JoystickButton setshooterwheel=new JoystickButton(launchpad,11);
-	JoystickButton climb=new JoystickButton(launchpad,6);
-	JoystickButton centerwheellift=new JoystickButton(launchpad,7);
+	JoystickButton climb=new JoystickButton(launchpad,10);
+	JoystickButton centerwheellift=new JoystickButton(launchpad,9);
 	
-	JoystickButton portcullis=new JoystickButton(launchpad,8);
-	JoystickButton chevaldefrise=new JoystickButton(launchpad,9);
-	JoystickButton drawbridge=new JoystickButton(launchpad,10);
-	JoystickButton sallyport=new JoystickButton(launchpad,5);
+	JoystickButton portcullis=new JoystickButton(launchpad,1);
+	JoystickButton chevaldefrise=new JoystickButton(launchpad,6);
+	JoystickButton drawbridge=new JoystickButton(launchpad,7);
+	JoystickButton sallyport=new JoystickButton(launchpad,8);
 	
 	
-    //// CREATING BUTTONS
-    // One type of button is a joystick button which is any button on a joystick.
-    // You create one by telling it which joystick it's on and which button
-    // number it is.
-    // Joystick stick = new Joystick(port);
-    // Button button = new JoystickButton(stick, buttonNumber);
-    
-    // There are a few additional built in buttons you can use. Additionally,
-    // by subclassing Button you can create custom triggers and bind those to
-    // commands the same as any other Button.
-    
-    //// TRIGGERING COMMANDS WITH BUTTONS
-    // Once you have a button, it's trivial to bind it to a button in one of
-    // three ways:
-    
-    // Start the command when the button is pressed and let it run the command
-    // until it is finished as determined by it's isFinished method.
-    // button.whenPressed(new ExampleCommand());
-   
-    // Run the command while the button is being held down and interrupt it once
-    // the button is released.
-    // button.whileHeld(new ExampleCommand());
-    
-    // Start the command when the button is released  and let it run the command
-    // until it is finished as determined by it's isFinished method.
-    // button.whenReleased(new ExampleCommand());
 	 
 	 lowgoalbutton.whenPressed(new LowGoal());
 	 //lowgoalbutton.whenPressed(new LEDOn());
@@ -95,4 +69,32 @@ public class OI {
 	    }
 	    
 }
+
+
+//// CREATING BUTTONS
+// One type of button is a joystick button which is any button on a joystick.
+// You create one by telling it which joystick it's on and which button
+// number it is.
+// Joystick stick = new Joystick(port);
+// Button button = new JoystickButton(stick, buttonNumber);
+
+// There are a few additional built in buttons you can use. Additionally,
+// by subclassing Button you can create custom triggers and bind those to
+// commands the same as any other Button.
+
+//// TRIGGERING COMMANDS WITH BUTTONS
+// Once you have a button, it's trivial to bind it to a button in one of
+// three ways:
+
+// Start the command when the button is pressed and let it run the command
+// until it is finished as determined by it's isFinished method.
+// button.whenPressed(new ExampleCommand());
+
+// Run the command while the button is being held down and interrupt it once
+// the button is released.
+// button.whileHeld(new ExampleCommand());
+
+// Start the command when the button is released  and let it run the command
+// until it is finished as determined by it's isFinished method.
+// button.whenReleased(new ExampleCommand());
 

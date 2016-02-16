@@ -20,16 +20,16 @@ public class Camera extends Subsystem {
 	private int[] servoPins = new int[2];
 	Servo cameraServos[] = new Servo[2];
 	
-	private static double servoRange[][] = {{0.0, 1.0},{0.19, 0.555}};
-	private static double servoRangeSearch[][] = {{0.0, 1.0},{0.4, 0.53}};
+	private static double servoRange[][] = {{0.0, 0.89},{0.19, 0.555}};
+	private static double servoRangeSearch[][] = {{0.0, 0.89},{0.4, 0.53}};
 	
-    private static double cameraHeight = 55.0;														//cm
+    private static double cameraHeight = 42.5;														//cm
     private static double goalHeight = 90.0;
     static double calibrationDist = 100.0;
-    static double calibrationAngle = 0.48;
+    static double calibrationAngle = 0.435;
     static double baseY = Math.toDegrees(Math.atan((goalHeight - cameraHeight)/calibrationDist)) + 170.0*calibrationAngle;
     
-    private double inc[] = {0.02,0.015};
+    private double inc[] = {0.026,0.015};
     
     public double[] servoAngles = {(servoRange[0][0] + servoRange[0][1]) / 2.0, 0.5};				//initial Servo angles (0.0-1.0 scale)
     
@@ -39,22 +39,21 @@ public class Camera extends Subsystem {
     long lastPIDUpdate = System.currentTimeMillis();
 	
 	Serial raspberryPi;
-	private double goalCenter[] = new double[2];
+	private double goalCenter[] = {160.0,140.0};
 	public double goalCoordinates[] = new double[2];
 	
-	private double PIDGains[][] = {{0.0,0.0,0.0},{0.0,0.0,0.0}};
+	private double PIDGains[][] = {{0.025/goalCenter[0],0.0,0.0008/goalCenter[0]},
+			{0.0165/goalCenter[1],0.0,0.00045/goalCenter[1]}};
 	private double error[] = {0.0,0.0};
 	private double lastError[] = {0.0,0.0};
 	private double integralError[] = {0.0,0.0};
 	
 	private boolean foundGoal = false;
 	
-	public Camera(double[] xGains,double[] yGains,double[] screenCenter,int xServoPin,int yServoPin,Port port){
-		raspberryPi = new Serial(port,9600);
-		this.initializePID(xGains,yGains);
-    	goalCenter = screenCenter;
-    	servoPins[0] = xServoPin;
-    	servoPins[1] = yServoPin;
+	public Camera(){
+		raspberryPi = new Serial(Port.kMXP,9600);
+    	servoPins[0] = 8;
+    	servoPins[1] = 9;
     	for(int i = 0;i < 2;i++){
     		cameraServos[i] = new Servo(servoPins[i]);
     		goalCoordinates[i] = goalCenter[i];
@@ -173,7 +172,7 @@ public class Camera extends Subsystem {
     }
     
     public double getAzimuth(){
-    	return (170.0*servoAngles[0] - 90.0);//degrees
+    	return (170.0*(servoAngles[0] + (1.0 - servoRange[0][1])/2.0) - 90.0);//degrees
     }
     
     public boolean canSeeSwagadelia(){

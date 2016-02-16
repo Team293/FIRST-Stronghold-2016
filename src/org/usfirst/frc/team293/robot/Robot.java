@@ -5,9 +5,10 @@ import org.usfirst.frc.team293.robot.commands.Aim;
 import org.usfirst.frc.team293.robot.commands.Autonomous;
 import org.usfirst.frc.team293.robot.commands.HoodRestPosition;
 import org.usfirst.frc.team293.robot.commands.LookDown;
+import org.usfirst.frc.team293.robot.subsystems.Arduino;
 import org.usfirst.frc.team293.robot.subsystems.Camera;
 import org.usfirst.frc.team293.robot.subsystems.DriveTrain;
-import org.usfirst.frc.team293.robot.subsystems.DriveTrain1;
+import org.usfirst.frc.team293.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team293.robot.subsystems.DriverCamera;
 import org.usfirst.frc.team293.robot.subsystems.Feeder;
 import org.usfirst.frc.team293.robot.subsystems.Hood;
@@ -41,7 +42,7 @@ public class Robot extends IterativeRobot {
 	///////////instantiate subsystems
 	public static OI oi;
 	public static DriverCamera drivercamera;
-	public static DriveTrain1 drivetrain;
+	public static DriveTrain drivetrain;
 	public static Feeder feeder;
 	public static Hood hood;
 	public static ShooterRotation shooterrotation;
@@ -50,6 +51,7 @@ public class Robot extends IterativeRobot {
 	public static Camera Camera;
 	public static LEDButtons ledbuttons;
 	public static Logging logging;
+	public static Arduino ledStrip;
 	
 	public static Preferences prefs;
 	
@@ -63,7 +65,7 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
 		
 ///////////instantiate subsystems
-        drivetrain = new DriveTrain1(0.0);
+        drivetrain = new DriveTrain(0.0);
         
         hood= new Hood();
         lifterdrivetrain = new LifterDriveTrain();
@@ -74,8 +76,10 @@ public class Robot extends IterativeRobot {
         shooterwheel=new ShooterWheel();
         logging=new Logging();
         ledbuttons= new LEDButtons(1);
+        Camera = new Camera();
         oi = new OI();
         autonomousCommand = new Autonomous();
+        ledStrip = new Arduino();
     }
 	
 	/**

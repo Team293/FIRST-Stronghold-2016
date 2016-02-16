@@ -15,7 +15,7 @@ public class FollowGoal extends Command {
 	private static int Dt = 50;
 	private boolean lost = false;
 	private long timeLost = 0;
-	private int timeToLost = 500;
+	private int timeToLost = 1200;
 	
     public FollowGoal(double[] xGains,double[] yGains) {
         // Use requires() here to declare subsystem dependencies
@@ -49,6 +49,7 @@ public class FollowGoal extends Command {
     		lastTime = System.currentTimeMillis();
     	}
     	SmartDashboard.putBoolean("Lost", lost);
+    	System.out.println("running");
     }
 
     // Make this return true when this Command no longer needs to run execute()

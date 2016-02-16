@@ -11,9 +11,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class StartDriveStraight extends Command {
 	
-	double Kp = 0.13;
-	double Ki = 0.003;
-	double Kd = 0.0;
+	double Kp = 0.004;
+	double Ki = 0.00001;
+	double Kd = 0.000001;
 
     public StartDriveStraight() {
         // Use requires() here to declare subsystem dependencies

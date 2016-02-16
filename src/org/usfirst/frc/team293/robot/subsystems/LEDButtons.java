@@ -20,26 +20,24 @@ public class LEDButtons extends Subsystem {
     }
     public LEDButtons(int i){
     	super();
-    	this.port=i;
     	this.status=false;
     	this.time= System.currentTimeMillis();
     }
     
-    public void on(){
-    	OI.launchpad.setOutput(this.port, true);
+    public void on(int port){
+    	OI.launchpad.setOutput(port, true);
     	this.status=true;
     }
     public void off(){
-    	OI.launchpad.setOutput(this.port, false);
+    	OI.launchpad.setOutput(port, false);
     	this.status=false;
     }
     public void flash(){
     	if((System.currentTimeMillis()-this.time)>750){
-    		this.status= !this.status;
+    		this.status = !this.status;
     		OI.launchpad.setOutput(this.port, this.status);
-    		this.time=System.currentTimeMillis();
+    		this.time = System.currentTimeMillis();
     	}
     }
-    
 }
 

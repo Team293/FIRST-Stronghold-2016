@@ -21,7 +21,7 @@ public class ShooterWheel extends Subsystem {
 		shooterwheel = new CANTalon(RobotMap.shooterwheel);
 		shooterwheel.changeControlMode(TalonControlMode.Speed);
 		shooterwheel.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-		shooterwheel.setPID(3, 0.001, 0.0); // Set the PID constants (p, i, d)
+		shooterwheel.setPID(3, 0.001, .5); // Set the PID constants (p, i, d)
 		shooterwheel.setF(.4);// what we think it should be
 
 		shooterwheel.enableControl(); // Enable PID control on the talon

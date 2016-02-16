@@ -7,28 +7,26 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class StopShooterWheel extends Command {
+public class pdpLogging extends Command {
 
-    public StopShooterWheel() {
-    	requires(Robot.shooterwheel);
-    	requires(Robot.ledbuttons);
+    public pdpLogging() {
         // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
+          requires(Robot.logging);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.shooterwheel.disableShooter();
-    	Robot.ledbuttons.on(1);
+    	Robot.logging.reset();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	Robot.logging.log();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+        return false;
     }
 
     // Called once after isFinished returns true
