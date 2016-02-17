@@ -1,7 +1,7 @@
 package org.usfirst.frc.team293.robot;
 
 import org.usfirst.frc.team293.robot.commands.Aim;
-import org.usfirst.frc.team293.robot.commands.DropCenterWheel;
+//import org.usfirst.frc.team293.robot.commands.DropCenterWheel;
 import org.usfirst.frc.team293.robot.commands.Feeding;
 import org.usfirst.frc.team293.robot.commands.Fire;
 //import org.usfirst.frc.team293.robot.commands.LEDOn;
@@ -52,7 +52,7 @@ public class OI {
 	 setshooterwheel.whenInactive(new StopShooterWheel());
 	 
 	 centerwheellift.whenPressed(new LiftCenterWheel());
-	 centerwheellift.whenInactive(new DropCenterWheel());
+	 //centerwheellift.whenInactive(new DropCenterWheel());
 	 
 	 highgoalshoot.whenPressed(new ShootHighGoal());
 	 

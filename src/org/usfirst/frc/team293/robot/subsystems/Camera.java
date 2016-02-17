@@ -50,8 +50,8 @@ public class Camera extends Subsystem {			//This manages the OpenCV camera by ge
 	
 	private boolean foundGoal = false;
 	
-	public Camera(){
-		raspberryPi = new Serial(Port.kMXP,9600);		//Instantiates the Servos and Pi
+	public Camera(){											//Instantiates the Servos and Pi
+		raspberryPi = new Serial(Port.kMXP,9600);
     	servoPins[0] = 8;
     	servoPins[1] = 9;
     	for(int i = 0;i < 2;i++){
@@ -63,34 +63,34 @@ public class Camera extends Subsystem {			//This manages the OpenCV camera by ge
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
-    	setDefaultCommand(new FollowGoal(PIDGains[0],PIDGains[1]));
+    	setDefaultCommand(new FollowGoal(PIDGains[0],PIDGains[1]));		//default command is to follow goal
     }
     
     public int getGoalCoordinates(){	//Gets the coordinates from the Pi to setup the Rio
     	String x = raspberryPi.getData();
     	if(x != "null"){
     		String delims = "[ ]";
-    		String[] vals = x.split(delims);
+    		String[] vals = x.split(delims);							//split string at spaces
     		if(vals.length == 2){
     			for(int i = 0;i < 2;i++){
-    				goalCoordinates[i] = Integer.parseInt(vals[i]);
+    				goalCoordinates[i] = Integer.parseInt(vals[i]);		//get the integer values
     			}
     		}
-   			lastReading = System.currentTimeMillis();
+   			lastReading = System.currentTimeMillis();					//set time for the last reading
    			if(goalCoordinates[0] == -1){
-   				return -1;
+   				return -1;												//if can't see goal, return -1
    			}
-    		return 1;
+    		return 1;													//if can see goal, return 1
     	}
-    	return 0;
+    	return 0;														//else return 0
     }
     
     public void initializePID(double[] xGains,double[] yGains){	// Start the PID for the Camera Servos to the coordinates
     	for(int i = 0;i < 3;i++){
-    		PIDGains[0][i] = xGains[i];
+    		PIDGains[0][i] = xGains[i];							//set x gains
     	}
     	for(int i = 0;i < 3;i++){
-    		PIDGains[1][i] = yGains[i];
+    		PIDGains[1][i] = yGains[i];							//set y gains
     	}
     }
     
@@ -135,32 +135,31 @@ public class Camera extends Subsystem {			//This manages the OpenCV camera by ge
     public void search(){		//If the camera can't find the goal, it needs to search around
     	double outputs[] = {0.0,0.0};
     	for(int i = 0;i < 2;i++){
-    		if(servoAngles[i] + inc[i] < servoRangeSearch[i][0] && inc[i] < 0 ){
+    		if(servoAngles[i] + inc[i] < servoRangeSearch[i][0] && inc[i] < 0 ){				//changes direction (x)
     			inc[i] = -1*inc[i];
     		}
-    		if(servoAngles[i] + inc[i] > servoRangeSearch[i][1] && inc[i] > 0){
+    		if(servoAngles[i] + inc[i] > servoRangeSearch[i][1] && inc[i] > 0){					//changes direction (y)
     			inc[i] = -1*inc[i];
     		}
-    		outputs[i] = servoAngles[i] + inc[i];
+    		outputs[i] = servoAngles[i] + inc[i];												//changes servo values
     	}
     	SmartDashboard.putNumber("inc Y", inc[1]);
     	SmartDashboard.putNumber("outputValue Y", outputs[1]);
-    	this.setServoValues(outputs);
+    	this.setServoValues(outputs);															//actually moves servos
     	foundGoal = false;
     }
     
-    public void setServoValues(double[] vals){		
+    public void setServoValues(double[] vals){														//sets the servo values	
     	vals[0] = Math.min(Math.max(vals[0],servoRange[0][0]), servoRange[0][1]);					//Constrain Servo Values
     	vals[1] = Math.min(Math.max(vals[1],servoRange[1][0]), servoRange[1][1]);
     	SmartDashboard.putNumber("yAngle", servoAngles[1]);
     	for(int i = 0;i < 2;i++){
-    		servoAngles[i] = vals[i];												//Set Servo values
+    		servoAngles[i] = vals[i];								//Set Servo values (Does not actually set servos)
     	}
     }
     
-    public void setServos(){
+    public void setServos(){			//Sets servos to a certain value
     	for(int i = 0;i < 2;i++){
-    		//SmartDashboard.putNumber("servoValue", servoAngles[0]);
     		cameraServos[i].set(servoAngles[i]);											//Set Servos
     	}
     	lastServoSet = System.currentTimeMillis();
@@ -171,7 +170,7 @@ public class Camera extends Subsystem {			//This manages the OpenCV camera by ge
     	return ((goalHeight - cameraHeight) / Math.tan(rad));//in inches
     }
     
-    public double getAzimuth(){			//Tells us what angle we are at.
+    public double getAzimuth(){			//Tells us what angle we are at (RELATIVE).
     	return (170.0*(servoAngles[0] + (1.0 - servoRange[0][1])/2.0) - 90.0);//degrees
     }
     

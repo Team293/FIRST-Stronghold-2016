@@ -6,26 +6,40 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 /**
  *
  */
-public class Arduino extends Subsystem {//How the heck does this work?  Where is the Arduino Code?  Is this going to be worthless to us?
+public class Arduino extends Subsystem {						//so this sends stuff to the Arduino through i2c
+	/******************************CODES*******************************/
+	public static final byte
+	AutoRed=1,	//red pulsing if on red alliance
+	AutoBlue=2,	//blue pulsing if on blue alliance
+	TeleopNoBallShooteroff=3,  //yellow
+	TeleopNoBallShooteron=4,//pulsing yellow
+	ShooterOnCanSeeSwag=5,//green pulsing
+	ShooterOnAiming=6,//green flashing
+	aftershooting=7,  //Fast Rainbow maybe for a second or two for swag?
+	
+	
+	///Drivetrain Codes   Probabaly only a few strips
+	Drivetrainup=21,	//red pulsing
+	Drvetraindown=22,  //purple pulsing
+	
+	//all LEDS
+	MUSIC = 10;//before a match, or when the robot isn't enabled
+	/*****************************END CODES****************************/
 	
 	I2C arduino;
 	byte[] toSend = new byte[1];
 	
 	int arduinoAddress = 8;
 	
-	public Arduino(){
+	public Arduino(){											//initializes the i2c port
 		arduino = new I2C(I2C.Port.kOnboard, arduinoAddress);
 	}
     
-    // Put methods for controlling this subsystem
-    // here. Call these from Commands.
-
     public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
     }
     
-    public void writeByte(byte toWrite){
+    public void writeByte(byte toWrite){						//writes 1 byte to the i2c port
     	toSend[0] = toWrite;
     	arduino.transaction(toSend, 1, null, 0);
     }

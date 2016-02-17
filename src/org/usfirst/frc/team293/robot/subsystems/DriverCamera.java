@@ -20,6 +20,10 @@ public class DriverCamera extends Subsystem {//Changes angle for camera for driv
 	public void Lookup() {
 		drivercamera.set(1);
 	}
+	
+	public void setServo(double angle){
+		drivercamera.set(angle);
+	}
 
 
 	public void initDefaultCommand() {

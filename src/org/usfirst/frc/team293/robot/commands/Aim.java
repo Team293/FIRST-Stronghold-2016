@@ -1,6 +1,7 @@
 package org.usfirst.frc.team293.robot.commands;
 
 import org.usfirst.frc.team293.robot.Robot;
+import org.usfirst.frc.team293.robot.subsystems.Arduino;
 import org.usfirst.frc.team293.robot.subsystems.Hood;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -23,18 +24,20 @@ public class Aim extends Command {// sets up the shooter to match the camera
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
-		Robot.drivetrain.setPID(0.13, 0.0001, 0.001);
+		Robot.drivetrain.setPID(0.001, 0.00001, 0.001);
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		if (Robot.Camera.canSeeSwagadelia() && Robot.drivetrain.returnAttitude()[0] != -1.0) {	
+		if (Robot.Camera.canSeeSwagadelia()) {	
 			/*********************************Angle Stuff************************************/
 			System.out.println("TURNING TO GOAL");
 			double azimuth = Robot.Camera.getAzimuth();
 			if (azimuth <= 11.6) {	//if its just a shooter rotation
+				Robot.ledStrip.writeByte(Arduino.AIMCANSEE);
 				Robot.shooterrotation.turnToGoal(azimuth);
-			} else {
+			} else if(Robot.drivetrain.returnAttitude()[0] != -1.0){
+				Robot.ledStrip.writeByte(Arduino.AIMCANSEE);
 				double absoluteAngle = azimuth + Robot.drivetrain.getAttitude()[0];
 				if(absoluteAngle > 360.0){
 					absoluteAngle -= 360.0;
@@ -52,11 +55,15 @@ public class Aim extends Command {// sets up the shooter to match the camera
 					Robot.drivetrain.turnToAngle();
 					Robot.shooterrotation.setsetpoint(-12.0);
 				}
+			}else{
+				Robot.ledStrip.writeByte(Arduino.AIMNOATTITUDE);
 			}
 			/*********************************Distance Stuff***********************************/
 			distance=Robot.Camera.getDistance();
 			angle=-6.087e-3*Math.pow(distance, 3)+3.587e-1*Math.pow(distance,2)-7.783*distance+91.16;
 			Hood.setPosition(angle);
+		}else{
+			Robot.ledStrip.writeByte(Arduino.AIMCANTSEE);
 		}
 	
 	}
@@ -71,6 +78,7 @@ public class Aim extends Command {// sets up the shooter to match the camera
 
 	// Called once after isFinished returns true
 	protected void end() {
+		Robot.drivetrain.tankdrive(0, 0);
 	}
 
 	// Called when another command which requires one or more of the same

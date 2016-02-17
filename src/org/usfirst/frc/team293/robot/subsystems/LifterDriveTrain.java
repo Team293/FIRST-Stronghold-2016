@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class LifterDriveTrain extends Subsystem {//the lifter center wheel on the drivetrain
 	private CANTalon lifterMotor;
+	public boolean position;
 	boolean state;
     public LifterDriveTrain(){
     // Put methods for controlling this subsystem
@@ -36,6 +37,7 @@ public class LifterDriveTrain extends Subsystem {//the lifter center wheel on th
 	public boolean stopliftdrivetrain(){
 		if (lifterMotor.getAnalogInRaw()>2.5) {			//This stops the motor when the angle hits a certain value, which is the lifting position
 			state=true;
+			
 		}
 		return state;
 	}
@@ -49,6 +51,7 @@ public class LifterDriveTrain extends Subsystem {//the lifter center wheel on th
 	public boolean stopdropdrivetrain(){			//This stops the motor when the angle hits a certain value
 		if (.01<lifterMotor.getAnalogInRaw()) {
 			state=true;
+			
 		}
 		return state;
 	}

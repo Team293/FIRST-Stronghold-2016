@@ -11,19 +11,21 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class StartDriveStraight extends Command {
 	
-	double Kp = 0.004;
-	double Ki = 0.00001;
-	double Kd = 0.000001;
+	double Kp = 0.000004;
+	double Ki = 0.00000002;
+	double Kd = 0.0;
+	double dist = 0.0;
 
-    public StartDriveStraight() {
+    public StartDriveStraight(double distance) {
         // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
+    	this.dist = distance;
     	requires(Robot.drivetrain);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.drivetrain.initsensor();
+    	Robot.drivetrain.resetEnc();
     	Robot.drivetrain.setSetpoint(Robot.drivetrain.getAttitude()[0]);
     	SmartDashboard.putNumber("setpoint", Robot.drivetrain.getAttitude()[0]);
     	Robot.drivetrain.setPID(Kp, Ki, Kd);
@@ -32,8 +34,6 @@ public class StartDriveStraight extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	//Robot.drivetrain.setPID(Kp, Ki, Kd);
-    	//Robot.drivetrain.setPID(0.13, 0.003, 0.0);
     	Robot.drivetrain.getAttitude();
     	Robot.drivetrain.PID();
     	Robot.drivetrain.usePID();
@@ -41,6 +41,9 @@ public class StartDriveStraight extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
+    	if(Robot.drivetrain.getDist() >= dist){
+    		return true;
+    	}
         return false;
     }
 
