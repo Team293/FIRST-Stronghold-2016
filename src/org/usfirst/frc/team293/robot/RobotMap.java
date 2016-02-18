@@ -43,4 +43,24 @@ public class RobotMap {
      rightEncoderone=2,
      rightEncodertwo=3,
      opticallimit=4;  
+     
+     /**************Power Stuff*************
+      
+      * Right Side:
+      RightDrive 2,3
+      Feeder 4
+      Lifter
+      Hood
+      
+      
+      *Left Side:
+     Leftdrive 12, 13
+     Feeder 11
+     Shooterwheel
+     ShooterRotation
+     
+     Arduino 12v 500ma
+     
+     Pi in the 5v 2a
+     */
 }
