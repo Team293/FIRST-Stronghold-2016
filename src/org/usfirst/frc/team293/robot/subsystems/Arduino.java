@@ -19,11 +19,11 @@ public class Arduino extends Subsystem {						//so this sends stuff to the Ardui
 	
 	
 	///Drivetrain Codes   Probabaly only a few strips
-	Drivetrainup=21,	//red pulsing
-	Drvetraindown=22,  //purple pulsing
+	DrivetrainUp=21,	//red pulsing
+	DrvetrainDown=22,  //purple pulsing
 	
 	//all LEDS
-	MUSIC = 10;//before a match, or when the robot isn't enabled
+	PARTY = 10;//before a match, or when the robot isn't enabled
 	/*****************************END CODES****************************/
 	
 	I2C arduino;
