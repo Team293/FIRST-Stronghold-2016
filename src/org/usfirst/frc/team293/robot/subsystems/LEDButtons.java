@@ -1,11 +1,7 @@
 package org.usfirst.frc.team293.robot.subsystems;
 
 import org.usfirst.frc.team293.robot.OI;
-import org.usfirst.frc.team293.robot.Robot;
-
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -21,16 +17,17 @@ public class LEDButtons extends Subsystem {		//Allows for the Launchpad LED butt
     public LEDButtons(int i){
     	super();
     	this.status=false;
+    	this.port = i;
     	this.time= System.currentTimeMillis();
     }
     
-    public void on(int port){
-    	OI.launchpad.setOutput(port, true);
+    public void on(){
     	this.status=true;
+    	OI.launchpad.setOutput(this.port, this.status);
     }
     public void off(){
-    	OI.launchpad.setOutput(port, false);
     	this.status=false;
+    	OI.launchpad.setOutput(this.port, this.status);
     }
     public void flash(){
     	if((System.currentTimeMillis()-this.time)>750){

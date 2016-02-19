@@ -12,6 +12,7 @@ public class LowGoal extends Command {
 
     public LowGoal() {
     	requires(Robot.feeder);
+    	requires(Robot.ledLowGoal);
     	 setTimeout(1);
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
@@ -21,6 +22,7 @@ public class LowGoal extends Command {
     protected void initialize() {
     	Robot.feeder.insidefeederset(-1);
     	Robot.feeder.outsidefeederset(-1);
+    	Robot.ledLowGoal.on();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -37,6 +39,7 @@ public class LowGoal extends Command {
     protected void end() {
     	  Robot.feeder.insidefeederset(0);
     	  Robot.feeder.outsidefeederset(0);
+    	  Robot.ledLowGoal.off();
     }
     
 

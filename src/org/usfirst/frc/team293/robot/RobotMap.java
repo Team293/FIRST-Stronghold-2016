@@ -44,6 +44,10 @@ public class RobotMap {
      rightEncodertwo=3,
      opticallimit=4;  
      
+     //LED Button Ports
+     public static int
+     ledShooterWheels = 1,
+     ledLowGoal = 2;
      /**************Power Stuff*************
       
       * Right Side:

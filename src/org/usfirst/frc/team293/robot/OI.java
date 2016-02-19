@@ -1,19 +1,20 @@
 package org.usfirst.frc.team293.robot;
 
-import org.usfirst.frc.team293.robot.commands.Aim;
+//import org.usfirst.frc.team293.robot.commands.Aim;
 //import org.usfirst.frc.team293.robot.commands.DropCenterWheel;
-import org.usfirst.frc.team293.robot.commands.Feeding;
-import org.usfirst.frc.team293.robot.commands.Fire;
+//import org.usfirst.frc.team293.robot.commands.Feeding;
+//import org.usfirst.frc.team293.robot.commands.Fire;
 //import org.usfirst.frc.team293.robot.commands.LEDOn;
-import org.usfirst.frc.team293.robot.commands.LiftCenterWheel;
+//import org.usfirst.frc.team293.robot.commands.LiftCenterWheel;
 import org.usfirst.frc.team293.robot.commands.LowGoal;
-import org.usfirst.frc.team293.robot.commands.RunShooterWheel;
-import org.usfirst.frc.team293.robot.commands.ShootHighGoal;
-import org.usfirst.frc.team293.robot.commands.StopShooterWheel;
+//import org.usfirst.frc.team293.robot.commands.RunShooterWheel;
+//import org.usfirst.frc.team293.robot.commands.ShootHighGoal;
+//import org.usfirst.frc.team293.robot.commands.StopShooterWheel;
 
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.buttons.Button;
+//import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+//import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 /**
@@ -30,33 +31,33 @@ public class OI {
 	 
 	 public OI(){
 		 /////////////////////instantiate buttons
-	JoystickButton feederbutton=new JoystickButton(launchpad,3);
+//	JoystickButton feederbutton=new JoystickButton(launchpad,3);
 	JoystickButton lowgoalbutton=new JoystickButton(launchpad,5);
-	JoystickButton highgoalshoot=new JoystickButton(launchpad,2);
-	JoystickButton manualshoot=new JoystickButton(launchpad,4);
-	JoystickButton setshooterwheel=new JoystickButton(launchpad,11);
-	JoystickButton climb=new JoystickButton(launchpad,10);
-	JoystickButton centerwheellift=new JoystickButton(launchpad,9);
+//	JoystickButton highgoalshoot=new JoystickButton(launchpad,2);
+//	JoystickButton manualshoot=new JoystickButton(launchpad,4);
+//	JoystickButton setshooterwheel=new JoystickButton(launchpad,11);
+//	JoystickButton climb=new JoystickButton(launchpad,10);
+//	JoystickButton centerwheellift=new JoystickButton(launchpad,9);
 	
-	JoystickButton portcullis=new JoystickButton(launchpad,1);
-	JoystickButton chevaldefrise=new JoystickButton(launchpad,6);
-	JoystickButton drawbridge=new JoystickButton(launchpad,7);
-	JoystickButton sallyport=new JoystickButton(launchpad,8);
+//	JoystickButton portcullis=new JoystickButton(launchpad,1);
+//	JoystickButton chevaldefrise=new JoystickButton(launchpad,6);
+//	JoystickButton drawbridge=new JoystickButton(launchpad,7);
+//	JoystickButton sallyport=new JoystickButton(launchpad,8);
 	
 	
-	 
 	 lowgoalbutton.whenPressed(new LowGoal());
 	 //lowgoalbutton.whenPressed(new LEDOn());
-	 feederbutton.whenPressed(new Feeding());
-	 setshooterwheel.whenActive(new RunShooterWheel());
-	 setshooterwheel.whenInactive(new StopShooterWheel());
+	 //feederbutton.whenPressed(new Feeding());
+	 //setshooterwheel.whenActive(new RunShooterWheel());
+	 //setshooterwheel.whenInactive(new StopShooterWheel());
 	 
-	 centerwheellift.whenPressed(new LiftCenterWheel());
+	 //centerwheellift.whenPressed(new LiftCenterWheel());
 	 //centerwheellift.whenInactive(new DropCenterWheel());
 	 
-	 highgoalshoot.whenPressed(new ShootHighGoal());
+	 //highgoalshoot.whenPressed(new ShootHighGoal());
 	 
-	 manualshoot.whenPressed(new Fire());
+	 //manualshoot.whenPressed(new Fire());
+	 
 	 }
 	    public double getJoystick1() {
 	        return joy1.getY();

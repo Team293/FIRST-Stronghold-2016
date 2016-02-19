@@ -3,7 +3,6 @@ package org.usfirst.frc.team293.robot.subsystems;
 import org.usfirst.frc.team293.robot.commands.pdpLogging;
 
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 

@@ -1,7 +1,7 @@
 package org.usfirst.frc.team293.robot.commands;
 
 import org.usfirst.frc.team293.robot.Robot;
-import org.usfirst.frc.team293.robot.subsystems.Arduino;
+//import org.usfirst.frc.team293.robot.subsystems.Arduino;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -19,7 +19,7 @@ public class Fire extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.ledStrip.writeByte(Arduino.FIRE);
+//    	Robot.ledStrip.writeByte(Arduino.FIRE);
     	Robot.feeder.outsidefeederset(-1);
     	Robot.feeder.insidefeederset(-1);
     }
