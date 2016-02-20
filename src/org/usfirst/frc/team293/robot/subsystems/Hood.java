@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class Hood extends Subsystem {//the hood that aims up and down and manipulates.  PID
 	private static CANTalon Hood;
-
+	
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
 	public Hood() {

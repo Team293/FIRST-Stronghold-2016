@@ -18,7 +18,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class DriveTrain extends Subsystem {		//this does the TankDrive as well as the drivestraight for autonomous
 	private SpeedController leftMotor, rightMotor;
-	Encoder[] encoders = new Encoder[2];
+	//Encoder[] encoders = new Encoder[2];
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
 	RobotDrive drive;
@@ -41,21 +41,21 @@ public class DriveTrain extends Subsystem {		//this does the TankDrive as well a
 	private double lastDist = 0.0;
 	private double correctedDist = 0.0;
 	private static int[][] encoderPorts = {{6,7},{8,9}};
-	
-	public DriveTrain(double setpointWanted){
+	double setpointWanted;
+	public DriveTrain(){
 		leftMotor = new VictorSP(RobotMap.leftMotor);
 		rightMotor = new VictorSP(RobotMap.rightMotor);
 		drive = new RobotDrive(leftMotor, rightMotor);
 		drive.setExpiration(0.1);
 		drive.setSensitivity(1.0);
 		
-		for(int i = 0;i < 2;i++){
+		/*for(int i = 0;i < 2;i++){
 			encoders[i] = new Encoder(encoderPorts[i][0],encoderPorts[i][1],true,EncodingType.k4X);
 			encoders[i].setMaxPeriod(0.1);
 			encoders[i].setMinRate(10);
 			encoders[i].setDistancePerPulse(5.0);
 			encoders[i].setSamplesToAverage(5);
-		}
+		}*/
 		
 		pi = new Serial(Port.kOnboard,115200);// rs232
 		
@@ -156,7 +156,7 @@ public class DriveTrain extends Subsystem {		//this does the TankDrive as well a
 		drive.drive(0.0, output);
 	}
 	
-	public void resetEnc(){
+	/*public void resetEnc(){
 		encoders[0].reset();
 		encoders[1].reset();
 	}
@@ -173,6 +173,6 @@ public class DriveTrain extends Subsystem {		//this does the TankDrive as well a
 		double dist = this.getDist();
 		correctedDist += (dist - lastDist) * Math.cos(Math.toRadians(error));
 		lastDist = dist;
-	}
+	}*/
 }
 

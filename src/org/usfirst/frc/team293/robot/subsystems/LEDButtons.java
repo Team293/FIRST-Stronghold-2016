@@ -6,8 +6,14 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 /**
  *
  */
-public class LEDButtons extends Subsystem {		//Allows for the Launchpad LED buttons to light up
-	public int port;
+public class LEDButtons extends Subsystem {
+
+	@Override
+	protected void initDefaultCommand() {
+		// TODO Auto-generated method stub
+		
+	}		//Allows for the Launchpad LED buttons to light up
+	/*public int port;
 	public boolean status;
 	public long time;
     public void initDefaultCommand() {
@@ -35,6 +41,6 @@ public class LEDButtons extends Subsystem {		//Allows for the Launchpad LED butt
     		OI.launchpad.setOutput(this.port, this.status);
     		this.time = System.currentTimeMillis();
     	}
-    }
+    }*/
 }
 

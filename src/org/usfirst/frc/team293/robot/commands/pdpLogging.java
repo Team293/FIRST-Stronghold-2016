@@ -11,7 +11,7 @@ public class pdpLogging extends Command {
 
     public pdpLogging() {
         // Use requires() here to declare subsystem dependencies
-    //      requires(Robot.logging);
+         requires(Robot.logging);
     }
 
     // Called just before this Command runs the first time

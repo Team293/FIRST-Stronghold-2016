@@ -11,7 +11,6 @@ public class Feeding extends Command {
 
     public Feeding() {
     	requires(Robot.feeder);
-    	setTimeout(5);
     	
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
@@ -29,7 +28,7 @@ public class Feeding extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return (Robot.feeder.boulderoptical()||isTimedOut());
+    	return (Robot.feeder.boulderoptical());
     }
 
     // Called once after isFinished returns true

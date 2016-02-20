@@ -17,7 +17,7 @@ public class Aim extends Command {// sets up the shooter to match the camera
 	
 
 	public Aim() {//auto aiming
-//		requires(Robot.hood);
+		requires(Robot.hood);
 		requires(Robot.shooterrotation);
 		requires(Robot.drivetrain);
 	}
@@ -62,8 +62,6 @@ public class Aim extends Command {// sets up the shooter to match the camera
 			distance=Robot.Camera.getDistance();
 			angle=-6.087e-3*Math.pow(distance, 3)+3.587e-1*Math.pow(distance,2)-7.783*distance+91.16;
 			Hood.setPosition(angle);
-		}else{
-			//Robot.ledStrip.writeByte(Arduino.AIMCANTSEE);
 		}
 	
 	}

@@ -13,6 +13,7 @@ public class HoodRestPosition extends Command {
     public HoodRestPosition() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
+    	 requires(Robot.hood);
    // 	requires(Robot.hood);
     }
 

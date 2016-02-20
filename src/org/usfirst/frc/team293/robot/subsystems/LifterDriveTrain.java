@@ -4,6 +4,7 @@ import org.usfirst.frc.team293.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
+import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -17,7 +18,7 @@ public class LifterDriveTrain extends Subsystem {//the lifter center wheel on th
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	lifterMotor = new CANTalon(RobotMap.lifterMotor);
-	// lifterMotor.changeControlMode(TalonControlMode.Position);//Change
+	 lifterMotor.changeControlMode(TalonControlMode.Position);//Change
 	// control mode of talon, default is PercentVbus (-1.0 to 1.0)
 	lifterMotor.setFeedbackDevice(FeedbackDevice.AnalogEncoder);
 	

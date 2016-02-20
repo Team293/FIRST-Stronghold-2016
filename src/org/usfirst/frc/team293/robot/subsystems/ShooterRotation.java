@@ -31,7 +31,7 @@ public class ShooterRotation extends Subsystem {//rotate the shooter and setup t
 	}
 
 	public void setsetpoint(double angle) {
-		angle = Math.min(Math.max(angle,rotateRange[0]), rotateRange[1]);			//Constrain Angle Value
+		//angle = Math.min(Math.max(angle,rotateRange[0]), rotateRange[1]);			//Constrain Angle Value
 		shooterrotation.set(angle);
 	}
 	

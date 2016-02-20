@@ -11,7 +11,7 @@ public class StopShooterWheel extends Command {
 
     public StopShooterWheel() {
     	requires(Robot.shooterwheel);
-    	requires(Robot.ledShooterWheels);
+    	//requires(Robot.ledShooterWheels);
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
@@ -19,7 +19,7 @@ public class StopShooterWheel extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.shooterwheel.disableShooter();
-    	Robot.ledShooterWheels.on();
+    	//Robot.ledShooterWheels.on();
     }
 
     // Called repeatedly when this Command is scheduled to run

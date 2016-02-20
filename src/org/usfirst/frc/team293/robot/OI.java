@@ -65,9 +65,9 @@ public class OI {
 	    public double getJoystick2(){
 	    	return joy2.getY();
 	    }
-	    public void flash(int port){
-	    	launchpad.setOutputs(port);
-	    }
+	    //public void flash(int port){
+	    	//launchpad.setOutputs(port);
+	    //}
 	    
 }
 

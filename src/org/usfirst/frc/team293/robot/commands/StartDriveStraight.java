@@ -23,7 +23,7 @@ public class StartDriveStraight extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.drivetrain.initsensor();
-    	Robot.drivetrain.resetEnc();
+    	//Robot.drivetrain.resetEnc();
     	Robot.drivetrain.setSetpoint(Robot.drivetrain.getAttitude()[0]);
     	SmartDashboard.putNumber("setpoint", Robot.drivetrain.getAttitude()[0]);
     	Robot.drivetrain.setPID(Kp, Ki, Kd);
@@ -39,9 +39,9 @@ public class StartDriveStraight extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	if(Robot.drivetrain.getDist() >= dist){
+    	/*if(Robot.drivetrain.getDist() >= dist){
     		return true;
-    	}
+    	}*/
         return false;
     }
 
