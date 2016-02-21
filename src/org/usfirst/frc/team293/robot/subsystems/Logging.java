@@ -20,10 +20,13 @@ public class Logging extends Subsystem {//for logging PDP current
         setDefaultCommand(new pdpLogging());
     }
     public void log(){
-    	SmartDashboard.putNumber("TotalPower", pdp.getTotalPower());//log stuff
+    	SmartDashboard.putNumber("C_TotalPower", pdp.getTotalPower());//log stuff
+    	SmartDashboard.putNumber("C_ShooterWheel", pdp.getCurrent(5));
+    	SmartDashboard.putNumber("C_TotalAmps", pdp.getTotalCurrent());
+    	
     }
     public void reset(){
-    	//pdp.clearStickyFaults();//clear that bizarre sticky fault thing
+    	pdp.clearStickyFaults();//clear that bizarre sticky fault thing
     }
 }
 

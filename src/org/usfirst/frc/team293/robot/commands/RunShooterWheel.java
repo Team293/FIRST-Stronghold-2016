@@ -12,8 +12,8 @@ public class RunShooterWheel extends Command {
 
     public RunShooterWheel() {
     	requires(Robot.shooterwheel);
-    	//requires(Robot.ledShooterWheels);
-    	requires(Robot.drivercamera);
+    	requires(Robot.ledShooterWheels);
+    	//requires(Robot.drivercamera);
     	
     	// Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
@@ -23,17 +23,19 @@ public class RunShooterWheel extends Command {
     protected void initialize() {
     Robot.shooterwheel.setShooterRPM();
     Robot.drivercamera.Lookup();
-    //.ledShooterWheels.on();
+    Robot.ledShooterWheels.on();
     
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	System.out.println("Shooter");
+    	Robot.ledShooterWheels.flash();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+        return false;
     }
 
     // Called once after isFinished returns true

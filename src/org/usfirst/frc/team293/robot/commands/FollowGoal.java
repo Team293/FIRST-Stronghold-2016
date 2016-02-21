@@ -49,7 +49,6 @@ public class FollowGoal extends Command {
     		lastTime = System.currentTimeMillis();
     	}
     	SmartDashboard.putBoolean("Lost", lost);
-    	System.out.println("running");
     }
 
     // Make this return true when this Command no longer needs to run execute()

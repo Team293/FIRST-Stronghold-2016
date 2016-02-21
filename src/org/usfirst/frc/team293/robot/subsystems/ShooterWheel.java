@@ -25,6 +25,7 @@ public class ShooterWheel extends Subsystem {
 		shooterwheel.setF(.4);// what we think it should be
 
 		shooterwheel.enableControl(); // Enable PID control on the talon
+
 	}
 
 	public void initDefaultCommand() {
@@ -34,7 +35,7 @@ public class ShooterWheel extends Subsystem {
 
 	public void setShooterRPM() {
 		shooterwheel.enableControl();
-		shooterwheel.setSetpoint(2400);
+		shooterwheel.setSetpoint(2400*scalefactor);
 	}
 
 	public void disableShooter() {

@@ -2,6 +2,7 @@
 package org.usfirst.frc.team293.robot;
 
 import org.usfirst.frc.team293.robot.commands.Autonomous;
+import org.usfirst.frc.team293.robot.subsystems.Arduino;
 //import org.usfirst.frc.team293.robot.subsystems.Arduino;
 import org.usfirst.frc.team293.robot.subsystems.Camera;
 import org.usfirst.frc.team293.robot.subsystems.DriveTrain;
@@ -16,6 +17,7 @@ import org.usfirst.frc.team293.robot.subsystems.Logging;
 //import org.usfirst.frc.team293.robot.subsystems.Logging;
 import org.usfirst.frc.team293.robot.subsystems.ShooterRotation;
 import org.usfirst.frc.team293.robot.subsystems.ShooterWheel;
+import org.usfirst.frc.team293.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Preferences;
@@ -25,6 +27,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 //import org.usfirst.frc.team293.robot.commands.ExampleCommand;
 //import org.usfirst.frc.team293.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -46,11 +49,16 @@ public class Robot extends IterativeRobot {
 	public static ShooterWheel shooterwheel;
 	public static LifterDriveTrain lifterdrivetrain;
 	public static Camera Camera;
-	public static Logging logging;
-//	public static Arduino ledStrip;
+//	public static Logging logging;
+	public static Arduino ledStrip;
 	
-	//public static LEDButtons ledShooterWheels;
-	//public static LEDButtons ledLowGoal;
+	public static LEDButtons ledShooterWheels;
+	public static LEDButtons ledLowGoal;
+	public static LEDButtons ledClimb;
+	public static LEDButtons ledFeeder;
+	public static LEDButtons ledHighGoal;
+	public static LEDButtons ledManual;
+	public static LEDButtons ledCenterWheel;
 	
 	public static Preferences prefs;
 	
@@ -64,8 +72,16 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
 		
 ///////////instantiate subsystems
+    	ledShooterWheels= new LEDButtons(RobotMap.shooterButt[1]);
+    	ledClimb= new LEDButtons(RobotMap.climbButt[1]);
+    	ledFeeder= new LEDButtons(RobotMap.feederButt[1]);
+    	ledLowGoal = new LEDButtons(RobotMap.lowButt[1]);
+    	ledHighGoal = new LEDButtons(RobotMap.highButt[1]);
+    	ledManual = new LEDButtons(RobotMap.manualButt[1]);
+    	ledCenterWheel= new LEDButtons(RobotMap.wheelButt[1]);
+    	
+    	
         drivetrain = new DriveTrain();
-        
         hood= new Hood();
         lifterdrivetrain = new LifterDriveTrain();
        
@@ -73,15 +89,13 @@ public class Robot extends IterativeRobot {
         feeder=new Feeder();
         shooterrotation=new ShooterRotation();
         shooterwheel=new ShooterWheel();
-        logging=new Logging();
+//        logging=new Logging();
        Camera = new Camera();
         oi = new OI();
         autonomousCommand = new Autonomous();
         //ledStrip = new Arduino();
         
         //LED Buttons
-      //  ledShooterWheels= new LEDButtons(RobotMap.ledShooterWheels);
-        //ledLowGoal= new LEDButtons(RobotMap.ledLowGoal);
     }
 	
 	/**

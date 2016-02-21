@@ -29,6 +29,19 @@ public class RobotMap {
      drivetrainLifterMotor Potentiometer
      
      */
+     //Butt stuff
+     public static final int[]
+     feederButt={3,5},
+     lowButt={5,3},
+     highButt={2,11},
+     manualButt={4,4},
+     climbButt={10,10},
+     shooterButt={11,1},
+     wheelButt={9,9},
+     portButt={1,6},
+     chevaldeFesse={6,7},
+     sallyButt={8,8};
+     
      //Servos
      public static int
      drivercamera=7,
@@ -43,11 +56,6 @@ public class RobotMap {
      rightEncoderone=2,
      rightEncodertwo=3,
      opticallimit=4;  
-     
-     //LED Button Ports
-     public static int
-     ledShooterWheels = 1,
-     ledLowGoal = 2;
      /**************Power Stuff*************
       
       * Right Side:

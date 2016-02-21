@@ -11,6 +11,8 @@ public class Feeding extends Command {
 
     public Feeding() {
     	requires(Robot.feeder);
+    	requires(Robot.ledFeeder);
+    	requires(Robot.drivercamera);
     	
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
@@ -19,22 +21,26 @@ public class Feeding extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.feeder.outsidefeederset(1);
+    	Robot.ledFeeder.on();
+    	setTimeout(5);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	
-    }
+    	Robot.ledFeeder.flash();
+    	}
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return (Robot.feeder.boulderoptical());
+    	//return (isTimedOut());
+    	return (Robot.feeder.boulderoptical()||isTimedOut());
     }
 
     // Called once after isFinished returns true
     protected void end() {
     	Robot.feeder.outsidefeederset(0);
     	Robot.drivercamera.Lookup();
+    	Robot.ledFeeder.off();
     }
 
     // Called when another command which requires one or more of the same

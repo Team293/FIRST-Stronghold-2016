@@ -1,6 +1,7 @@
 package org.usfirst.frc.team293.robot.commands;
 
 import org.usfirst.frc.team293.robot.Robot;
+import org.usfirst.frc.team293.robot.subsystems.Arduino;
 //import org.usfirst.frc.team293.robot.subsystems.Arduino;
 import org.usfirst.frc.team293.robot.subsystems.Hood;
 
@@ -20,6 +21,7 @@ public class Aim extends Command {// sets up the shooter to match the camera
 		requires(Robot.hood);
 		requires(Robot.shooterrotation);
 		requires(Robot.drivetrain);
+		requires(Robot.ledHighGoal);
 	}
 
 	// Called just before this Command runs the first time
@@ -29,15 +31,13 @@ public class Aim extends Command {// sets up the shooter to match the camera
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
+		Robot.ledHighGoal.flash();
 		if (Robot.Camera.canSeeSwagadelia()) {	
 			/*********************************Angle Stuff************************************/
-			System.out.println("TURNING TO GOAL");
 			double azimuth = Robot.Camera.getAzimuth();
 			if (azimuth <= 11.6) {	//if its just a shooter rotation
-//				Robot.ledStrip.writeByte(Arduino.AIMCANSEE);
 				Robot.shooterrotation.turnToGoal(azimuth);
 			} else if(Robot.drivetrain.returnAttitude()[0] != -1.0){
-//				Robot.ledStrip.writeByte(Arduino.AIMCANSEE);
 				double absoluteAngle = azimuth + Robot.drivetrain.getAttitude()[0];
 				if(absoluteAngle > 360.0){
 					absoluteAngle -= 360.0;
@@ -56,7 +56,6 @@ public class Aim extends Command {// sets up the shooter to match the camera
 					Robot.shooterrotation.setsetpoint(-12.0);
 				}
 			}else{
-//				Robot.ledStrip.writeByte(Arduino.AIMNOATTITUDE);
 			}
 			/*********************************Distance Stuff***********************************/
 			distance=Robot.Camera.getDistance();
