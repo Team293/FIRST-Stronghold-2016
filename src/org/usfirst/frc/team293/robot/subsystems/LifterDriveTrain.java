@@ -11,9 +11,12 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  *
  */
 public class LifterDriveTrain extends Subsystem {//the lifter center wheel on the drivetrain
-	private CANTalon lifterMotor;
+	private static CANTalon lifterMotor;
 	public boolean position;
-	boolean state = false;
+	boolean wheelIsUp = false;
+	boolean wheelIsDown = true;
+	private static final double UP = 2.5;
+	private static final double DOWN = 0.0;
     public LifterDriveTrain(){
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
@@ -31,26 +34,44 @@ public class LifterDriveTrain extends Subsystem {//the lifter center wheel on th
     }
 
 	public void lift() {			//This powers up the motor to start lifting
-		if (lifterMotor.getAnalogInRaw()<2.5) {			//This stops the motor when the angle hits a certain value, which is the lifting position
+		if (lifterMotor.getAnalogInRaw()<UP) {			//This stops the motor when the angle hits a certain value, which is the lifting position
 			lifterMotor.set(.5);
 		}
 		else {
 			lifterMotor.set(0);
-			state=true;
 		}
 	}
 	public void drop() {			//This powers up the motor to start lifting
-	/*	if (lifterMotor.getAnalogInRaw()>2.5) {			//I don't know this value
-			lifterMotor.set(.5);
+	if (lifterMotor.getAnalogInRaw()>DOWN) {			//I don't know this value
+			lifterMotor.set(-.5);
 		}
 		else {
 			lifterMotor.set(0);
-			state=false;
 		}
-	*/
 	}
-	public boolean getStatus(){
-		return state;
+	public void stop(){
+		lifterMotor.set(0);
+	}
+	
+	private void updateUpDown(){
+		if (lifterMotor.getAnalogInRaw()<UP) {
+			wheelIsUp = false;
+		}else{
+			wheelIsUp = true;
+		}
+		if (lifterMotor.getAnalogInRaw()>DOWN) {
+			wheelIsDown = false;
+		}else{
+			wheelIsDown = true;
+		}
+	}
+	
+	public boolean isUp(){
+		updateUpDown();
+		return wheelIsUp;
+	}
+	public boolean isDown(){
+		updateUpDown();
+		return wheelIsDown;
 	}
 }
-

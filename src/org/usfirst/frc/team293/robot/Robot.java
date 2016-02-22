@@ -76,7 +76,7 @@ public class Robot extends IterativeRobot {
     	ledClimb= new LEDButtons(RobotMap.climbButt[1]);
     	ledFeeder= new LEDButtons(RobotMap.feederButt[1]);
     	ledLowGoal = new LEDButtons(RobotMap.lowButt[1]);
-    	ledHighGoal = new LEDButtons(RobotMap.highButt[1]);
+    	ledHighGoal = new LEDButtons(RobotMap.aimButt[1]);
     	ledManual = new LEDButtons(RobotMap.manualButt[1]);
     	ledCenterWheel= new LEDButtons(RobotMap.wheelButt[1]);
     	

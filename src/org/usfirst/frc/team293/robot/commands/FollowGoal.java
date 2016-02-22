@@ -11,11 +11,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class FollowGoal extends Command {
 	private double[] xGainsFollow, yGainsFollow;
-	private long lastTime = System.currentTimeMillis();
-	private static int Dt = 50;
-	private boolean lost = false;
-	private long timeLost = 0;
-	private int timeToLost = 1200;
+	private static long lastTime = System.currentTimeMillis();
+	private static final int Dt = 50;
+	private static boolean lost = false;
+	private static long timeLost = 0;
+	private static final int timeToLost = 1200;
 	
     public FollowGoal(double[] xGains,double[] yGains) {
         // Use requires() here to declare subsystem dependencies

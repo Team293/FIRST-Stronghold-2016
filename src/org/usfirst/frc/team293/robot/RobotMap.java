@@ -29,11 +29,11 @@ public class RobotMap {
      drivetrainLifterMotor Potentiometer
      
      */
-     //Butt stuff
+     //Butt stuff ([0] = button number, [1] = LED number)
      public static final int[]
      feederButt={3,5},
      lowButt={5,3},
-     highButt={2,11},
+     aimButt={2,11},
      manualButt={4,4},
      climbButt={10,10},
      shooterButt={11,1},

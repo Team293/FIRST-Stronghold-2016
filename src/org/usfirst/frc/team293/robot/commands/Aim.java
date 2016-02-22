@@ -4,6 +4,7 @@ import org.usfirst.frc.team293.robot.Robot;
 import org.usfirst.frc.team293.robot.subsystems.Arduino;
 //import org.usfirst.frc.team293.robot.subsystems.Arduino;
 import org.usfirst.frc.team293.robot.subsystems.Hood;
+import org.usfirst.frc.team293.robot.subsystems.ShooterRotation;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -13,8 +14,8 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class Aim extends Command {// sets up the shooter to match the camera
 									// stuff.
-	double distance;
-	double angle;
+	private static double distance;
+	private static double angle;
 	
 
 	public Aim() {//auto aiming
@@ -45,24 +46,28 @@ public class Aim extends Command {// sets up the shooter to match the camera
 					absoluteAngle += 360.0;
 				}
 				if (azimuth >= 0.0) {//if its more one direction
-					Robot.drivetrain.setSetpoint(absoluteAngle - 12.0);
+					Robot.drivetrain.setSetpoint(absoluteAngle - ShooterRotation.rotateRange[1]);
 					Robot.drivetrain.PID();
 					Robot.drivetrain.turnToAngle();
-					Robot.shooterrotation.setsetpoint(12.0);
+					Robot.shooterrotation.setsetpoint(ShooterRotation.rotateRange[1]);
 				} else {								//more the other way
-					Robot.drivetrain.setSetpoint(absoluteAngle + 12.0);
+					Robot.drivetrain.setSetpoint(absoluteAngle - ShooterRotation.rotateRange[0]);
 					Robot.drivetrain.PID();
 					Robot.drivetrain.turnToAngle();
-					Robot.shooterrotation.setsetpoint(-12.0);
+					Robot.shooterrotation.setsetpoint(ShooterRotation.rotateRange[0]);
 				}
 			}else{
 			}
 			/*********************************Distance Stuff***********************************/
 			distance=Robot.Camera.getDistance();
-			angle=-6.087e-3*Math.pow(distance, 3)+3.587e-1*Math.pow(distance,2)-7.783*distance+91.16;
+			angle=getAngle(distance);
 			Hood.setPosition(angle);
 		}
 	
+	}
+	
+	private static double getAngle(double distance){
+		return -6.087e-3*Math.pow(distance, 3)+3.587e-1*Math.pow(distance,2)-7.783*distance+91.16;
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
@@ -81,6 +86,7 @@ public class Aim extends Command {// sets up the shooter to match the camera
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
 	protected void interrupted() {
-}
+		end();
+	}
 	
 }

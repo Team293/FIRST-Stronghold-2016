@@ -1,5 +1,6 @@
 package org.usfirst.frc.team293.robot;
 
+import org.usfirst.frc.team293.robot.commands.Aim;
 import org.usfirst.frc.team293.robot.commands.Climb;
 import org.usfirst.frc.team293.robot.commands.Feeding;
 import org.usfirst.frc.team293.robot.commands.Fire;
@@ -33,7 +34,7 @@ public class OI {
 		 /////////////////////instantiate buttons
 	JoystickButton feederbutton=new JoystickButton(launchpad,RobotMap.feederButt[0]);
 	JoystickButton lowgoalbutton=new JoystickButton(launchpad,RobotMap.lowButt[0]);
-	JoystickButton highgoalshoot=new JoystickButton(launchpad,RobotMap.highButt[0]);
+	JoystickButton aimbutton=new JoystickButton(launchpad,RobotMap.aimButt[0]);
 	JoystickButton manualshoot=new JoystickButton(launchpad,RobotMap.manualButt[0]);
 	JoystickButton setshooterwheel=new JoystickButton(launchpad,RobotMap.shooterButt[0]);
 	JoystickButton climb=new JoystickButton(launchpad,RobotMap.climbButt[0]);
@@ -43,16 +44,18 @@ public class OI {
 //	JoystickButton drawbridge=new JoystickButton(launchpad,RobotMap.drawButt[0]);
 	JoystickButton sallyport=new JoystickButton(launchpad,RobotMap.sallyButt[0]);
 	
-	 climb.whenPressed(new Climb());
-	 lowgoalbutton.whenPressed(new LowGoal());
-	 feederbutton.whenPressed(new Feeding());
+	 climb.toggleWhenPressed(new Climb());
+	 lowgoalbutton.toggleWhenPressed(new LowGoal());
+	 feederbutton.toggleWhenPressed(new Feeding());
 	 setshooterwheel.whenActive(new RunShooterWheel());
 	 setshooterwheel.whenInactive(new StopShooterWheel());
 	 
 	 centerwheellift.whenPressed(new LiftCenterWheel());
 	 //centerwheellift.whenInactive(new DropCenterWheel());
 	 
-	 highgoalshoot.whenPressed(new ShootHighGoal());
+	 aimbutton.toggleWhenPressed(new Aim());
+	 manualshoot.toggleWhenPressed(new ShootHighGoal());
+	 
 	 
 	 manualshoot.whenPressed(new Fire());
 	 

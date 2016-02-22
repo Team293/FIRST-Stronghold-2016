@@ -1,5 +1,6 @@
 package org.usfirst.frc.team293.robot.subsystems;
 
+import org.usfirst.frc.team293.robot.Robot;
 import org.usfirst.frc.team293.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.CANTalon;
@@ -11,8 +12,9 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  *
  */
 public class ShooterRotation extends Subsystem {//rotate the shooter and setup that PID
-	private CANTalon shooterrotation;
-	private static double[] rotateRange = {-12.0,12.0};
+	private static CANTalon shooterrotation;
+	public static final double[] rotateRange = {-12.0,12.0};
+	private static final double hoodLum = 2.0;
 
 	public ShooterRotation() {
 		super();
@@ -31,15 +33,22 @@ public class ShooterRotation extends Subsystem {//rotate the shooter and setup t
 	}
 
 	public void setsetpoint(double angle) {	//this can only happen if we are above 10 degrees
+		if(Math.abs(angle) > 2.0 && !Hood.hoodIsUp()){
+			angle = 1.8 * angle / Math.abs(angle);
+		}
 		angle = Math.min(Math.max(angle,rotateRange[0]), rotateRange[1]);			//Constrain Angle Value
 		shooterrotation.set(angle);
 	}
 	
+	public static boolean isInHoodBounds(){
+		return (Math.abs(getShooterAngle()) < hoodLum);
+	}
+		
 	public void turnToGoal(double angle){
-		this.setsetpoint(this.getShooterAngle() + angle);
+		setsetpoint(getShooterAngle() + angle);
 	}
 	
-	public double getShooterAngle(){
+	public static double getShooterAngle(){
 		return shooterrotation.getPosition();
 	}
 }

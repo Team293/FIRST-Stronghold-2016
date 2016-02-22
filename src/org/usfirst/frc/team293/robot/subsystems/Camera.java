@@ -1,5 +1,7 @@
 package org.usfirst.frc.team293.robot.subsystems;
 
+import org.usfirst.frc.team293.robot.Robot;
+import org.usfirst.frc.team293.robot.RobotMap;
 import org.usfirst.frc.team293.robot.Serial;
 import org.usfirst.frc.team293.robot.commands.FollowGoal;
 
@@ -20,40 +22,40 @@ public class Camera extends Subsystem {			//This manages the OpenCV camera by ge
 	private int[] servoPins = new int[2];
 	Servo cameraServos[] = new Servo[2];
 	
-	private static double servoRange[][] = {{0.0, 0.89},{0.19, 0.555}};
-	private static double servoRangeSearch[][] = {{0.0, 0.89},{0.4, 0.53}};
+	private static final double servoRange[][] = {{0.0, 0.89},{0.19, 0.555}};
+	private static final double servoRangeSearch[][] = {{0.0, 0.89},{0.4, 0.53}};
 	
-    private static double cameraHeight = 42.5;														//cm
-    private static double goalHeight = 90.0;
-    static double calibrationDist = 100.0;
-    static double calibrationAngle = 0.435;
-    static double baseY = Math.toDegrees(Math.atan((goalHeight - cameraHeight)/calibrationDist)) + 170.0*calibrationAngle;
+    private static final double cameraHeight = 42.5;														//cm
+    private static final double goalHeight = 90.0;
+    private static final double calibrationDist = 100.0;
+    private static final double calibrationAngle = 0.435;
+    private static final double baseY = Math.toDegrees(Math.atan((goalHeight - cameraHeight)/calibrationDist)) + 170.0*calibrationAngle;
     
-    private double inc[] = {0.026,0.015};
+    private static final double inc[] = {0.026,0.015};
     
-    public double[] servoAngles = {(servoRange[0][0] + servoRange[0][1]) / 2.0, 0.5};				//initial Servo angles (0.0-1.0 scale)
+    private static double[] servoAngles = {(servoRange[0][0] + servoRange[0][1]) / 2.0, 0.5};				//initial Servo angles (0.0-1.0 scale)
     
     /*                         SWAGADELIC CAMERA STUFF                              */
     
-    long lastReading = System.currentTimeMillis();
-    long lastPIDUpdate = System.currentTimeMillis();
+    public long lastReading = System.currentTimeMillis();
+    public long lastPIDUpdate = System.currentTimeMillis();
 	
 	Serial raspberryPi;
-	private double goalCenter[] = {160.0,140.0};
+	private static final double goalCenter[] = {160.0,140.0};
 	public double goalCoordinates[] = new double[2];
 	
-	private double PIDGains[][] = {{0.025/goalCenter[0],0.0,0.0008/goalCenter[0]},
+	private static final double PIDGains[][] = {{0.025/goalCenter[0],0.0,0.0008/goalCenter[0]},
 			{0.0165/goalCenter[1],0.0,0.00045/goalCenter[1]}};
-	private double error[] = {0.0,0.0};
-	private double lastError[] = {0.0,0.0};
-	private double integralError[] = {0.0,0.0};
+	private static double error[] = {0.0,0.0};
+	private static double lastError[] = {0.0,0.0};
+	private static double integralError[] = {0.0,0.0};
 	
-	private boolean foundGoal = false;
+	private static boolean foundGoal = false;
 	
 	public Camera(){											//Instantiates the Servos and Pi
 		raspberryPi = new Serial(Port.kMXP,9600);
-    	servoPins[0] = 8;
-    	servoPins[1] = 9;
+    	servoPins[0] = RobotMap.horizontalvisioncamera;
+    	servoPins[1] = RobotMap.verticalvisioncamera;
     	for(int i = 0;i < 2;i++){
     		cameraServos[i] = new Servo(servoPins[i]);
     		goalCoordinates[i] = goalCenter[i];
@@ -117,14 +119,10 @@ public class Camera extends Subsystem {			//This manages the OpenCV camera by ge
     		}
     		integralError[i] += error[i] * Dt;
     		integralError[i] = Math.min(Math.max(integralError[i],-1000.0), 1000.0);
-    		if(i == 1){
+    		/*if(i == 1){
     			SmartDashboard.putNumber("Center X", goalCoordinates[0]);
         		SmartDashboard.putNumber("Center Y", goalCoordinates[1]);
-        		//SmartDashboard.putNumber("goalCenter X", goalCenter[0]);
-        		//SmartDashboard.putNumber("goalCenter Y", goalCenter[1]);
-    			//SmartDashboard.putNumber("Error Y", error[1]);
-    			//SmartDashboard.putNumber("outputValue Y", outputs[1]);
-    		}
+    		}*/
     		outputs[i] = servoAngles[i] + PIDGains[i][0] * error[i] + PIDGains[i][1] * integralError[i] + PIDGains[i][2] * derivative;
     	}
     	this.setServoValues(outputs);

@@ -22,7 +22,6 @@ public class Feeding extends Command {
     protected void initialize() {
     	Robot.feeder.outsidefeederset(1);
     	Robot.ledFeeder.on();
-    	setTimeout(5);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -33,7 +32,7 @@ public class Feeding extends Command {
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
     	//return (isTimedOut());
-    	return (Robot.feeder.boulderoptical()||isTimedOut());
+    	return (Robot.feeder.boulderoptical());
     }
 
     // Called once after isFinished returns true
@@ -46,5 +45,6 @@ public class Feeding extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	end();
     }
 }

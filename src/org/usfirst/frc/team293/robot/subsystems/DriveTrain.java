@@ -40,7 +40,7 @@ public class DriveTrain extends Subsystem {		//this does the TankDrive as well a
 	private double error = 0.0;
 	private double lastDist = 0.0;
 	private double correctedDist = 0.0;
-	private static int[][] encoderPorts = {{6,7},{8,9}};
+	private static final int[][] encoderPorts = {{6,7},{8,9}};
 	double setpointWanted;
 	public DriveTrain(){
 		leftMotor = new VictorSP(RobotMap.leftMotor);

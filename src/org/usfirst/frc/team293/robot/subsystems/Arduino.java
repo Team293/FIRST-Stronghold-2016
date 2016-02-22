@@ -30,7 +30,7 @@ public class Arduino extends Subsystem {						//so this sends stuff to the Ardui
 	I2C arduino;
 	byte[] toSend = new byte[1];
 	
-	int arduinoAddress = 8;
+	private int arduinoAddress = 8;
 	
 	public Arduino(){											//initializes the i2c port
 		arduino = new I2C(I2C.Port.kOnboard, arduinoAddress);
