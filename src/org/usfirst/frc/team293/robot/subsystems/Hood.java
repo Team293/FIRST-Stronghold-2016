@@ -33,7 +33,7 @@ public class Hood extends Subsystem {//the hood that aims up and down and manipu
 	}
 
 	public static void setPosition(double i) {
-		Hood.setSetpoint(i);
+		Hood.setSetpoint(i);//this must be above 10 degrees when we rotate the shooter.
 
 	}
 

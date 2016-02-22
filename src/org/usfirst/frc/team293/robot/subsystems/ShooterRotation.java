@@ -30,7 +30,7 @@ public class ShooterRotation extends Subsystem {//rotate the shooter and setup t
 		// setDefaultCommand(new MySpecialCommand());
 	}
 
-	public void setsetpoint(double angle) {
+	public void setsetpoint(double angle) {	//this can only happen if we are above 10 degrees
 		angle = Math.min(Math.max(angle,rotateRange[0]), rotateRange[1]);			//Constrain Angle Value
 		shooterrotation.set(angle);
 	}
