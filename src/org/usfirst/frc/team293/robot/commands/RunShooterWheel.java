@@ -4,6 +4,7 @@ import org.usfirst.frc.team293.robot.Robot;
 //import org.usfirst.frc.team293.robot.subsystems.ShooterWheel;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -29,8 +30,12 @@ public class RunShooterWheel extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	System.out.println("Shooter");
-    	Robot.ledShooterWheels.flash();
+    	if(Robot.shooterwheel.atSpeed()){
+    		Robot.ledShooterWheels.on();
+    	}else{
+    		Robot.ledShooterWheels.flash();
+    	}
+    	//SmartDashboard.putNumber("RPM", Robot.shooterwheel);
     }
 
     // Make this return true when this Command no longer needs to run execute()

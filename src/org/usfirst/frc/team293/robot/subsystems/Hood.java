@@ -34,7 +34,7 @@ public class Hood extends Subsystem {//the hood that aims up and down and manipu
 		 setDefaultCommand(new HoodRestPosition());
 	}
 
-	public static void setPosition(double i) {
+	public void setPosition(double i) {
 		if (ShooterRotation.isInHoodBounds() && i < UP) {
 			i = UP;
 		}

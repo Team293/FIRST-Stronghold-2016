@@ -59,6 +59,8 @@ public class Robot extends IterativeRobot {
 	public static LEDButtons ledHighGoal;
 	public static LEDButtons ledManual;
 	public static LEDButtons ledCenterWheel;
+	public static LEDButtons ledRotateLeft;
+	public static LEDButtons ledRotateRight;
 	
 	public static Preferences prefs;
 	
@@ -79,6 +81,8 @@ public class Robot extends IterativeRobot {
     	ledHighGoal = new LEDButtons(RobotMap.aimButt[1]);
     	ledManual = new LEDButtons(RobotMap.manualButt[1]);
     	ledCenterWheel= new LEDButtons(RobotMap.wheelButt[1]);
+    	ledRotateLeft = new LEDButtons(RobotMap.rotateLeftButt[1]);
+    	ledRotateRight = new LEDButtons(RobotMap.rotateRightButt[1]);
     	
     	
         drivetrain = new DriveTrain();

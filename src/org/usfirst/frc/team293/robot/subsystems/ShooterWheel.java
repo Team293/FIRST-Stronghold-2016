@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class ShooterWheel extends Subsystem {
 	CANTalon shooterwheel;
-	double scalefactor = -1.66;
+	double scalefactor = -2.5;
 
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
@@ -21,8 +21,8 @@ public class ShooterWheel extends Subsystem {
 		shooterwheel = new CANTalon(RobotMap.shooterwheel);
 		shooterwheel.changeControlMode(TalonControlMode.Speed);
 		shooterwheel.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-		shooterwheel.setPID(3, 0.001, .5); // Set the PID constants (p, i, d)
-		shooterwheel.setF(.4);// what we think it should be
+		shooterwheel.setPID(-1, 0.00001, .1); // Set the PID constants (p, i, d)
+		shooterwheel.setF(.1);// what we think it should be
 
 		shooterwheel.enableControl(); // Enable PID control on the talon
 
@@ -35,10 +35,17 @@ public class ShooterWheel extends Subsystem {
 
 	public void setShooterRPM() {
 		shooterwheel.enableControl();
-		shooterwheel.setSetpoint(2400*scalefactor);
+		shooterwheel.setSetpoint(-2400*scalefactor);
 	}
 
 	public void disableShooter() {
 		shooterwheel.disableControl();
+	}
+	
+	public boolean atSpeed(){
+		return (Math.abs(shooterwheel.getEncVelocity()) < 175.0);
+	}
+	public void printShooter(){
+		
 	}
 }

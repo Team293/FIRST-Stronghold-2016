@@ -48,7 +48,16 @@ public class FollowGoal extends Command {
     		Robot.Camera.setServos();
     		lastTime = System.currentTimeMillis();
     	}
-    	SmartDashboard.putBoolean("Lost", lost);
+    	
+    	//			RANDOM STUFF THAT ALWAYS RUNS
+    	if(Robot.Camera.isAimed()){
+    		Robot.ledManual.on();
+    	}
+    	Robot.shooterrotation.ledLight();
+    	if(!Robot.feeder.boulderoptical()){
+    		Robot.ledFeeder.on();
+    	}
+    	//			END RANDOM STUFF
     }
 
     // Make this return true when this Command no longer needs to run execute()

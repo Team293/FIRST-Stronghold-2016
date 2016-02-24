@@ -1,5 +1,6 @@
 package org.usfirst.frc.team293.robot.commands;
 
+import org.usfirst.frc.team293.robot.OI;
 import org.usfirst.frc.team293.robot.Robot;
 import org.usfirst.frc.team293.robot.subsystems.Hood;
 
@@ -14,7 +15,6 @@ public class HoodRestPosition extends Command {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	 requires(Robot.hood);
-   // 	requires(Robot.hood);
     }
 
     // Called just before this Command runs the first time
@@ -24,11 +24,12 @@ public class HoodRestPosition extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	Robot.hood.setPosition(OI.getHoodDial());
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+        return false;
     }
 
     // Called once after isFinished returns true

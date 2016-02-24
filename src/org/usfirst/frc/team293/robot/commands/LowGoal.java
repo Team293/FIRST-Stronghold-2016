@@ -20,7 +20,7 @@ public class LowGoal extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.feeder.insidefeederset(-1);
+    	Robot.feeder.insidefeederset(1);
     	Robot.feeder.outsidefeederset(-1);
     	Robot.ledLowGoal.on();
     }

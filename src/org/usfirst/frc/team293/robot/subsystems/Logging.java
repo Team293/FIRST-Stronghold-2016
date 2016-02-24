@@ -1,5 +1,6 @@
  package org.usfirst.frc.team293.robot.subsystems;
 
+import org.usfirst.frc.team293.robot.Robot;
 import org.usfirst.frc.team293.robot.commands.pdpLogging;
 
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
@@ -23,6 +24,7 @@ public class Logging extends Subsystem {//for logging PDP current
     	SmartDashboard.putNumber("C_TotalPower", pdp.getTotalPower());//log stuff
     	SmartDashboard.putNumber("C_ShooterWheel", pdp.getCurrent(5));
     	SmartDashboard.putNumber("C_TotalAmps", pdp.getTotalCurrent());
+    	SmartDashboard.putBoolean("Optical Sensor", !Robot.feeder.boulderoptical());
     	
     }
     public void reset(){

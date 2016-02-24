@@ -52,6 +52,8 @@ public class Camera extends Subsystem {			//This manages the OpenCV camera by ge
 	
 	private static boolean foundGoal = false;
 	
+	private static final double AIMED = 1.2;
+	
 	public Camera(){											//Instantiates the Servos and Pi
 		raspberryPi = new Serial(Port.kMXP,9600);
     	servoPins[0] = RobotMap.horizontalvisioncamera;
@@ -170,6 +172,10 @@ public class Camera extends Subsystem {			//This manages the OpenCV camera by ge
     
     public double getAzimuth(){			//Tells us what angle we are at (RELATIVE).
     	return (170.0*(servoAngles[0] + (1.0 - servoRange[0][1])/2.0) - 90.0);//degrees
+    }
+    
+    public boolean isAimed(){
+    	return (Math.abs(getAzimuth()) < AIMED);
     }
     
     public boolean canSeeSwagadelia(){		//returns if the camera can indeed see the goal or if its searching around

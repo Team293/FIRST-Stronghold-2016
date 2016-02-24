@@ -61,9 +61,8 @@ public class Aim extends Command {// sets up the shooter to match the camera
 			/*********************************Distance Stuff***********************************/
 			distance=Robot.Camera.getDistance();
 			angle=getAngle(distance);
-			Hood.setPosition(angle);
+			Robot.hood.setPosition(angle);
 		}
-	
 	}
 	
 	private static double getAngle(double distance){
@@ -72,7 +71,9 @@ public class Aim extends Command {// sets up the shooter to match the camera
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		if (Math.abs(Robot.Camera.getAzimuth()) <= 1.0) {	//when we are within shooting point
+		if (Robot.Camera.isAimed()) {	//when we are within shooting point
+			Robot.ledHighGoal.off();
+			Robot.ledManual.on();
 			return true;
 		}
 		return false;

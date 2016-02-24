@@ -1,5 +1,6 @@
 package org.usfirst.frc.team293.robot.subsystems;
 
+import org.usfirst.frc.team293.robot.Robot;
 import org.usfirst.frc.team293.robot.RobotMap;
 import org.usfirst.frc.team293.robot.Serial;
 import org.usfirst.frc.team293.robot.commands.TankDriveWithJoystick;
@@ -42,6 +43,7 @@ public class DriveTrain extends Subsystem {		//this does the TankDrive as well a
 	private double correctedDist = 0.0;
 	private static final int[][] encoderPorts = {{6,7},{8,9}};
 	double setpointWanted;
+	
 	public DriveTrain(){
 		leftMotor = new VictorSP(RobotMap.leftMotor);
 		rightMotor = new VictorSP(RobotMap.rightMotor);
@@ -53,7 +55,7 @@ public class DriveTrain extends Subsystem {		//this does the TankDrive as well a
 			encoders[i] = new Encoder(encoderPorts[i][0],encoderPorts[i][1],true,EncodingType.k4X);
 			encoders[i].setMaxPeriod(0.1);
 			encoders[i].setMinRate(10);
-			encoders[i].setDistancePerPulse(5.0);
+			encoders[i].setDistancePerPulse(0.09817477042);
 			encoders[i].setSamplesToAverage(5);
 		}
 		
@@ -175,5 +177,6 @@ public class DriveTrain extends Subsystem {		//this does the TankDrive as well a
 		correctedDist += (dist - lastDist) * Math.cos(Math.toRadians(error));
 		lastDist = dist;
 	}
+	
 }
 

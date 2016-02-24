@@ -40,12 +40,14 @@ public class LEDButtons extends Subsystem {
     	this.time = System.currentTimeMillis();
     }
     public void flash(){
-    	//System.out.println(System.currentTimeMillis()-this.time);
     	if((System.currentTimeMillis()-this.time)>300){
     		this.status = !this.status;
     		OI.launchpad.setOutput(this.port, this.status);
     		this.time = System.currentTimeMillis();
     	}
+    }
+    public boolean getStatus(){
+    	return this.status;
     }
 }
 

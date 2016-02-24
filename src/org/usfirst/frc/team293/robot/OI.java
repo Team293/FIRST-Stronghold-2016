@@ -7,6 +7,7 @@ import org.usfirst.frc.team293.robot.commands.Fire;
 import org.usfirst.frc.team293.robot.commands.LiftCenterWheel;
 
 import org.usfirst.frc.team293.robot.commands.LowGoal;
+import org.usfirst.frc.team293.robot.commands.RotateShooter;
 import org.usfirst.frc.team293.robot.commands.RunShooterWheel;
 import org.usfirst.frc.team293.robot.commands.ShootHighGoal;
 import org.usfirst.frc.team293.robot.commands.StopShooterWheel;
@@ -24,8 +25,8 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  */
 public class OI {
 	///////////instantiate joysticks
-	 private Joystick joy1 = new Joystick(0);
-	 private Joystick joy2=new Joystick(1);
+	 private static Joystick joy1 = new Joystick(0);
+	 private static Joystick joy2=new Joystick(1);
 	 
 	 public static Joystick launchpad=new Joystick(2);
 
@@ -40,35 +41,44 @@ public class OI {
 	JoystickButton climb=new JoystickButton(launchpad,RobotMap.climbButt[0]);
 	JoystickButton centerwheellift=new JoystickButton(launchpad,RobotMap.wheelButt[0]);
 	JoystickButton portcullis=new JoystickButton(launchpad,RobotMap.portButt[0]);
-	JoystickButton chevaldefrise=new JoystickButton(launchpad,RobotMap.chevaldeFesse[0]);
+	JoystickButton rotateShooterLeft = new JoystickButton(launchpad,RobotMap.rotateLeftButt[0]);
+	JoystickButton rotateShooterRight = new JoystickButton(launchpad,RobotMap.rotateRightButt[0]);
+	//JoystickButton chevaldefrise=new JoystickButton(launchpad,RobotMap.chevaldeFesse[0]);
 //	JoystickButton drawbridge=new JoystickButton(launchpad,RobotMap.drawButt[0]);
-	JoystickButton sallyport=new JoystickButton(launchpad,RobotMap.sallyButt[0]);
+	//JoystickButton sallyport=new JoystickButton(launchpad,RobotMap.sallyButt[0]);
+	JoystickButton rightTrigger = new JoystickButton(joy1,1);
+		
 	
 	 climb.toggleWhenPressed(new Climb());
 	 lowgoalbutton.toggleWhenPressed(new LowGoal());
 	 feederbutton.toggleWhenPressed(new Feeding());
-	 setshooterwheel.whenActive(new RunShooterWheel());
-	 setshooterwheel.whenInactive(new StopShooterWheel());
+	 setshooterwheel.whenPressed(new RunShooterWheel());
+	 setshooterwheel.whenReleased(new StopShooterWheel());
+	 centerwheellift.toggleWhenPressed(new LiftCenterWheel());
 	 
-	 centerwheellift.whenPressed(new LiftCenterWheel());
-	 //centerwheellift.whenInactive(new DropCenterWheel());
+	 rotateShooterLeft.whileHeld(new RotateShooter(false));
+	 rotateShooterRight.whileHeld(new RotateShooter(true));
 	 
 	 aimbutton.toggleWhenPressed(new Aim());
 	 manualshoot.toggleWhenPressed(new ShootHighGoal());
 	 
-	 
 	 manualshoot.whenPressed(new Fire());
 	 
+	 rightTrigger.whenPressed(new LiftCenterWheel());
+	 
+	 
+	 
 	 }
-	    public double getJoystick1() {
+	    public static double getJoystick1() {
 	        return joy1.getY();
 	    }
-	    public double getJoystick2(){
+	    public static double getJoystick2(){
 	    	return joy2.getY();
 	    }
-	    //public void flash(int port){
-	    	//launchpad.setOutputs(port);
-	    //}
+	    public static double getHoodDial(){
+	    	double raw = launchpad.getRawAxis(RobotMap.inDaHood);
+	    	return (raw * 180.0 / 0.11811023622047244);
+	    }
 	    
 }
 
