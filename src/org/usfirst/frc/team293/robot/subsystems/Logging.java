@@ -28,7 +28,7 @@ public class Logging extends Subsystem {//for logging PDP current
     	
     }
     public void reset(){
-    	pdp.clearStickyFaults();//clear that bizarre sticky fault thing
+    	pdp.clearStickyFaults();						//clear that bizarre sticky fault thing
     }
 }
 

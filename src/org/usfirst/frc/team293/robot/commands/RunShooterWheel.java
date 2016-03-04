@@ -2,6 +2,7 @@ package org.usfirst.frc.team293.robot.commands;
 
 import org.usfirst.frc.team293.robot.Robot;
 //import org.usfirst.frc.team293.robot.subsystems.ShooterWheel;
+import org.usfirst.frc.team293.robot.subsystems.Arduino;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -25,7 +26,7 @@ public class RunShooterWheel extends Command {
     Robot.shooterwheel.setShooterRPM();
     Robot.drivercamera.Lookup();
     Robot.ledShooterWheels.on();
-    
+    Robot.continuousfunctions.setShooterOn(true);
     }
 
     // Called repeatedly when this Command is scheduled to run

@@ -20,7 +20,7 @@ public class Arduino extends Subsystem {						//so this sends stuff to the Ardui
 	
 	///Drivetrain Codes   Probabaly only a few strips
 	DrivetrainUp=21,	//red pulsing
-	DrvetrainDown=22,  //purple pulsing
+	DrivetrainDown=22,  //purple pulsing
 	
 	//all LEDS
 	PARTY = 15; //before a match, or when the robot isn't enabled

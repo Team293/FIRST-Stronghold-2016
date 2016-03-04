@@ -3,6 +3,7 @@ package org.usfirst.frc.team293.robot.subsystems;
 import org.usfirst.frc.team293.robot.Robot;
 import org.usfirst.frc.team293.robot.RobotMap;
 import org.usfirst.frc.team293.robot.commands.HoodRestPosition;
+import org.usfirst.frc.team293.robot.commands.ManualHood;
 
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
@@ -23,26 +24,34 @@ public class Hood extends Subsystem {//the hood that aims up and down and manipu
 		Hood = new CANTalon(RobotMap.hoodMotor);
 		Hood.changeControlMode(TalonControlMode.Position);
 		Hood.setFeedbackDevice(FeedbackDevice.AnalogPot);
-		Hood.setPID(3, 0.001, 0.0); // Set the PID constants (p, i, d)
-
+		Hood.reverseSensor(false);
+		Hood.setPID(8.5,.0075,.25); // Set the PID constants (p, i, d);
+		Hood.setIZone(50);
+		Hood.setCloseLoopRampRate(.01);
+		
+		//Hood.reverseOutput(true);
 		Hood.enableControl(); // Enable PID control on the talon
 	}
 
 	public void initDefaultCommand() {
 		
 		// Set the default command for a subsystem here.
-		 setDefaultCommand(new HoodRestPosition());
+		 setDefaultCommand(new ManualHood());
 	}
 
-	public void setPosition(double i) {
-		if (ShooterRotation.isInHoodBounds() && i < UP) {
-			i = UP;
+	public static void setPosition(double i) {
+		Hood.enableControl();
+		Hood.setSetpoint(i);
+		if (Hood.GetIaccum()>.1){
+		Hood.clearIAccum();
 		}
-		Hood.setSetpoint(i);		
 	}
 	
 	public static double getPosition(){
 		return Hood.getPosition();
+	}
+	public static double getI(){
+		return Hood.GetIaccum();
 	}
 	
 	public static boolean hoodIsUp(){

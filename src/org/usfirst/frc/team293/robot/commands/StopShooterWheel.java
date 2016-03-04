@@ -20,6 +20,7 @@ public class StopShooterWheel extends Command {
     protected void initialize() {
     	Robot.shooterwheel.disableShooter();
     	Robot.ledShooterWheels.off();
+    	Robot.continuousfunctions.setShooterOn(false);
     }
 
     // Called repeatedly when this Command is scheduled to run

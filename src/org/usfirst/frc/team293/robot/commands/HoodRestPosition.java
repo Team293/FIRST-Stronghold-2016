@@ -24,7 +24,9 @@ public class HoodRestPosition extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.hood.setPosition(OI.getHoodDial());
+    	if(OI.getBackupHoodDial() < -0.95){
+    		Robot.hood.disable();
+    }
     }
 
     // Make this return true when this Command no longer needs to run execute()

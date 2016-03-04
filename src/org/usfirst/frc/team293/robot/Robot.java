@@ -9,14 +9,12 @@ import org.usfirst.frc.team293.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team293.robot.subsystems.DriverCamera;
 import org.usfirst.frc.team293.robot.subsystems.Feeder;
 import org.usfirst.frc.team293.robot.subsystems.Hood;
-//import org.usfirst.frc.team293.robot.subsystems.Hood;
 import org.usfirst.frc.team293.robot.subsystems.LEDButtons;
-//import org.usfirst.frc.team293.robot.subsystems.LEDButtons;
 import org.usfirst.frc.team293.robot.subsystems.LifterDriveTrain;
 import org.usfirst.frc.team293.robot.subsystems.Logging;
-//import org.usfirst.frc.team293.robot.subsystems.Logging;
 import org.usfirst.frc.team293.robot.subsystems.ShooterRotation;
 import org.usfirst.frc.team293.robot.subsystems.ShooterWheel;
+import org.usfirst.frc.team293.robot.subsystems.continuousFunctions;
 import org.usfirst.frc.team293.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -24,10 +22,8 @@ import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-//import org.usfirst.frc.team293.robot.commands.ExampleCommand;
-//import org.usfirst.frc.team293.robot.subsystems.ExampleSubsystem;
+
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -49,7 +45,7 @@ public class Robot extends IterativeRobot {
 	public static ShooterWheel shooterwheel;
 	public static LifterDriveTrain lifterdrivetrain;
 	public static Camera Camera;
-//	public static Logging logging;
+	public static Logging logging;
 	public static Arduino ledStrip;
 	
 	public static LEDButtons ledShooterWheels;
@@ -64,6 +60,8 @@ public class Robot extends IterativeRobot {
 	
 	public static Preferences prefs;
 	
+	public static continuousFunctions continuousfunctions;
+	
     Command autonomousCommand;//instantiate auto command
     SendableChooser chooser;
 
@@ -74,6 +72,7 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
 		
 ///////////instantiate subsystems
+    	//LED Buttons
     	ledShooterWheels= new LEDButtons(RobotMap.shooterButt[1]);
     	ledClimb= new LEDButtons(RobotMap.climbButt[1]);
     	ledFeeder= new LEDButtons(RobotMap.feederButt[1]);
@@ -85,21 +84,21 @@ public class Robot extends IterativeRobot {
     	ledRotateRight = new LEDButtons(RobotMap.rotateRightButt[1]);
     	
     	
-        drivetrain = new DriveTrain();
-        hood= new Hood();
-        lifterdrivetrain = new LifterDriveTrain();
+        drivetrain			=new DriveTrain();
+        hood				=new Hood();
+        lifterdrivetrain	=new LifterDriveTrain();
        
-        drivercamera=new DriverCamera();
-        feeder=new Feeder();
-        shooterrotation=new ShooterRotation();
-        shooterwheel=new ShooterWheel();
-//        logging=new Logging();
-       Camera = new Camera();
-        oi = new OI();
-        autonomousCommand = new Autonomous();
-        //ledStrip = new Arduino();
+        drivercamera		=new DriverCamera();
+        feeder				=new Feeder();
+        shooterrotation		=new ShooterRotation();
+        shooterwheel		=new ShooterWheel();
+        logging				=new Logging();
+        Camera				=new Camera();
+        oi					=new OI();
+        autonomousCommand	=new Autonomous();
+        ledStrip			=new Arduino();
+        continuousfunctions	=new continuousFunctions();
         
-        //LED Buttons
     }
 	
 	/**
@@ -149,7 +148,6 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
-        //Logging.log;
     }
     
     /**

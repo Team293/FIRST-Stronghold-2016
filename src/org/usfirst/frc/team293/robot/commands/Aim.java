@@ -28,6 +28,7 @@ public class Aim extends Command {// sets up the shooter to match the camera
 	// Called just before this Command runs the first time
 	protected void initialize() {
 		Robot.drivetrain.setPID(0.001, 0.00001, 0.001);
+		Robot.continuousfunctions.setAiming(true);
 	}
 
 	// Called repeatedly when this Command is scheduled to run
@@ -82,6 +83,7 @@ public class Aim extends Command {// sets up the shooter to match the camera
 	// Called once after isFinished returns true
 	protected void end() {
 		Robot.drivetrain.tankdrive(0, 0);
+		Robot.continuousfunctions.setAiming(false);
 	}
 
 	// Called when another command which requires one or more of the same

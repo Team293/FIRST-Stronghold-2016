@@ -43,28 +43,44 @@ public class OI {
 	JoystickButton portcullis=new JoystickButton(launchpad,RobotMap.portButt[0]);
 	JoystickButton rotateShooterLeft = new JoystickButton(launchpad,RobotMap.rotateLeftButt[0]);
 	JoystickButton rotateShooterRight = new JoystickButton(launchpad,RobotMap.rotateRightButt[0]);
+	
+	JoystickButton feederbuttonBackup=new JoystickButton(joy1,7);
+	JoystickButton lowgoalbuttonBackup=new JoystickButton(joy1,6);
+	JoystickButton aimbuttonBackup=new JoystickButton(joy1,11);
+	JoystickButton manualshootBackup=new JoystickButton(joy1,10);
+	JoystickButton setshooterwheelBackup=new JoystickButton(joy2,7);
+	JoystickButton rotateShooterLeftBackup = new JoystickButton(joy1,8);
+	JoystickButton rotateShooterRightBackup = new JoystickButton(joy1,9);
 	//JoystickButton chevaldefrise=new JoystickButton(launchpad,RobotMap.chevaldeFesse[0]);
 //	JoystickButton drawbridge=new JoystickButton(launchpad,RobotMap.drawButt[0]);
 	//JoystickButton sallyport=new JoystickButton(launchpad,RobotMap.sallyButt[0]);
-	JoystickButton rightTrigger = new JoystickButton(joy1,1);
+	JoystickButton rightTrigger = new JoystickButton(joy2,1);
+	JoystickButton leftTrigger = new JoystickButton(joy1,1);
 		
 	
 	 climb.toggleWhenPressed(new Climb());
 	 lowgoalbutton.toggleWhenPressed(new LowGoal());
+	 lowgoalbuttonBackup.toggleWhenPressed(new LowGoal());
 	 feederbutton.toggleWhenPressed(new Feeding());
+	 feederbuttonBackup.toggleWhenPressed(new Feeding());
 	 setshooterwheel.whenPressed(new RunShooterWheel());
 	 setshooterwheel.whenReleased(new StopShooterWheel());
+	 setshooterwheelBackup.whenPressed(new RunShooterWheel());
+	 setshooterwheelBackup.whenReleased(new StopShooterWheel());
 	 centerwheellift.toggleWhenPressed(new LiftCenterWheel());
+	 rightTrigger.whenPressed(new LiftCenterWheel());
 	 
 	 rotateShooterLeft.whileHeld(new RotateShooter(false));
+	 rotateShooterLeftBackup.whileHeld(new RotateShooter(false));
 	 rotateShooterRight.whileHeld(new RotateShooter(true));
+	 rotateShooterRightBackup.whileHeld(new RotateShooter(true));
 	 
 	 aimbutton.toggleWhenPressed(new Aim());
+	 aimbuttonBackup.toggleWhenPressed(new Aim());
 	 manualshoot.toggleWhenPressed(new ShootHighGoal());
+	 manualshootBackup.toggleWhenPressed(new ShootHighGoal());
 	 
 	 manualshoot.whenPressed(new Fire());
-	 
-	 rightTrigger.whenPressed(new LiftCenterWheel());
 	 
 	 
 	 
@@ -77,7 +93,10 @@ public class OI {
 	    }
 	    public static double getHoodDial(){
 	    	double raw = launchpad.getRawAxis(RobotMap.inDaHood);
-	    	return (raw * 180.0 / 0.11811023622047244);
+	    	return (raw * 180.0);
+	    }
+	    public static double getBackupHoodDial(){
+	    	return joy1.getZ();
 	    }
 	    
 }

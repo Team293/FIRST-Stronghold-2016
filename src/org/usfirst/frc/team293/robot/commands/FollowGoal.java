@@ -35,8 +35,12 @@ public class FollowGoal extends Command {
     	if(newData == -1 && !lost){
     		lost = true;
     		timeLost = System.currentTimeMillis();
+    		Robot.continuousfunctions.setCanSeeSwag(false);
     	}
-    	if(newData == 1 || System.currentTimeMillis() - lastTime > Dt && !lost){
+    	if(newData == 1 || (System.currentTimeMillis() - lastTime > Dt && !lost)){
+    		if(lost && newData == 1){
+    			Robot.continuousfunctions.setCanSeeSwag(true);
+    		}
     		Robot.Camera.updatePID(newData);
     		Robot.Camera.setServos();
     		SmartDashboard.putNumber("Azimuth", Robot.Camera.getAzimuth());
@@ -48,16 +52,6 @@ public class FollowGoal extends Command {
     		Robot.Camera.setServos();
     		lastTime = System.currentTimeMillis();
     	}
-    	
-    	//			RANDOM STUFF THAT ALWAYS RUNS
-    	if(Robot.Camera.isAimed()){
-    		Robot.ledManual.on();
-    	}
-    	Robot.shooterrotation.ledLight();
-    	if(!Robot.feeder.boulderoptical()){
-    		Robot.ledFeeder.on();
-    	}
-    	//			END RANDOM STUFF
     }
 
     // Make this return true when this Command no longer needs to run execute()
