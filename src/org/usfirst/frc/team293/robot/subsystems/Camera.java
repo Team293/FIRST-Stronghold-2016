@@ -25,11 +25,12 @@ public class Camera extends Subsystem {			//This manages the OpenCV camera by ge
 	private static final double servoRange[][] = {{0.0, 0.89},{0.19, 0.555}};
 	private static final double servoRangeSearch[][] = {{0.0, 0.89},{0.4, 0.53}};
 	
-    private static final double cameraHeight = 42.5;														//cm
+    private static final double cameraHeight = 19.5;														//42.5//in
     private static final double goalHeight = 90.0;
     private static final double calibrationDist = 100.0;
-    private static final double calibrationAngle = 0.435;
+    private static final double calibrationAngle = 0.394;
     private static final double baseY = Math.toDegrees(Math.atan((goalHeight - cameraHeight)/calibrationDist)) + 170.0*calibrationAngle;
+    private static final double baseX = 0.41;
     
     private static final double inc[] = {0.026,0.015};
     
@@ -152,6 +153,7 @@ public class Camera extends Subsystem {			//This manages the OpenCV camera by ge
     public void setServoValues(double[] vals){														//sets the servo values	
     	vals[0] = Math.min(Math.max(vals[0],servoRange[0][0]), servoRange[0][1]);					//Constrain Servo Values
     	vals[1] = Math.min(Math.max(vals[1],servoRange[1][0]), servoRange[1][1]);
+    	SmartDashboard.putNumber("xAngle", servoAngles[0]);
     	SmartDashboard.putNumber("yAngle", servoAngles[1]);
     	for(int i = 0;i < 2;i++){
     		servoAngles[i] = vals[i];								//Set Servo values (Does not actually set servos)
@@ -171,7 +173,7 @@ public class Camera extends Subsystem {			//This manages the OpenCV camera by ge
     }
     
     public double getAzimuth(){			//Tells us what angle we are at (RELATIVE).
-    	return (170.0*(servoAngles[0] + (1.0 - servoRange[0][1])/2.0) - 90.0);//degrees
+    	return (170.0*(servoAngles[0] - baseX));//degrees
     }
     
     public boolean isAimed(){

@@ -75,8 +75,8 @@ public class OI {
 	 rotateShooterRight.whileHeld(new RotateShooter(true));
 	 rotateShooterRightBackup.whileHeld(new RotateShooter(true));
 	 
-	// aimbutton.toggleWhenPressed(new Aim());
-	 //aimbuttonBackup.toggleWhenPressed(new Aim());
+	 aimbutton.toggleWhenPressed(new Aim());
+	 aimbuttonBackup.toggleWhenPressed(new Aim());
 	 manualshoot.toggleWhenPressed(new ShootHighGoal());
 	 manualshootBackup.toggleWhenPressed(new ShootHighGoal());
 	 

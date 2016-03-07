@@ -7,6 +7,7 @@ import org.usfirst.frc.team293.robot.subsystems.Hood;
 import org.usfirst.frc.team293.robot.subsystems.ShooterRotation;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -37,32 +38,34 @@ public class Aim extends Command {// sets up the shooter to match the camera
 		if (Robot.Camera.canSeeSwagadelia()) {	
 			/*********************************Angle Stuff************************************/
 			double azimuth = Robot.Camera.getAzimuth();
-			if (azimuth <= 11.6) {	//if its just a shooter rotation
+			SmartDashboard.putNumber("shooter Auto Setpoint yaw", Robot.shooterrotation.getsetpoint());
+			if (Math.abs(azimuth) <= ShooterRotation.rotateRange[1]) {	//if its just a shooter rotation
 				Robot.shooterrotation.turnToGoal(azimuth);
 			} else if(Robot.drivetrain.returnAttitude()[0] != -1.0){
 				double absoluteAngle = azimuth + Robot.drivetrain.getAttitude()[0];
+				SmartDashboard.putNumber("absAngle", absoluteAngle);
 				if(absoluteAngle > 360.0){
 					absoluteAngle -= 360.0;
 				}else if(absoluteAngle < 0.0){
 					absoluteAngle += 360.0;
 				}
 				if (azimuth >= 0.0) {//if its more one direction
-					Robot.drivetrain.setSetpoint(absoluteAngle - ShooterRotation.rotateRange[1]);
-					Robot.drivetrain.PID();
-					Robot.drivetrain.turnToAngle();
-					Robot.shooterrotation.setsetpoint(ShooterRotation.rotateRange[1]);
-				} else {								//more the other way
 					Robot.drivetrain.setSetpoint(absoluteAngle - ShooterRotation.rotateRange[0]);
 					Robot.drivetrain.PID();
 					Robot.drivetrain.turnToAngle();
-					Robot.shooterrotation.setsetpoint(ShooterRotation.rotateRange[0]);
+					Robot.shooterrotation.setangle(ShooterRotation.rotateRange[0] - 0.1);
+				} else {								//more the other way
+					Robot.drivetrain.setSetpoint(absoluteAngle - ShooterRotation.rotateRange[1]);
+					Robot.drivetrain.PID();
+					Robot.drivetrain.turnToAngle();
+					Robot.shooterrotation.setangle(ShooterRotation.rotateRange[1] - 0.1);
 				}
 			}else{
 			}
 			/*********************************Distance Stuff***********************************/
 			distance=Robot.Camera.getDistance();
 			angle=getAngle(distance);
-			Robot.hood.setPosition(angle);
+			//Robot.hood.setPosition(angle);
 		}
 	}
 	
@@ -72,11 +75,11 @@ public class Aim extends Command {// sets up the shooter to match the camera
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		if (Robot.Camera.isAimed()) {	//when we are within shooting point
-			Robot.ledHighGoal.off();
-			Robot.ledManual.on();
-			return true;
-		}
+		//if () {	//when we are within shooting point
+			//Robot.ledHighGoal.off();
+			//Robot.ledManual.on();
+			//return true;
+		//}
 		return false;
 	}
 
@@ -89,6 +92,8 @@ public class Aim extends Command {// sets up the shooter to match the camera
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
 	protected void interrupted() {
+		Robot.ledHighGoal.off();
+		Robot.ledManual.on();
 		end();
 	}
 	
