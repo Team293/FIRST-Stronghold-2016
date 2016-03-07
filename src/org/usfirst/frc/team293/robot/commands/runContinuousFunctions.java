@@ -24,6 +24,7 @@ public class runContinuousFunctions extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	Robot.shooterwheel.printShooter();
     	if(Robot.Camera.isAimed()){
     		Robot.ledManual.on();
     	}

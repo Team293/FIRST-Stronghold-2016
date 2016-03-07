@@ -25,9 +25,9 @@ public class Hood extends Subsystem {//the hood that aims up and down and manipu
 		Hood.changeControlMode(TalonControlMode.Position);
 		Hood.setFeedbackDevice(FeedbackDevice.AnalogPot);
 		Hood.reverseSensor(false);
-		Hood.setPID(8.5,.0075,.25); // Set the PID constants (p, i, d);
+		Hood.setPID(20,.00075,500); // Set the PID constants (p, i, d);
 		Hood.setIZone(50);
-		Hood.setCloseLoopRampRate(.01);
+		//Hood.setCloseLoopRampRate(.0025);
 		
 		//Hood.reverseOutput(true);
 		Hood.enableControl(); // Enable PID control on the talon
@@ -42,9 +42,9 @@ public class Hood extends Subsystem {//the hood that aims up and down and manipu
 	public static void setPosition(double i) {
 		Hood.enableControl();
 		Hood.setSetpoint(i);
-		if (Hood.GetIaccum()>.1){
-		Hood.clearIAccum();
-		}
+		//if (Hood.GetIaccum()>.1){
+		//Hood;
+		//}
 	}
 	
 	public static double getPosition(){
@@ -53,7 +53,9 @@ public class Hood extends Subsystem {//the hood that aims up and down and manipu
 	public static double getI(){
 		return Hood.GetIaccum();
 	}
-	
+	public static double getError(){
+		return Hood.getError();
+	}
 	public static boolean hoodIsUp(){
 		if(getPosition() >= 9.9){
 			return true;

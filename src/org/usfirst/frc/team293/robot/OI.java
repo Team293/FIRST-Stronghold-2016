@@ -75,8 +75,8 @@ public class OI {
 	 rotateShooterRight.whileHeld(new RotateShooter(true));
 	 rotateShooterRightBackup.whileHeld(new RotateShooter(true));
 	 
-	 aimbutton.toggleWhenPressed(new Aim());
-	 aimbuttonBackup.toggleWhenPressed(new Aim());
+	// aimbutton.toggleWhenPressed(new Aim());
+	 //aimbuttonBackup.toggleWhenPressed(new Aim());
 	 manualshoot.toggleWhenPressed(new ShootHighGoal());
 	 manualshootBackup.toggleWhenPressed(new ShootHighGoal());
 	 
@@ -93,7 +93,7 @@ public class OI {
 	    }
 	    public static double getHoodDial(){
 	    	double raw = launchpad.getRawAxis(RobotMap.inDaHood);
-	    	return (raw * 180.0);
+	    	return (raw);
 	    }
 	    public static double getBackupHoodDial(){
 	    	return joy1.getZ();

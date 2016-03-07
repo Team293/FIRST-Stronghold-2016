@@ -23,14 +23,16 @@ public class ManualHood extends Command {
     protected void initialize() {
     	
     	Hood.enable();
+    	
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Hood.setPosition(850);
+    	Hood.setPosition(886-(222*(((-OI.getHoodDial())+1)/2)));
     	SmartDashboard.putNumber("Iaccum",Hood.getI());
   
-    	SmartDashboard.putNumber("angle", Hood.getPosition());
+    	SmartDashboard.putNumber("Hood Angle", Hood.getPosition());
+    	SmartDashboard.putNumber("Error", 850-Hood.getPosition());
     	//SmartDashboard.putNumber("anglesetpoint");
     }
 
