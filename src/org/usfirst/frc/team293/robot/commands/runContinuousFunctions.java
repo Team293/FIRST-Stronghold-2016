@@ -26,9 +26,11 @@ public class runContinuousFunctions extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	SmartDashboard.putNumber("Azimuth IMU",Robot.drivetrain.getAttitude()[0]);
+    	SmartDashboard.putNumber("angle vel", Robot.shooterrotation.getVel());
     	Robot.shooterwheel.printShooter();
     	SmartDashboard.putNumber("Camera Coord Distance", Robot.Camera.getDistance());
     	SmartDashboard.putNumber("Camera Coord Azimuth", Robot.Camera.getAzimuth());
+    	SmartDashboard.putNumber("ShooterAngle",Robot.shooterrotation.getangle());
     	if(Robot.Camera.isAimed()){
     		Robot.ledManual.on();
     	}

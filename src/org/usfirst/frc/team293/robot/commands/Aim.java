@@ -17,8 +17,8 @@ public class Aim extends Command {// sets up the shooter to match the camera
 									// stuff.
 	private static double distance;
 	private static double angle;
+	double azimuth = 0.0;
 	
-
 	public Aim() {//auto aiming
 		requires(Robot.hood);
 		requires(Robot.shooterrotation);
@@ -30,14 +30,21 @@ public class Aim extends Command {// sets up the shooter to match the camera
 	protected void initialize() {
 		Robot.drivetrain.setPID(0.001, 0.00001, 0.001);
 		Robot.continuousfunctions.setAiming(true);
+		if(Robot.Camera.canSeeSwagadelia() && Robot.Camera.whenstaringatSwagadelia()){
+			azimuth = Robot.Camera.getAzimuth();
+		}
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
 		Robot.ledHighGoal.flash();
-		if (Robot.Camera.canSeeSwagadelia()) {	
+		//if (Robot.Camera.canSeeSwagadelia() && Robot.Camera.whenstaringatSwagadelia()) {	
 			/*********************************Angle Stuff************************************/
-			double azimuth = Robot.Camera.getAzimuth();
+		/*
+		if(Math.abs(Robot.Camera.getAzimuth()) < 0.4 && Robot.Camera.canSeeSwagadelia() 
+				&& Robot.Camera.whenstaringatSwagadelia() || Robot.shooterrotation.isAtAngle()){
+			azimuth = Robot.Camera.getAzimuth();
+		}
 			SmartDashboard.putNumber("shooter Auto Setpoint yaw", Robot.shooterrotation.getsetpoint());
 			if (Math.abs(azimuth) <= ShooterRotation.rotateRange[1]) {	//if its just a shooter rotation
 				Robot.shooterrotation.turnToGoal(azimuth);
@@ -66,7 +73,17 @@ public class Aim extends Command {// sets up the shooter to match the camera
 			distance=Robot.Camera.getDistance();
 			angle=getAngle(distance);
 			//Robot.hood.setPosition(angle);
-		}
+		//}
+			if (Robot.shooterrotation.isAtAngle()){ //If shooter is not moving
+				if(Robot.Camera.canSeeSwagadelia() 
+						&& Robot.Camera.whenstaringatSwagadelia()){ //check to see if camera centered
+					azimuth = Robot.Camera.getAzimuth();
+				}
+				if (Math.abs(azimuth) <= ShooterRotation.rotateRange[1]) {	//if it is in shooter range
+					Robot.shooterrotation.turnToGoal(azimuth);
+				}
+			}
+			
 	}
 	
 	private static double getAngle(double distance){

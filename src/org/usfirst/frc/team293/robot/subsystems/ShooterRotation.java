@@ -30,7 +30,7 @@ public class ShooterRotation extends Subsystem {//rotate the shooter and setup t
 		shooterrotation = new CANTalon(RobotMap.shooterRotation);
 		shooterrotation.changeControlMode(TalonControlMode.Position);
 		shooterrotation.setFeedbackDevice(FeedbackDevice.AnalogPot);
-		shooterrotation.setPID(9, .00001, 1);
+		shooterrotation.setPID(12, .00000001, 2);
 		shooterrotation.enableControl(); // Enable PID control on the talon
 		shooterrotation.setSetpoint(setpoint);
 	}
@@ -50,8 +50,16 @@ public class ShooterRotation extends Subsystem {//rotate the shooter and setup t
 		return shooterrotation.getSetpoint();
 	}
 	
+	public double getVel(){
+		return shooterrotation.getAnalogInVelocity();
+	}
+	
 	public static boolean isInHoodBounds(){
 		return (Math.abs(getShooterAngle()) < hoodLum);
+	}
+	
+	public boolean isAtAngle(){
+		return (Math.abs(shooterrotation.getPosition()-shooterrotation.getSetpoint()) < 20);
 	}
 		
 	public void turnToGoal(double angle){

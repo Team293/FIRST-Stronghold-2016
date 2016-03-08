@@ -54,6 +54,7 @@ public class Camera extends Subsystem {			//This manages the OpenCV camera by ge
 	private static boolean foundGoal = false;
 	
 	private static final double AIMED = 1.2;
+	private double lastAngle = 0.0;
 	
 	public Camera(){											//Instantiates the Servos and Pi
 		raspberryPi = new Serial(Port.kMXP,9600);
@@ -185,8 +186,23 @@ public class Camera extends Subsystem {			//This manages the OpenCV camera by ge
     	return foundGoal;
     }
     public boolean whenstaringatSwagadelia(){
-    	boolean staring=true;
+    	boolean staring = false;
+    	if(Math.abs(goalCoordinates[0] - goalCenter[0]) < 30.0 && Math.abs(goalCoordinates[1] - goalCenter[1]) < 25.0){
+    		staring=true;
+    	}
+    	else{
+    		staring =false;
+    	}
     	return staring;
+    }
+    public void shooterRotcompensation(boolean first){
+    	if(first){
+    		lastAngle = Robot.shooterrotation.getangle();
+    	}
+    	double vals[] = {baseX + (getAzimuth() + Robot.shooterrotation.getangle() - lastAngle)/170.0,servoAngles[1]};
+    	setServoValues(vals);
+    	setServos();
+    	lastAngle = Robot.shooterrotation.getangle();
     }
 }
 

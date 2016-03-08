@@ -10,6 +10,7 @@ import org.usfirst.frc.team293.robot.commands.LowGoal;
 import org.usfirst.frc.team293.robot.commands.RotateShooter;
 import org.usfirst.frc.team293.robot.commands.RunShooterWheel;
 import org.usfirst.frc.team293.robot.commands.ShootHighGoal;
+import org.usfirst.frc.team293.robot.commands.SimpleAim;
 import org.usfirst.frc.team293.robot.commands.StopShooterWheel;
 import org.usfirst.frc.team293.robot.RobotMap;
 
@@ -75,7 +76,7 @@ public class OI {
 	 rotateShooterRight.whileHeld(new RotateShooter(true));
 	 rotateShooterRightBackup.whileHeld(new RotateShooter(true));
 	 
-	 aimbutton.toggleWhenPressed(new Aim());
+	 aimbutton.toggleWhenPressed(new SimpleAim());
 	 aimbuttonBackup.toggleWhenPressed(new Aim());
 	 manualshoot.toggleWhenPressed(new ShootHighGoal());
 	 manualshootBackup.toggleWhenPressed(new ShootHighGoal());
