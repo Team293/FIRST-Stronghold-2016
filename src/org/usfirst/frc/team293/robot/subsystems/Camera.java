@@ -184,5 +184,9 @@ public class Camera extends Subsystem {			//This manages the OpenCV camera by ge
     	SmartDashboard.putBoolean("RobotCanSeeGoal", foundGoal);
     	return foundGoal;
     }
+    public boolean whenstaringatSwagadelia(){
+    	boolean staring=true;
+    	return staring;
+    }
 }
 
