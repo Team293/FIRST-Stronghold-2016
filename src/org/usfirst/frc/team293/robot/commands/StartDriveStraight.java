@@ -9,8 +9,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class StartDriveStraight extends Command {
 	
-	private static final double Kp = 0.000004,
-	Ki = 0.00000002,
+	private static final double Kp = 0.00004,
+	Ki = 0.0,
 	Kd = 0.0;
 	public double dist = 0.0;
 

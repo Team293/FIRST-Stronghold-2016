@@ -55,6 +55,7 @@ public class Camera extends Subsystem {			//This manages the OpenCV camera by ge
 	
 	private static final double AIMED = 1.2;
 	private double lastAngle = 0.0;
+	private double lastAzimuth = 0.0;
 	
 	public Camera(){											//Instantiates the Servos and Pi
 		raspberryPi = new Serial(Port.kMXP,9600);
@@ -198,11 +199,21 @@ public class Camera extends Subsystem {			//This manages the OpenCV camera by ge
     public void shooterRotcompensation(boolean first){
     	if(first){
     		lastAngle = Robot.shooterrotation.getangle();
+    		lastAzimuth = Robot.drivetrain.getAttitude()[0];
     	}
-    	double vals[] = {baseX + (getAzimuth() + Robot.shooterrotation.getangle() - lastAngle)/170.0,servoAngles[1]};
+    	double change = Robot.drivetrain.getAttitude()[0] - lastAzimuth;
+    	if(change > 180.0){
+    		change -= 360.0;
+    	}else if(change < -180.0){
+    		change += 360.0;
+    	}
+    	SmartDashboard.putNumber("change", change);
+    	//change = 0;
+    	double vals[] = {baseX + (getAzimuth() + Robot.shooterrotation.getangle() - lastAngle - change)/170.0,servoAngles[1]};
     	setServoValues(vals);
     	setServos();
     	lastAngle = Robot.shooterrotation.getangle();
+    	lastAzimuth = Robot.drivetrain.getAttitude()[0];
     }
 }
 

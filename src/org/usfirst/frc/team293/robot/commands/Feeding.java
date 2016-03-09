@@ -21,7 +21,8 @@ public class Feeding extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.feeder.outsidefeederset(.5);
+    	Robot.shooterrotation.setangle(0);
+    	Robot.feeder.outsidefeederset(1);
     	Robot.feeder.insidefeederset(-.2);
     	Robot.ledFeeder.on();
     }

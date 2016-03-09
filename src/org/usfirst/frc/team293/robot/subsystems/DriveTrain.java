@@ -32,11 +32,11 @@ public class DriveTrain extends Subsystem {		//this does the TankDrive as well a
 	/*   PID VARIABLES       */
 	private double setpoint = 0.0;
 	private double[] PIDGains = {0.0,0.0,0.0};
-	private double integral = 40.0;
-	private double[] integralRange = {-45.0,45.0};
+	private double integral = 0.0;
+	private double[] integralRange = {-450.0,450.0};
 	private double lastTime = System.currentTimeMillis();
 	public boolean newData = false;
-	private double output = 0.0;
+	private static double output = 0.0;
 	
 	private double error = 0.0;
 	private double lastDist = 0.0;
@@ -74,7 +74,7 @@ public class DriveTrain extends Subsystem {		//this does the TankDrive as well a
     }
     
     public void resetPID(){
-    	integral = 40.0;
+    	integral = 0.0;
     	lastTime = System.currentTimeMillis();
     }
     
@@ -147,7 +147,8 @@ public class DriveTrain extends Subsystem {		//this does the TankDrive as well a
 				SmartDashboard.putNumber("setpoint", attitude[0]);
 				driving = true;
 			}
-			drive.drive(0.55, output);
+			//drive.drive(-0.5, output);
+			drive.arcadeDrive(-0.8, -output);
 		}else{
 			driving = false;
 		}
@@ -155,7 +156,31 @@ public class DriveTrain extends Subsystem {		//this does the TankDrive as well a
 	}
 
 	public void turnToAngle() {			//Turning, speed is set to 0, output is set for turning
-		drive.drive(0.0, output);
+		drive.arcadeDrive(0.0, -output);
+		/*error = setpoint - attitude[0];
+		if(error > 180.0){
+			error -= 360.0;
+		}else if(error < -180.0){
+			error += 360.0;
+		}
+		if(error > 5.0){
+			drive.arcadeDrive(0.0,-0.5);
+		}else if(error < -5.0){
+			drive.arcadeDrive(0.0,0.5);
+		}
+		SmartDashboard.putNumber("error", error);*/
+	}
+	
+	public void turnLeft(){
+		drive.arcadeDrive(0.0,0.5);
+	}
+	
+	public void turnRight(){
+		drive.arcadeDrive(0.0,-0.5);
+	}
+	
+	public void stop(){
+		drive.arcadeDrive(0.0,0.0);
 	}
 	
 	public void resetEnc(){
