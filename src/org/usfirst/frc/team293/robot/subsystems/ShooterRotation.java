@@ -30,7 +30,7 @@ public class ShooterRotation extends Subsystem {//rotate the shooter and setup t
 		shooterrotation = new CANTalon(RobotMap.shooterRotation);
 		shooterrotation.changeControlMode(TalonControlMode.Position);
 		shooterrotation.setFeedbackDevice(FeedbackDevice.AnalogPot);
-		shooterrotation.setPID(12, .00000001, 2);
+		shooterrotation.setPID(14, .00000001, 15);
 		shooterrotation.enableControl(); // Enable PID control on the talon
 		shooterrotation.setSetpoint(setpoint);
 	}
