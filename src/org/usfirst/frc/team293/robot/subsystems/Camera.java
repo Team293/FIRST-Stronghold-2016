@@ -53,7 +53,7 @@ public class Camera extends Subsystem {			//This manages the OpenCV camera by ge
 	
 	private static boolean foundGoal = false;
 	
-	private static final double AIMED = 1.2;
+	private static final double AIMED = 0.5;
 	private double lastAngle = 0.0;
 	private double lastAzimuth = 0.0;
 	
@@ -124,10 +124,7 @@ public class Camera extends Subsystem {			//This manages the OpenCV camera by ge
     		}
     		integralError[i] += error[i] * Dt;
     		integralError[i] = Math.min(Math.max(integralError[i],-1000.0), 1000.0);
-    		/*if(i == 1){
-    			SmartDashboard.putNumber("Center X", goalCoordinates[0]);
-        		SmartDashboard.putNumber("Center Y", goalCoordinates[1]);
-    		}*/
+    		
     		outputs[i] = servoAngles[i] + PIDGains[i][0] * error[i] + PIDGains[i][1] * integralError[i] + PIDGains[i][2] * derivative;
     	}
     	this.setServoValues(outputs);
@@ -146,8 +143,7 @@ public class Camera extends Subsystem {			//This manages the OpenCV camera by ge
     		}
     		outputs[i] = servoAngles[i] + inc[i];												//changes servo values
     	}
-    	SmartDashboard.putNumber("inc Y", inc[1]);
-    	SmartDashboard.putNumber("outputValue Y", outputs[1]);
+
     	this.setServoValues(outputs);															//actually moves servos
     	foundGoal = false;
     }
@@ -155,8 +151,8 @@ public class Camera extends Subsystem {			//This manages the OpenCV camera by ge
     public void setServoValues(double[] vals){														//sets the servo values	
     	vals[0] = Math.min(Math.max(vals[0],servoRange[0][0]), servoRange[0][1]);					//Constrain Servo Values
     	vals[1] = Math.min(Math.max(vals[1],servoRange[1][0]), servoRange[1][1]);
-    	SmartDashboard.putNumber("xAngle", servoAngles[0]);
-    	SmartDashboard.putNumber("yAngle", servoAngles[1]);
+    	//SmartDashboard.putNumber("ServoxAngle", servoAngles[0]);
+    	//SmartDashboard.putNumber("ServoyAngle", servoAngles[1]);
     	for(int i = 0;i < 2;i++){
     		servoAngles[i] = vals[i];								//Set Servo values (Does not actually set servos)
     	}
@@ -171,7 +167,7 @@ public class Camera extends Subsystem {			//This manages the OpenCV camera by ge
     
     public double getDistance(){		//Returns how far we are from the goal according to the camera
     	double rad = Math.toRadians(baseY - 170.0*servoAngles[1]);
-    	return ((goalHeight - cameraHeight) / Math.tan(rad));//in inches
+    	return (((goalHeight - cameraHeight)*1.18 / Math.tan(rad)));//in inches
     }
     
     public double getAzimuth(){			//Tells us what angle we are at (RELATIVE).
@@ -207,7 +203,6 @@ public class Camera extends Subsystem {			//This manages the OpenCV camera by ge
     	}else if(change < -180.0){
     		change += 360.0;
     	}
-    	SmartDashboard.putNumber("change", change);
     	//change = 0;
     	double vals[] = {baseX + (getAzimuth() + Robot.shooterrotation.getangle() - lastAngle - change)/170.0,servoAngles[1]};
     	setServoValues(vals);

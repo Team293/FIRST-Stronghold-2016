@@ -23,7 +23,7 @@ public class Feeding extends Command {
     protected void initialize() {
     	Robot.shooterrotation.setangle(0);
     	Robot.feeder.outsidefeederset(1);
-    	Robot.feeder.insidefeederset(-.2);
+    	Robot.feeder.insidefeederset(-.3);
     	Robot.ledFeeder.on();
     }
 

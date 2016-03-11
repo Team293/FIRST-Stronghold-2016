@@ -50,8 +50,6 @@ public class ShooterWheel extends Subsystem {
 		return (Math.abs(shooterwheel.getEncVelocity()) < 175.0);
 	}
 	public void printShooter(){
-		SmartDashboard.putNumber("Shooter Error", shooterwheel.getError()/scalefactor);
 		SmartDashboard.putNumber("Shooter RPM", shooterwheel.getSpeed()/scalefactor);
-		SmartDashboard.putNumber("Motor Output", shooterwheel.getOutputVoltage());
 	}
 }

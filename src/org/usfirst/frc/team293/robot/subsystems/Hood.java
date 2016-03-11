@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Hood extends Subsystem {//the hood that aims up and down and manipulates.  PID
 	private static CANTalon Hood;
 	
+	public static int bottompoint=889;
 	private static final double UP = 10.0;
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
@@ -25,11 +26,10 @@ public class Hood extends Subsystem {//the hood that aims up and down and manipu
 		Hood.changeControlMode(TalonControlMode.Position);
 		Hood.setFeedbackDevice(FeedbackDevice.AnalogPot);
 		Hood.reverseSensor(false);
-		Hood.setPID(20,.00075,500); // Set the PID constants (p, i, d);
+		Hood.setPID(15,.00075,500); // Set the PID constants (p, i, d);
 		Hood.setIZone(50);
 		//Hood.setCloseLoopRampRate(.0025);
-		
-		//Hood.reverseOutput(true);
+
 		Hood.enableControl(); // Enable PID control on the talon
 	}
 
@@ -40,6 +40,12 @@ public class Hood extends Subsystem {//the hood that aims up and down and manipu
 	}
 
 	public static void setPosition(double i) {
+		if (i>bottompoint){
+			i=bottompoint;
+		}
+		if (i<bottompoint-226){
+			i=bottompoint-226;
+		}
 		Hood.enableControl();
 		Hood.setSetpoint(i);
 		//if (Hood.GetIaccum()>.1){

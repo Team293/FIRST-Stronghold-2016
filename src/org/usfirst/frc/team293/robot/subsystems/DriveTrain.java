@@ -129,15 +129,14 @@ public class DriveTrain extends Subsystem {		//this does the TankDrive as well a
 		}else if(error < -180){
 			error+=360;
 		}
-		SmartDashboard.putNumber("attitude",attitude[0]);
+		SmartDashboard.putNumber("Drivetrain attitude",attitude[0]);
 		integral += error*Dt;
 		integral = Math.min(Math.max(integral,integralRange[0]), integralRange[1]);
 		double derivative = attitude[3];
 		output = PIDGains[0] * error + PIDGains[1] * integral + PIDGains[2] * derivative;
-		SmartDashboard.putNumber("Error", error);
-		SmartDashboard.putNumber("Integral", integral);
-		SmartDashboard.putNumber("Derivative", derivative);
-		SmartDashboard.putNumber("output", output);
+		SmartDashboard.putNumber("Drivetrain Error", error);
+		//SmartDashboard.putNumber("Drivetrain Integral", integral);
+		//SmartDashboard.putNumber("Drivetrain Derivative", derivative);
 	}
 	
 	public void usePID() {											//Method for Driving
@@ -148,6 +147,7 @@ public class DriveTrain extends Subsystem {		//this does the TankDrive as well a
 				driving = true;
 			}
 			//drive.drive(-0.5, output);
+			
 			drive.arcadeDrive(-0.8, -output);
 		}else{
 			driving = false;
@@ -156,6 +156,17 @@ public class DriveTrain extends Subsystem {		//this does the TankDrive as well a
 	}
 
 	public void turnToAngle() {			//Turning, speed is set to 0, output is set for turning
+		if(output > 0){
+			output = Math.min(output, 0.5);
+		}else{
+			output = Math.max(output, -0.5);
+		}
+		if(output > 0){
+			output = Math.max(output, 0.28);
+		}else{
+			output = Math.min(output, -0.28);
+		}
+		//System.out.println(output);
 		drive.arcadeDrive(0.0, -output);
 		/*error = setpoint - attitude[0];
 		if(error > 180.0){
@@ -172,11 +183,11 @@ public class DriveTrain extends Subsystem {		//this does the TankDrive as well a
 	}
 	
 	public void turnLeft(){
-		drive.arcadeDrive(0.0,0.5);
+		drive.arcadeDrive(0.0,0.37);
 	}
 	
 	public void turnRight(){
-		drive.arcadeDrive(0.0,-0.5);
+		drive.arcadeDrive(0.0,-0.37);
 	}
 	
 	public void stop(){

@@ -69,7 +69,7 @@ public class OI {
 	 setshooterwheelBackup.whenPressed(new RunShooterWheel());
 	 setshooterwheelBackup.whenReleased(new StopShooterWheel());
 	 centerwheellift.toggleWhenPressed(new LiftCenterWheel());
-	 rightTrigger.whenPressed(new LiftCenterWheel());
+	 leftTrigger.whenPressed(new LiftCenterWheel());
 	 
 	 rotateShooterLeft.whileHeld(new RotateShooter(false));
 	 rotateShooterLeftBackup.whileHeld(new RotateShooter(false));
@@ -82,6 +82,7 @@ public class OI {
 	 manualshootBackup.toggleWhenPressed(new ShootHighGoal());
 	 
 	 manualshoot.whenPressed(new Fire());
+	 rightTrigger.whenPressed(new Fire());
 	 
 	 
 	 

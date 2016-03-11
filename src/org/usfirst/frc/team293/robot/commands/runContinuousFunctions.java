@@ -2,6 +2,7 @@ package org.usfirst.frc.team293.robot.commands;
 
 import org.usfirst.frc.team293.robot.Robot;
 import org.usfirst.frc.team293.robot.subsystems.Arduino;
+import org.usfirst.frc.team293.robot.subsystems.Hood;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -31,8 +32,21 @@ public class runContinuousFunctions extends Command {
     	SmartDashboard.putNumber("Camera Coord Distance", Robot.Camera.getDistance());
     	SmartDashboard.putNumber("Camera Coord Azimuth", Robot.Camera.getAzimuth());
     	SmartDashboard.putNumber("ShooterAngle",Robot.shooterrotation.getangle());
+       	//SmartDashboard.putNumber("Iaccum",Hood.getI());
+      	SmartDashboard.putNumber("Hood Angle", Hood.getPosition());
+    	SmartDashboard.putNumber("Error", 850-Hood.getPosition());
     	if(Robot.Camera.isAimed()){
     		Robot.ledManual.on();
+    	}else{
+    		Robot.ledManual.off();
+    	}
+    	if(Robot.continuousfunctions.isAiming()){
+    		Robot.ledHighGoal.flash();
+    	}else if(Robot.Camera.canSeeSwagadelia()){
+    		Robot.ledHighGoal.off();
+    	}
+    	if(!Robot.Camera.canSeeSwagadelia()){
+    		Robot.ledHighGoal.on();
     	}
     	Robot.shooterrotation.ledLight();
     	if(!Robot.feeder.boulderoptical()){

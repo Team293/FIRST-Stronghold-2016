@@ -21,7 +21,7 @@ public class ShooterRotation extends Subsystem {//rotate the shooter and setup t
 	private static final double wumbo = 15.0;							//Degrees per Second
 	private static long lastTime = System.currentTimeMillis();
 	
-	private static final double centerTolerance = 0.5;
+	private static final double centerTolerance = 0.8;
 	
 	private static double setpoint = 292;
 
@@ -64,11 +64,11 @@ public class ShooterRotation extends Subsystem {//rotate the shooter and setup t
 		
 	public void turnToGoal(double angle){
 		setangle((getangle() - angle));
-		SmartDashboard.putNumber("shooter Angle", getangle());
+		SmartDashboard.putNumber("Shooter Left Right Angle", getangle());
 	}
 	
 	public static double getShooterAngle(){
-		return shooterrotation.getPosition();
+		return Robot.shooterrotation.getangle();
 	}
 	public void setangle(double angle){	//ASSUMING 299 CENTER, AND 210 RIGHT-11.5 DEGREES, AND 395 +11.5 DEGREES
 		angle = Math.min(rotateRange[1], Math.max(rotateRange[0], angle));
@@ -79,14 +79,14 @@ public class ShooterRotation extends Subsystem {//rotate the shooter and setup t
 		return (shooterrotation.getPosition() - 299.0) / 7.74;
 	}
 	public void ledLight(){
-		if(getShooterAngle() < centerTolerance){
+		if(getShooterAngle() > centerTolerance){
 			if(!Robot.ledRotateLeft.getStatus()){
 				Robot.ledRotateLeft.on();
 			}
 			if(Robot.ledRotateRight.getStatus()){
 				Robot.ledRotateRight.off();
 			}
-		}else if(getShooterAngle() > centerTolerance){
+		}else if(getShooterAngle() < -centerTolerance){
 			if(!Robot.ledRotateRight.getStatus()){
 				Robot.ledRotateRight.on();
 			}
