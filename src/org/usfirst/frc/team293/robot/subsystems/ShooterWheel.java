@@ -24,13 +24,13 @@ public class ShooterWheel extends Subsystem {
 		// speed=SmartDashboard.getNumber("SetShooterPercentage");
 		shooterwheel = new CANTalon(RobotMap.shooterwheel);
 		shooterwheel.changeControlMode(TalonControlMode.Speed);
-		shooterwheel.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+		shooterwheel.setFeedbackDevice(FeedbackDevice.EncFalling);
 		shooterwheel.reverseOutput(false);
 		shooterwheel.reverseSensor(false);
 		shooterwheel.configEncoderCodesPerRev(4);
-		//shooterwheel.changeMotionControlFramePeriod(1000);
-		shooterwheel.setPID(100,0.00001, 0); // Set the PID constants (p, i, d)
-		shooterwheel.setF(0);// what we think it should be
+		//shooterwheel.getMotionProfileTopLevelBufferCount();
+		shooterwheel.setPID(225,0.00001, 0); // Set the PID constants (p, i, d)
+		shooterwheel.setF(.6);// what we think it should be
 
 		shooterwheel.enableControl(); // Enable PID control on the talon
 
@@ -43,7 +43,7 @@ public class ShooterWheel extends Subsystem {
 
 	public void setShooterRPM() {
 		shooterwheel.enableControl();
-		shooterwheel.setSetpoint(2825);
+		shooterwheel.setSetpoint(3400);
 	}
 
 	public void disableShooter() {
