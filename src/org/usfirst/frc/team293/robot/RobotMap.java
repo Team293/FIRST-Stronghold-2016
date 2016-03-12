@@ -51,7 +51,7 @@ public class RobotMap {
      public static final int
      drivercamera=7,
      horizontalvisioncamera=8,
-     verticalvisioncamera=9;
+     verticalvisioncamera=6;
      
      //Sensors
      public static final int

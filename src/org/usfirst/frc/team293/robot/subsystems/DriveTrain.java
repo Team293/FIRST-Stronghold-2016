@@ -162,9 +162,9 @@ public class DriveTrain extends Subsystem {		//this does the TankDrive as well a
 			output = Math.max(output, -0.5);
 		}
 		if(output > 0){
-			output = Math.max(output, 0.28);
+			output = Math.max(output, 0.32);
 		}else{
-			output = Math.min(output, -0.28);
+			output = Math.min(output, -0.32);
 		}
 		//System.out.println(output);
 		drive.arcadeDrive(0.0, -output);
@@ -183,11 +183,11 @@ public class DriveTrain extends Subsystem {		//this does the TankDrive as well a
 	}
 	
 	public void turnLeft(){
-		drive.arcadeDrive(0.0,0.37);
+		drive.arcadeDrive(0.0,0.4);
 	}
 	
 	public void turnRight(){
-		drive.arcadeDrive(0.0,-0.37);
+		drive.arcadeDrive(0.0,-0.4);
 	}
 	
 	public void stop(){

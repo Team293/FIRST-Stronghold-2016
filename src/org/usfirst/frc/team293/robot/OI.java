@@ -12,6 +12,7 @@ import org.usfirst.frc.team293.robot.commands.RunShooterWheel;
 import org.usfirst.frc.team293.robot.commands.ShootHighGoal;
 import org.usfirst.frc.team293.robot.commands.SimpleAim;
 import org.usfirst.frc.team293.robot.commands.StopShooterWheel;
+import org.usfirst.frc.team293.robot.commands.aimAndShoot;
 import org.usfirst.frc.team293.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -52,11 +53,12 @@ public class OI {
 	JoystickButton setshooterwheelBackup=new JoystickButton(joy2,7);
 	JoystickButton rotateShooterLeftBackup = new JoystickButton(joy1,8);
 	JoystickButton rotateShooterRightBackup = new JoystickButton(joy1,9);
+	JoystickButton aimAndShootButton = new JoystickButton(joy1,3);
 	//JoystickButton chevaldefrise=new JoystickButton(launchpad,RobotMap.chevaldeFesse[0]);
 //	JoystickButton drawbridge=new JoystickButton(launchpad,RobotMap.drawButt[0]);
 	//JoystickButton sallyport=new JoystickButton(launchpad,RobotMap.sallyButt[0]);
-	JoystickButton rightTrigger = new JoystickButton(joy2,1);
-	JoystickButton leftTrigger = new JoystickButton(joy1,1);
+	JoystickButton rightTrigger = new JoystickButton(joy1,1);
+	JoystickButton leftTrigger = new JoystickButton(joy2,1);
 		
 	
 	 climb.toggleWhenPressed(new Climb());
@@ -76,8 +78,9 @@ public class OI {
 	 rotateShooterRight.whileHeld(new RotateShooter(true));
 	 rotateShooterRightBackup.whileHeld(new RotateShooter(true));
 	 
-	 aimbutton.toggleWhenPressed(new SimpleAim());
-	 aimbuttonBackup.toggleWhenPressed(new Aim());
+	 aimbutton.toggleWhenPressed(new SimpleAim(true));
+	 aimbuttonBackup.toggleWhenPressed(new SimpleAim(true));
+	 aimAndShootButton.toggleWhenPressed(new aimAndShoot());
 	 manualshoot.toggleWhenPressed(new ShootHighGoal());
 	 manualshootBackup.toggleWhenPressed(new ShootHighGoal());
 	 

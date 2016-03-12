@@ -21,7 +21,7 @@ public class ShooterRotation extends Subsystem {//rotate the shooter and setup t
 	private static final double wumbo = 15.0;							//Degrees per Second
 	private static long lastTime = System.currentTimeMillis();
 	
-	private static final double centerTolerance = 0.8;
+	private static final double centerTolerance = 0.7;
 	
 	private static double setpoint = 292;
 
@@ -30,7 +30,7 @@ public class ShooterRotation extends Subsystem {//rotate the shooter and setup t
 		shooterrotation = new CANTalon(RobotMap.shooterRotation);
 		shooterrotation.changeControlMode(TalonControlMode.Position);
 		shooterrotation.setFeedbackDevice(FeedbackDevice.AnalogPot);
-		shooterrotation.setPID(14, .00000001, 15);
+		shooterrotation.setPID(8, .00000001, 13);
 		shooterrotation.enableControl(); // Enable PID control on the talon
 		shooterrotation.setSetpoint(setpoint);
 	}

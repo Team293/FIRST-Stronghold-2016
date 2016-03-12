@@ -22,8 +22,8 @@ public class Camera extends Subsystem {			//This manages the OpenCV camera by ge
 	private int[] servoPins = new int[2];
 	Servo cameraServos[] = new Servo[2];
 	
-	private static final double servoRange[][] = {{0.0, 0.89},{0.19, 0.555}};
-	private static final double servoRangeSearch[][] = {{0.0, 0.89},{0.4, 0.53}};
+	private static final double servoRange[][] = {{0.0, 0.89},{0.19, 0.567}};
+	private static final double servoRangeSearch[][] = {{0.0, 0.89},{0.3, 0.53}};
 	
     private static final double cameraHeight = 19.5;														//42.5//in
     private static final double goalHeight = 90.0;
@@ -53,9 +53,9 @@ public class Camera extends Subsystem {			//This manages the OpenCV camera by ge
 	
 	private static boolean foundGoal = false;
 	
-	private static final double AIMED = 0.5;
+	private static final double AIMED = 0.79;
 	private double lastAngle = 0.0;
-	private double lastAzimuth = 0.0;
+	private double lastAzimuth = -1.0;
 	
 	public Camera(){											//Instantiates the Servos and Pi
 		raspberryPi = new Serial(Port.kMXP,9600);
@@ -193,22 +193,25 @@ public class Camera extends Subsystem {			//This manages the OpenCV camera by ge
     	return staring;
     }
     public void shooterRotcompensation(boolean first){
+    	double az = Robot.drivetrain.getAttitude()[0];
     	if(first){
     		lastAngle = Robot.shooterrotation.getangle();
-    		lastAzimuth = Robot.drivetrain.getAttitude()[0];
+    		lastAzimuth = az;
     	}
-    	double change = Robot.drivetrain.getAttitude()[0] - lastAzimuth;
+    	double change = az - lastAzimuth;
     	if(change > 180.0){
     		change -= 360.0;
     	}else if(change < -180.0){
     		change += 360.0;
     	}
-    	//change = 0;
+    	if(first || az == -1.0 || lastAzimuth == -1.0){
+    		change = 0;
+    	}
     	double vals[] = {baseX + (getAzimuth() + Robot.shooterrotation.getangle() - lastAngle - change)/170.0,servoAngles[1]};
     	setServoValues(vals);
     	setServos();
     	lastAngle = Robot.shooterrotation.getangle();
-    	lastAzimuth = Robot.drivetrain.getAttitude()[0];
+    	lastAzimuth = az;
     }
 }
 

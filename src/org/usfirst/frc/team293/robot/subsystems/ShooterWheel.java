@@ -53,6 +53,11 @@ public class ShooterWheel extends Subsystem {
 	public boolean atSpeed(){
 		return (Math.abs(shooterwheel.getEncVelocity()) < 175.0);
 	}
+	
+	public boolean atSetpoint(){
+		return (shooterwheel.getSpeed() > 1600);
+	}
+	
 	public void printShooter(){
 		SmartDashboard.putNumber("Shooter RPM", shooterwheel.getSpeed());
 		SmartDashboard.putNumber("shooteroutput", shooterwheel.getOutputVoltage());
