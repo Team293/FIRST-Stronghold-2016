@@ -149,6 +149,9 @@ public class Robot extends IterativeRobot {
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
     }
+    public void teleopDisable(){
+    	Robot.lifterdrivetrain.drop();
+    }
     
     /**
      * This function is called periodically during test mode
