@@ -8,41 +8,37 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class LiftCenterWheel extends Command {		//Toggles the Drivetrain Center Wheel up and down with a button press
-    public LiftCenterWheel() {
+public class CenterWheelDrop extends Command {
+
+    public CenterWheelDrop() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.lifterdrivetrain);
+      	requires(Robot.lifterdrivetrain);
     	requires(Robot.ledCenterWheel);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.ledCenterWheel.on();
-
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.lifterdrivetrain.lift();
+    	Robot.lifterdrivetrain.drop();
     	Robot.ledCenterWheel.flash(RobotMap.flashnorm);
-
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return Robot.lifterdrivetrain.issetUp();
+        return !Robot.lifterdrivetrain.issetUp();
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.ledCenterWheel.off();
-
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	end();
     }
 }
