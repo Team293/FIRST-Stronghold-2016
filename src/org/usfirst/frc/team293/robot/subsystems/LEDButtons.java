@@ -39,8 +39,8 @@ public class LEDButtons extends Subsystem {
     	OI.launchpad.setOutput(this.port, this.status);
     	this.time = System.currentTimeMillis();
     }
-    public void flash(){
-    	if((System.currentTimeMillis()-this.time)>300){
+    public void flash(int wait){
+    	if((System.currentTimeMillis()-this.time)>wait){
     		this.status = !this.status;
     		OI.launchpad.setOutput(this.port, this.status);
     		this.time = System.currentTimeMillis();

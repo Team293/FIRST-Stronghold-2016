@@ -1,6 +1,7 @@
 package org.usfirst.frc.team293.robot.commands;
 
 import org.usfirst.frc.team293.robot.Robot;
+import org.usfirst.frc.team293.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -30,7 +31,7 @@ public class LiftCenterWheel extends Command {		//Toggles the Drivetrain Center 
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.ledCenterWheel.flash();
+    	Robot.ledCenterWheel.flash(RobotMap.flashnorm);
     	if(up){
     		Robot.lifterdrivetrain.lift();
     	}else{

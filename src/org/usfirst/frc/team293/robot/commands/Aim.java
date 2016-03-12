@@ -1,6 +1,7 @@
 package org.usfirst.frc.team293.robot.commands;
 
 import org.usfirst.frc.team293.robot.Robot;
+import org.usfirst.frc.team293.robot.RobotMap;
 import org.usfirst.frc.team293.robot.subsystems.Arduino;
 //import org.usfirst.frc.team293.robot.subsystems.Arduino;
 import org.usfirst.frc.team293.robot.subsystems.Hood;
@@ -37,7 +38,7 @@ public class Aim extends Command {// sets up the shooter to match the camera
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		Robot.ledHighGoal.flash();
+		Robot.ledHighGoal.flash(RobotMap.flashnorm);
 		//if (Robot.Camera.canSeeSwagadelia() && Robot.Camera.whenstaringatSwagadelia()) {	
 			/*********************************Angle Stuff************************************/
 		/*
@@ -104,12 +105,12 @@ public class Aim extends Command {// sets up the shooter to match the camera
 	protected void end() {
 		Robot.drivetrain.tankdrive(0, 0);
 		Robot.continuousfunctions.setAiming(false);
+		Robot.ledHighGoal.off();
 	}
 
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
 	protected void interrupted() {
-		Robot.ledHighGoal.off();
 		Robot.ledManual.on();
 		end();
 	}

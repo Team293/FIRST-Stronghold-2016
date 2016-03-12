@@ -60,7 +60,12 @@ public class RobotMap {
      leftEncodertwo=1,
      rightEncoderone=2,
      rightEncodertwo=3,
-     opticallimit=4;  
+     opticallimit=4;
+     
+     //Flash time
+     public static final int
+     flashnorm=300,
+     flashfast=200;
      /**************Power Stuff*************
       
       * Right Side:

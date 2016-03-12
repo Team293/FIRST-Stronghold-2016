@@ -1,6 +1,7 @@
 package org.usfirst.frc.team293.robot.commands;
 
 import org.usfirst.frc.team293.robot.Robot;
+import org.usfirst.frc.team293.robot.RobotMap;
 //import org.usfirst.frc.team293.robot.subsystems.ShooterWheel;
 import org.usfirst.frc.team293.robot.subsystems.Arduino;
 
@@ -34,7 +35,7 @@ public class RunShooterWheel extends Command {
     	if(Robot.shooterwheel.atSpeed()){
     		Robot.ledShooterWheels.on();
     	}else{
-    		Robot.ledShooterWheels.flash();
+    		Robot.ledShooterWheels.flash(RobotMap.flashnorm);
     	}
     	//SmartDashboard.putNumber("RPM", Robot.shooterwheel);
     }

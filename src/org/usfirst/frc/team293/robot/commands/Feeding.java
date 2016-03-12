@@ -1,6 +1,7 @@
 package org.usfirst.frc.team293.robot.commands;
 
 import org.usfirst.frc.team293.robot.Robot;
+import org.usfirst.frc.team293.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -29,7 +30,7 @@ public class Feeding extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.ledFeeder.flash();
+    	Robot.ledFeeder.flash(RobotMap.flashnorm);
     }
 
     // Make this return true when this Command no longer needs to run execute()

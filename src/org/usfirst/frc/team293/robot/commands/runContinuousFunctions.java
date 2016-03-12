@@ -1,6 +1,7 @@
 package org.usfirst.frc.team293.robot.commands;
 
 import org.usfirst.frc.team293.robot.Robot;
+import org.usfirst.frc.team293.robot.RobotMap;
 import org.usfirst.frc.team293.robot.subsystems.Arduino;
 import org.usfirst.frc.team293.robot.subsystems.Hood;
 
@@ -27,11 +28,12 @@ public class runContinuousFunctions extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	SmartDashboard.putNumber("Azimuth IMU",Robot.drivetrain.getAttitude()[0]);
-    	SmartDashboard.putNumber("angle vel", Robot.shooterrotation.getVel());
+    	//SmartDashboard.putNumber("angle vel", Robot.shooterrotation.getVel());
     	Robot.shooterwheel.printShooter();
     	SmartDashboard.putNumber("Camera Coord Distance", Robot.Camera.getDistance());
     	SmartDashboard.putNumber("Camera Coord Azimuth", Robot.Camera.getAzimuth());
     	SmartDashboard.putNumber("ShooterAngle",Robot.shooterrotation.getangle());
+     Robot.shooterwheel.printShooter();
        	//SmartDashboard.putNumber("Iaccum",Hood.getI());
       	SmartDashboard.putNumber("Hood Angle", Hood.getPosition());
     	SmartDashboard.putNumber("Error", 850-Hood.getPosition());
@@ -41,7 +43,7 @@ public class runContinuousFunctions extends Command {
     		Robot.ledManual.off();
     	}
     	if(Robot.continuousfunctions.isAiming()){
-    		Robot.ledHighGoal.flash();
+    		Robot.ledHighGoal.flash(RobotMap.flashnorm);
     	}else if(Robot.Camera.canSeeSwagadelia()){
     		Robot.ledHighGoal.off();
     	}
