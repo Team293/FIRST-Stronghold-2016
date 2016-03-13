@@ -14,6 +14,7 @@ public class aimAndShoot extends CommandGroup {
     	addSequential(new LookDown());
     	addSequential(new StopShooterWheel());
     	addSequential(new TankDriveWithJoystick());
+    	addSequential(new RotateShooter());
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());

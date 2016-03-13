@@ -15,7 +15,7 @@ public class Feeding extends Command {
     	requires(Robot.feeder);
     	requires(Robot.ledFeeder);
     	requires(Robot.drivercamera);
-    	
+    	requires(Robot.shooterrotation);
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
@@ -45,6 +45,7 @@ public class Feeding extends Command {
     	Robot.feeder.insidefeederset(0);
     	Robot.drivercamera.Lookup();
     	Robot.ledFeeder.off();
+    	new RotateShooter();
     }
 
     // Called when another command which requires one or more of the same

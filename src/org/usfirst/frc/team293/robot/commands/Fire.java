@@ -40,7 +40,7 @@ public class Fire extends Command {
     protected void end() {
     	Robot.feeder.outsidefeederset(0);
     	Robot.feeder.insidefeederset(0);
-    	new HoodRestPosition();
+    	new RotateShooter();
     }
 
     // Called when another command which requires one or more of the same

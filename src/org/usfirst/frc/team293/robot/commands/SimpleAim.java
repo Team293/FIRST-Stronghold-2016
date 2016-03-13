@@ -119,5 +119,6 @@ public class SimpleAim extends Command {
     // subsystems is scheduled to run
     protected void interrupted() {
     	Robot.continuousfunctions.setAiming(false);
+    	new RotateShooter();
     }
 }

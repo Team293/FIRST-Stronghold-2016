@@ -13,12 +13,14 @@ public class RobotMap {
      rightMotor = 1, //splitter
      outsideFeeder=3,
      insideFeeder=2;
+     
+     //shooterwheel1= 
     
      //TalonSRX Stuff
      public static int 
-     shooterwheel=2,
+     shooterwheel=1,
      hoodMotor=4,
-     shooterRotation=1,
+     shooterRotation=2,
      lifterMotor=3;
      
      //TalonSRX Sensors
@@ -33,18 +35,19 @@ public class RobotMap {
      
      public static final int[]
     	     feederButt={2,11},
-    	     lowButt={9,9},
+    	     noButt1={9,9},
     	     aimButt={5,3},
     	     manualButt={4,4},
-    	     rotateLeftButt={10,10},
+    	     lowButt={10,10},
     	     shooterButt={11,1},
-    	     rotateRightButt={3,5},
+    	     autoAimAndShootButt={3,5},
     	     portButt={1,6},
     	     wheelButt={8,8},
     	     climbButt={6,7};
      
      //Hood Knobber
-     public static final int inDaHood = 6;			//We Back
+     public static final int inDaHood = 5;			//We Back
+     public static final int HVUKNO = 6;			//We Back
     		 
      
      //Servos

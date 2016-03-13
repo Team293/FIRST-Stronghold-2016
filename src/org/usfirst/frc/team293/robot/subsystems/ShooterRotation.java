@@ -2,6 +2,7 @@ package org.usfirst.frc.team293.robot.subsystems;
 
 import org.usfirst.frc.team293.robot.Robot;
 import org.usfirst.frc.team293.robot.RobotMap;
+import org.usfirst.frc.team293.robot.commands.RotateShooter;
 
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.CANTalon;
@@ -39,7 +40,7 @@ public class ShooterRotation extends Subsystem {//rotate the shooter and setup t
 
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
-		// setDefaultCommand(new MySpecialCommand());
+		setDefaultCommand(new RotateShooter());
 	}
 
 	public void setsetpoint(double angle) {	//this can only happen if we are above 10 degrees
@@ -79,7 +80,7 @@ public class ShooterRotation extends Subsystem {//rotate the shooter and setup t
 		return (shooterrotation.getPosition() - 299.0) / 7.74;
 	}
 	public void ledLight(){
-		if(getShooterAngle() > centerTolerance){
+		/*if(getShooterAngle() > centerTolerance){
 			if(!Robot.ledRotateLeft.getStatus()){
 				Robot.ledRotateLeft.on();
 			}
@@ -100,6 +101,6 @@ public class ShooterRotation extends Subsystem {//rotate the shooter and setup t
 			if(!Robot.ledRotateLeft.getStatus()){
 				Robot.ledRotateLeft.on();
 			}
-		}
+		}*/
 	}
 }
