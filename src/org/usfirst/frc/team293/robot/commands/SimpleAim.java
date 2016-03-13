@@ -35,37 +35,41 @@ public class SimpleAim extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.drivetrain.initsensor();
-    	Robot.shooterrotation.setangle(-Robot.Camera.getAzimuth()+Robot.shooterrotation.getangle());
-    	Robot.Camera.shooterRotcompensation(true);
-    	Robot.drivetrain.resetPID();
+    	Robot.drivetrain.initsensor();						//initialize values of IMU to -1
+    	Robot.Camera.shooterRotcompensation(true);			//initialize camera servo compensation initial values
+    	Robot.drivetrain.resetPID();						//reset Integral of drivetrain
     	SmartDashboard.putBoolean("Using Aiming Backup", false);
     	Robot.continuousfunctions.setAiming(true);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if (Robot.Camera.canSeeSwagadelia()){
-    		azimuth = Robot.Camera.getAzimuth();
-    		Robot.shooterrotation.setangle(Robot.shooterrotation.getangle()-azimuth);
+    	if (Robot.Camera.canSeeSwagadelia()){				//if robot can see goal
+    		azimuth = Robot.Camera.getAzimuth();			//get goal yaw
+    		Robot.shooterrotation.setangle(Robot.shooterrotation.getangle()-azimuth);	//set shooter rotation
     	}
-
+    	
+    	//if azimuth is more than 9.5 degrees from the midline of the robot and the IMU is working
     	if(azimuth > Robot.shooterrotation.getangle() + ShooterRotation.rotateRange[1] - 0.4
     			|| azimuth < Robot.shooterrotation.getangle() + ShooterRotation.rotateRange[0] + 0.4
     			&& Robot.drivetrain.returnAttitude()[0] != -1.0){
+    		//get true angle of goal (relative to IMU angle)
     		double absoluteAngle = azimuth + Robot.drivetrain.getAttitude()[0] - Robot.shooterrotation.getangle();
+    		//compensate for 0-360 degree discontinuity
     		if(absoluteAngle > 360.0){
 				absoluteAngle -= 360.0;
 			}else if(absoluteAngle < 0.0){
 				absoluteAngle += 360.0;
 			}
-    		//SmartDashboard.putNumber("absolute Angle", absoluteAngle);
+    		//turn robot to point at goal
     		Robot.drivetrain.setSetpoint(absoluteAngle);
     		Robot.drivetrain.PID();
 			Robot.drivetrain.turnToAngle();
 			SmartDashboard.putBoolean("using Backup", false);
     	}
+    	//if IMU is not working
     	if(Robot.drivetrain.returnAttitude()[0] == -1.0){
+    		//if shooter is all the way left turn left all the way right turn right
     		if(Robot.shooterrotation.getangle() > ShooterRotation.rotateRange[1] - 0.7){
     			Robot.drivetrain.turnLeft();
     		}else if(Robot.shooterrotation.getangle() < ShooterRotation.rotateRange[0] + 0.7){
@@ -73,6 +77,7 @@ public class SimpleAim extends Command {
     		}
     		SmartDashboard.putBoolean("using Backup", true);
     	}
+    	//compensate for shooter rotation and drivetrain rotation
     	Robot.Camera.shooterRotcompensation(false);
     	
     	///////////////////////////Distance Stuff///////////////////////////////////
@@ -86,9 +91,11 @@ public class SimpleAim extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
+    	//STOP if joystick is mashed
     	if(Math.abs(OI.getJoystick1()) > 0.8 || Math.abs(OI.getJoystick2()) > 0.8){
     		return true;
     	}
+    	//STOP if the aiming is done and it is auto-aim and shoot
     	if(!continuous && Robot.Camera.isAimed()){
     		if(System.currentTimeMillis() - wasAimedAt > aimTime && aimed && Robot.shooterwheel.atSetpoint()){
     			return true;

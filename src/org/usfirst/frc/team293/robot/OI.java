@@ -1,6 +1,5 @@
 package org.usfirst.frc.team293.robot;
 
-import org.usfirst.frc.team293.robot.commands.Aim;
 import org.usfirst.frc.team293.robot.commands.CenterWheelDrop;
 import org.usfirst.frc.team293.robot.commands.Climb;
 import org.usfirst.frc.team293.robot.commands.Feeding;

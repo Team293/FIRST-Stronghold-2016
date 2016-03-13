@@ -68,6 +68,9 @@ public class Hood extends Subsystem {//the hood that aims up and down and manipu
 		}
 		return false;
 	}
+	public static void setposition(double angle) {
+		Hood.set(angle);
+	}
 
 	public static void disable() {
 		Hood.disable();	

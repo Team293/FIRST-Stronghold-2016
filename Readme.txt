@@ -15,7 +15,7 @@
 
 ### Things it can do
 
- - Drive Straight with the IMU
+ - Drive Straight with the IMU (sort of)
  - Feeding
  - Low Goal Shooting
  - High Goal Auto-Aim Shooting with OpenCV on a Pi 2
