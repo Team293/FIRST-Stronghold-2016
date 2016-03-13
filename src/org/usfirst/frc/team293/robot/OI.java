@@ -1,6 +1,7 @@
 package org.usfirst.frc.team293.robot;
 
 import org.usfirst.frc.team293.robot.commands.Aim;
+import org.usfirst.frc.team293.robot.commands.CenterWheelDrop;
 import org.usfirst.frc.team293.robot.commands.Climb;
 import org.usfirst.frc.team293.robot.commands.Feeding;
 import org.usfirst.frc.team293.robot.commands.Fire;
@@ -31,20 +32,31 @@ public class OI {
 	 private static Joystick joy2=new Joystick(1);
 	 
 	 public static Joystick launchpad=new Joystick(2);
+	 
+	 public static Joystick launchpad2=new Joystick(3);
 
 	 
 	 public OI(){
-		 /////////////////////instantiate buttons
+		 /////////////////////instantiate buttons Launchpad
 	JoystickButton feederbutton=new JoystickButton(launchpad,RobotMap.feederButt[0]);
 	JoystickButton lowgoalbutton=new JoystickButton(launchpad,RobotMap.lowButt[0]);
 	JoystickButton aimbutton=new JoystickButton(launchpad,RobotMap.aimButt[0]);
 	JoystickButton manualshoot=new JoystickButton(launchpad,RobotMap.manualButt[0]);
-	JoystickButton setshooterwheel=new JoystickButton(launchpad,RobotMap.shooterButt[0]);
+	JoystickButton setcam=new JoystickButton(launchpad,RobotMap.shooterButt[0]);
 	JoystickButton climb=new JoystickButton(launchpad,RobotMap.climbButt[0]);
 	JoystickButton centerwheellift=new JoystickButton(launchpad,RobotMap.wheelButt[0]);
 	JoystickButton portcullis=new JoystickButton(launchpad,RobotMap.portButt[0]);
-	JoystickButton rotateShooterLeft = new JoystickButton(launchpad,RobotMap.rotateLeftButt[0]);
-	JoystickButton rotateShooterRight = new JoystickButton(launchpad,RobotMap.rotateRightButt[0]);
+	JoystickButton lowgoal = new JoystickButton(launchpad,RobotMap.rotateLeftButt[0]);
+	JoystickButton AutoAimandShoot= new JoystickButton(launchpad,RobotMap.rotateRightButt[0]);
+	 /////////////////////instantiate buttons Launchpad2
+	JoystickButton Automanualswitch1=new JoystickButton(launchpad2,1);
+	JoystickButton Automanualswitch2=new JoystickButton(launchpad2,2);
+	JoystickButton RPMmanualswitch1=new JoystickButton(launchpad2,3);
+	JoystickButton RPMmanualswitch2=new JoystickButton (launchpad2,4);
+	
+	
+	
+	
 	
 	JoystickButton feederbuttonBackup=new JoystickButton(joy1,7);
 	JoystickButton lowgoalbuttonBackup=new JoystickButton(joy1,6);
@@ -66,24 +78,21 @@ public class OI {
 	 lowgoalbuttonBackup.toggleWhenPressed(new LowGoal());
 	 feederbutton.toggleWhenPressed(new Feeding());
 	 feederbuttonBackup.toggleWhenPressed(new Feeding());
-	 setshooterwheel.whenPressed(new RunShooterWheel());
-	 setshooterwheel.whenReleased(new StopShooterWheel());
+	 setcam.whenPressed(new LiftCenterWheel());
+	 setcam.whenReleased(new CenterWheelDrop());
 	 setshooterwheelBackup.whenPressed(new RunShooterWheel());
 	 setshooterwheelBackup.whenReleased(new StopShooterWheel());
 	 centerwheellift.toggleWhenPressed(new LiftCenterWheel());
 	 leftTrigger.whenPressed(new LiftCenterWheel());
 	 
-	 rotateShooterLeft.whileHeld(new RotateShooter(false));
-	 rotateShooterLeftBackup.whileHeld(new RotateShooter(false));
-	 rotateShooterRight.whileHeld(new RotateShooter(true));
-	 rotateShooterRightBackup.whileHeld(new RotateShooter(true));
-	 
+
 	 aimbutton.toggleWhenPressed(new SimpleAim(true));
 	 aimbuttonBackup.toggleWhenPressed(new SimpleAim(true));
 	 aimAndShootButton.toggleWhenPressed(new aimAndShoot());
 	 manualshoot.toggleWhenPressed(new ShootHighGoal());
 	 manualshootBackup.toggleWhenPressed(new ShootHighGoal());
 	 
+	 AutoAimandShoot.toggleWhenPressed(new aimAndShoot());
 	 manualshoot.whenPressed(new Fire());
 	 rightTrigger.whenPressed(new Fire());
 	 
@@ -98,6 +107,10 @@ public class OI {
 	    }
 	    public static double getHoodDial(){
 	    	double raw = launchpad.getRawAxis(RobotMap.inDaHood);
+	    	return (raw);
+	    }
+	    public static double getRotationDial(){
+	    	double raw=launchpad2.getRawAxis(RobotMap.inDaHood);
 	    	return (raw);
 	    }
 	    public static double getBackupHoodDial(){

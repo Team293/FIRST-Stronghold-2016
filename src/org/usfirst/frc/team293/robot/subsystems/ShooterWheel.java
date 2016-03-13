@@ -45,6 +45,10 @@ public class ShooterWheel extends Subsystem {
 		shooterwheel.enableControl();
 		shooterwheel.setSetpoint(3400);
 	}
+	public void setSlowShooterRPM(){
+		shooterwheel.enableControl();
+		shooterwheel.setSetpoint(3000);
+	}
 
 	public void disableShooter() {
 		shooterwheel.disableControl();
