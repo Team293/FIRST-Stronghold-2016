@@ -25,40 +25,45 @@ public class Camera extends Subsystem {			//This manages the OpenCV camera by ge
 	private static final double servoRange[][] = {{0.0, 0.89},{0.19, 0.567}};
 	private static final double servoRangeSearch[][] = {{0.0, 0.89},{0.3, 0.53}};
 	
-    private static final double cameraHeight = 19.5;														//42.5//in
-    private static final double goalHeight = 90.0;
-    private static final double calibrationDist = 100.0;
-    private static final double calibrationAngle = 0.394;
-    private static final double baseY = Math.toDegrees(Math.atan((goalHeight - cameraHeight)/calibrationDist)) + 170.0*calibrationAngle;
+    private static final double cameraHeight = 19.5;				//42.5 on robot //in
+    private static final double goalHeight = 90.0;					//height of the middle of the goal
+    private static final double calibrationDist = 100.0;			//distance that calibrationAngle was taken at
+    private static final double calibrationAngle = 0.394;			//angle of Y servo
+    //calculates base y angle
+    private static final double baseY = Math.toDegrees(Math.atan((goalHeight - cameraHeight)/calibrationDist))
+    		+ 170.0*calibrationAngle;
+    //x servo angle pointed straight forward
     private static final double baseX = 0.41;
-    
+    //x and y search speeds
     private static final double inc[] = {0.026,0.015};
-    
-    private static double[] servoAngles = {(servoRange[0][0] + servoRange[0][1]) / 2.0, 0.5};				//initial Servo angles (0.0-1.0 scale)
+    //starting servo angles
+    private static double[] servoAngles = {baseX, 0.5};				//initial Servo angles (0.0-1.0 scale)
     
     /*                         SWAGADELIC CAMERA STUFF                              */
     
     public long lastReading = System.currentTimeMillis();
     public long lastPIDUpdate = System.currentTimeMillis();
 	
-	Serial raspberryPi;
-	private static final double goalCenter[] = {160.0,140.0};
-	public double goalCoordinates[] = new double[2];
+	Serial raspberryPi;												//serial port for Pi
+	private static final double goalCenter[] = {160.0,140.0};		//center of screen in pixels
+	public double goalCoordinates[] = new double[2];				//coordinates received from Pi
 	
+	//PID variables
 	private static final double PIDGains[][] = {{0.025/goalCenter[0],0.0,0.0008/goalCenter[0]},
 			{0.0165/goalCenter[1],0.0,0.00045/goalCenter[1]}};
 	private static double error[] = {0.0,0.0};
 	private static double lastError[] = {0.0,0.0};
 	private static double integralError[] = {0.0,0.0};
-	
+	//if it can see the goal
 	private static boolean foundGoal = false;
 	
-	private static final double AIMED = 0.79;
-	private double lastAngle = 0.0;
+	private static final double AIMED = 0.79;		//tolerance for being aimed at the goal
+	//for shooter and drivetrain rotation compensation
+	private double lastAngle = 0.0;					
 	private double lastAzimuth = -1.0;
 	
 	public Camera(){											//Instantiates the Servos and Pi
-		raspberryPi = new Serial(Port.kMXP,9600);
+		raspberryPi = new Serial(Port.kMXP,9600);				//9600 baud
     	servoPins[0] = RobotMap.horizontalvisioncamera;
     	servoPins[1] = RobotMap.verticalvisioncamera;
     	for(int i = 0;i < 2;i++){
@@ -102,13 +107,17 @@ public class Camera extends Subsystem {			//This manages the OpenCV camera by ge
     }
     
     public void updatePID(int newData){
-    	double Dt = (double)(System.currentTimeMillis() - lastPIDUpdate) / 1000.0;
+    	double Dt = (double)(System.currentTimeMillis() - lastPIDUpdate) / 1000.0;		//gets dt (seconds)
     	double[] outputs = {0.0,0.0};
     	for(int i = 0;i < 2;i++){
+    		//if we have new data update the last error
     		if(newData == 1){
     			lastError[i] = error[i];
     		}
+    		//get error (actual - wanted)
     		error[i] = goalCoordinates[i] - goalCenter[i];
+    		//wierd stuff to make it find the goal faster after it loses it
+    		//moves to the side that it lost it on
     		if(error[i] < 0){
     			if(inc[i] > 0){
     				inc[i] *= -1;
@@ -119,15 +128,16 @@ public class Camera extends Subsystem {			//This manages the OpenCV camera by ge
     			}
     		}
     		double derivative = 0.0;
-    		if(Dt < 0.400){
+    		if(Dt < 0.400){				//exclude derivative and integral if it has been too long
     			derivative = (error[i] - lastError[i]) / Dt;
+    			integralError[i] += error[i] * Dt;
     		}
-    		integralError[i] += error[i] * Dt;
+    		//constrain integral (-1000 to 1000)
     		integralError[i] = Math.min(Math.max(integralError[i],-1000.0), 1000.0);
-    		
+    		//set outputs based on PID
     		outputs[i] = servoAngles[i] + PIDGains[i][0] * error[i] + PIDGains[i][1] * integralError[i] + PIDGains[i][2] * derivative;
     	}
-    	this.setServoValues(outputs);
+    	this.setServoValues(outputs);							//set the servo values (DOES NOT MOVE SERVOS)
     	lastPIDUpdate = System.currentTimeMillis();
     	foundGoal = true;
     }
@@ -135,24 +145,22 @@ public class Camera extends Subsystem {			//This manages the OpenCV camera by ge
     public void search(){		//If the camera can't find the goal, it needs to search around
     	double outputs[] = {0.0,0.0};
     	for(int i = 0;i < 2;i++){
-    		if(servoAngles[i] + inc[i] < servoRangeSearch[i][0] && inc[i] < 0 ){				//changes direction (x)
+    		if(servoAngles[i] + inc[i] < servoRangeSearch[i][0] && inc[i] < 0 ){			//changes direction (x)
     			inc[i] = -1*inc[i];
     		}
-    		if(servoAngles[i] + inc[i] > servoRangeSearch[i][1] && inc[i] > 0){					//changes direction (y)
+    		if(servoAngles[i] + inc[i] > servoRangeSearch[i][1] && inc[i] > 0){				//changes direction (y)
     			inc[i] = -1*inc[i];
     		}
-    		outputs[i] = servoAngles[i] + inc[i];												//changes servo values
+    		outputs[i] = servoAngles[i] + inc[i];											//changes servo values
     	}
 
-    	this.setServoValues(outputs);															//actually moves servos
+    	this.setServoValues(outputs);														//actually moves servos
     	foundGoal = false;
     }
     
-    public void setServoValues(double[] vals){														//sets the servo values	
-    	vals[0] = Math.min(Math.max(vals[0],servoRange[0][0]), servoRange[0][1]);					//Constrain Servo Values
+    public void setServoValues(double[] vals){												//sets the servo values	
+    	vals[0] = Math.min(Math.max(vals[0],servoRange[0][0]), servoRange[0][1]);			//Constrain Servo Values
     	vals[1] = Math.min(Math.max(vals[1],servoRange[1][0]), servoRange[1][1]);
-    	//SmartDashboard.putNumber("ServoxAngle", servoAngles[0]);
-    	//SmartDashboard.putNumber("ServoyAngle", servoAngles[1]);
     	for(int i = 0;i < 2;i++){
     		servoAngles[i] = vals[i];								//Set Servo values (Does not actually set servos)
     	}
@@ -174,7 +182,7 @@ public class Camera extends Subsystem {			//This manages the OpenCV camera by ge
     	return (170.0*(servoAngles[0] - baseX));//degrees
     }
     
-    public boolean isAimed(){
+    public boolean isAimed(){			//returns whether the robot is aimed at the goal (azimuth only)
     	return (Math.abs(getAzimuth()) < AIMED);
     }
     
@@ -192,24 +200,28 @@ public class Camera extends Subsystem {			//This manages the OpenCV camera by ge
     	}
     	return staring;
     }
-    public void shooterRotcompensation(boolean first){
-    	double az = Robot.drivetrain.getAttitude()[0];
-    	if(first){
-    		lastAngle = Robot.shooterrotation.getangle();
-    		lastAzimuth = az;
+    public void shooterRotcompensation(boolean first){		//compensates for shooter and drivetrain rotation
+    	double az = Robot.drivetrain.getAttitude()[0];		//get azimuth
+    	if(first){											//if it is running for the first time
+    		lastAngle = Robot.shooterrotation.getangle();	//get base shooter rotation angle
+    		lastAzimuth = az;								//get base IMU angle
     	}
-    	double change = az - lastAzimuth;
-    	if(change > 180.0){
+    	double change = az - lastAzimuth;					//get change in IMU angle
+    	if(change > 180.0){									//compensate for discontinuity
     		change -= 360.0;
     	}else if(change < -180.0){
     		change += 360.0;
     	}
-    	if(first || az == -1.0 || lastAzimuth == -1.0){
+    	if(first || az == -1.0 || lastAzimuth == -1.0){		//if no IMU values were received yet don't compensate
     		change = 0;
     	}
-    	double vals[] = {baseX + (getAzimuth() + Robot.shooterrotation.getangle() - lastAngle - change)/170.0,servoAngles[1]};
+    	//translate changes to changes in servo values
+    	double vals[] = {baseX + (getAzimuth() + Robot.shooterrotation.getangle() - lastAngle - change)/170.0
+    			,servoAngles[1]};
+    	//move servos
     	setServoValues(vals);
     	setServos();
+    	//set last stuff
     	lastAngle = Robot.shooterrotation.getangle();
     	lastAzimuth = az;
     }

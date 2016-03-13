@@ -27,7 +27,7 @@ public class DriveTrain extends Subsystem {		//this does the TankDrive as well a
 	double processedangle;
 	Serial pi;// The IMU Data
 	
-	private double[] attitude = {-1.0,-1.0,-1.0,-1000.0};
+	private double[] attitude = {-1.0,-1.0,-1.0,-1000.0};		//yaw, roll, pitch, z rate
 	
 	/*   PID VARIABLES       */
 	private double setpoint = 0.0;
@@ -38,6 +38,7 @@ public class DriveTrain extends Subsystem {		//this does the TankDrive as well a
 	public boolean newData = false;
 	private static double output = 0.0;
 	
+	//encoder variables
 	private double error = 0.0;
 	private double lastDist = 0.0;
 	private double correctedDist = 0.0;
@@ -73,7 +74,7 @@ public class DriveTrain extends Subsystem {		//this does the TankDrive as well a
     	this.setpoint = setpointWanted;
     }
     
-    public void resetPID(){
+    public void resetPID(){							//resets PID variables
     	integral = 0.0;
     	lastTime = System.currentTimeMillis();
     }
@@ -86,13 +87,13 @@ public class DriveTrain extends Subsystem {		//this does the TankDrive as well a
 		drive.tankDrive(left, right);
 	}
 
-	public void setPID(double p, double i, double d) {
+	public void setPID(double p, double i, double d) {		//sets P, I, and D
 		PIDGains[0] = p;
 		PIDGains[1] = i;
 		PIDGains[2] = d;
 	}
 	
-	public void initsensor(){
+	public void initsensor(){								//initialize IMU values
 		for(int i = 0;i < 3;i++){
 			attitude[i] = -1.0;
 		}
@@ -124,17 +125,17 @@ public class DriveTrain extends Subsystem {		//this does the TankDrive as well a
 		double Dt = (double)(System.currentTimeMillis() - lastTime) / 1000.0;			//Dt, For calc stuff!!!
 		lastTime = System.currentTimeMillis();
 		error = setpoint - attitude[0];
+		//compensate for discontinuity
 		if(error > 180){
 			error-=360;
 		}else if(error < -180){
 			error+=360;
 		}
-		SmartDashboard.putNumber("Drivetrain attitude",attitude[0]);
 		integral += error*Dt;
-		integral = Math.min(Math.max(integral,integralRange[0]), integralRange[1]);
-		double derivative = attitude[3];
+		integral = Math.min(Math.max(integral,integralRange[0]), integralRange[1]);		//constrain
+		double derivative = attitude[3];										//derivative straight from gyro
 		output = PIDGains[0] * error + PIDGains[1] * integral + PIDGains[2] * derivative;
-		SmartDashboard.putNumber("Drivetrain Error", error);
+		//SmartDashboard.putNumber("Drivetrain Error", error);
 		//SmartDashboard.putNumber("Drivetrain Integral", integral);
 		//SmartDashboard.putNumber("Drivetrain Derivative", derivative);
 	}
@@ -148,7 +149,7 @@ public class DriveTrain extends Subsystem {		//this does the TankDrive as well a
 			}
 			//drive.drive(-0.5, output);
 			
-			drive.arcadeDrive(-0.8, -output);
+			drive.arcadeDrive(-0.5, -output);
 		}else{
 			driving = false;
 		}
@@ -156,30 +157,20 @@ public class DriveTrain extends Subsystem {		//this does the TankDrive as well a
 	}
 
 	public void turnToAngle() {			//Turning, speed is set to 0, output is set for turning
+		//constrain max turn speed
 		if(output > 0){
 			output = Math.min(output, 0.5);
 		}else{
 			output = Math.max(output, -0.5);
 		}
+		//constrain min turn speed
 		if(output > 0){
 			output = Math.max(output, 0.32);
 		}else{
 			output = Math.min(output, -0.32);
 		}
-		//System.out.println(output);
+		//turn
 		drive.arcadeDrive(0.0, -output);
-		/*error = setpoint - attitude[0];
-		if(error > 180.0){
-			error -= 360.0;
-		}else if(error < -180.0){
-			error += 360.0;
-		}
-		if(error > 5.0){
-			drive.arcadeDrive(0.0,-0.5);
-		}else if(error < -5.0){
-			drive.arcadeDrive(0.0,0.5);
-		}
-		SmartDashboard.putNumber("error", error);*/
 	}
 	
 	public void turnLeft(){
