@@ -35,6 +35,7 @@ public class SimpleAim extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Hood.setPosition(700);
     	Robot.drivetrain.initsensor();						//initialize values of IMU to -1
     	Robot.Camera.shooterRotcompensation(true);			//initialize camera servo compensation initial values
     	Robot.drivetrain.resetPID();						//reset Integral of drivetrain
