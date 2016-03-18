@@ -18,10 +18,10 @@ public class RobotMap {
     
      //TalonSRX Stuff
      public static int 
-     shooterwheel=1,
+     shooterwheel=2,
      hoodMotor=4,
-     shooterRotation=2,
-     lifterMotor=3;
+     shooterRotation=3 ,
+     lifterMotor=1;
      
      //TalonSRX Sensors
      /*
@@ -39,7 +39,7 @@ public class RobotMap {
     	     aimButt={5,3},
     	     manualButt={4,4},
     	     lowButt={10,10},
-    	     shooterButt={11,1},
+    	     camButt={11,1},
     	     autoAimAndShootButt={3,5},
     	     portButt={1,6},
     	     wheelButt={8,8},

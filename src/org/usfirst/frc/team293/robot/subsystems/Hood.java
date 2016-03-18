@@ -2,6 +2,7 @@ package org.usfirst.frc.team293.robot.subsystems;
 
 import org.usfirst.frc.team293.robot.Robot;
 import org.usfirst.frc.team293.robot.RobotMap;
+import org.usfirst.frc.team293.robot.commands.DefaultHoodResting;
 import org.usfirst.frc.team293.robot.commands.HoodRestPosition;
 import org.usfirst.frc.team293.robot.commands.ManualHood;
 
@@ -36,7 +37,7 @@ public class Hood extends Subsystem {//the hood that aims up and down and manipu
 	public void initDefaultCommand() {
 		
 		// Set the default command for a subsystem here.
-		 setDefaultCommand(new ManualHood());
+		 setDefaultCommand(new DefaultHoodResting());
 	}
 
 	public static void setPosition(double i) {

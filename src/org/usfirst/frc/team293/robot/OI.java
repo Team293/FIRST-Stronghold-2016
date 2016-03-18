@@ -43,7 +43,7 @@ public class OI {
 	JoystickButton feederbutton=new JoystickButton(launchpad,RobotMap.feederButt[0]);
 	JoystickButton aimbutton=new JoystickButton(launchpad,RobotMap.aimButt[0]);
 	JoystickButton manualshoot=new JoystickButton(launchpad,RobotMap.manualButt[0]);
-	JoystickButton setcam=new JoystickButton(launchpad,RobotMap.shooterButt[0]);
+	JoystickButton setcam=new JoystickButton(launchpad,RobotMap.camButt[0]);
 	JoystickButton climb=new JoystickButton(launchpad,RobotMap.climbButt[0]);
 	JoystickButton centerwheellift=new JoystickButton(launchpad,RobotMap.wheelButt[0]);
 	JoystickButton portcullis=new JoystickButton(launchpad,RobotMap.portButt[0]);
@@ -52,8 +52,8 @@ public class OI {
 	 /////////////////////instantiate buttons Launchpad2
 	JoystickButton manualHoodSwitch=new JoystickButton(launchpad2,1);
 	JoystickButton disableHoodSwitch=new JoystickButton(launchpad2,2);
-	JoystickButton RPMFastSwitch=new JoystickButton(launchpad2,3);
-	JoystickButton RPMSlowSwitch=new JoystickButton (launchpad2,4);
+	JoystickButton RPMFastSwitch=new JoystickButton(launchpad2,4);
+	JoystickButton RPMSlowSwitch=new JoystickButton (launchpad2,3);
 	
 	
 	JoystickButton feederbuttonBackup=new JoystickButton(joy1,7);

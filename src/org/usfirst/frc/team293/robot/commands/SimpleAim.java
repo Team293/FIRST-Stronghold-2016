@@ -35,12 +35,13 @@ public class SimpleAim extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Hood.setPosition(700);
+    	//Hood.setPosition(800);
     	Robot.drivetrain.initsensor();						//initialize values of IMU to -1
     	Robot.Camera.shooterRotcompensation(true);			//initialize camera servo compensation initial values
     	Robot.drivetrain.resetPID();						//reset Integral of drivetrain
     	SmartDashboard.putBoolean("Using Aiming Backup", false);
     	Robot.continuousfunctions.setAiming(true);
+    	Hood.enable();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -114,12 +115,12 @@ public class SimpleAim extends Command {
     // Called once after isFinished returns true
     protected void end() {
     	Robot.continuousfunctions.setAiming(false);
+    	new RotateShooter();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	Robot.continuousfunctions.setAiming(false);
-    	new RotateShooter();
+    	 end();
     }
 }

@@ -24,16 +24,17 @@ public class ShooterRotation extends Subsystem {//rotate the shooter and setup t
 	
 	private static final double centerTolerance = 0.7;
 	
-	private static double setpoint = 292;
+	private static double setpoint = 295;
 
 	public ShooterRotation() {
 		super();
 		shooterrotation = new CANTalon(RobotMap.shooterRotation);
 		shooterrotation.changeControlMode(TalonControlMode.Position);
 		shooterrotation.setFeedbackDevice(FeedbackDevice.AnalogPot);
-		shooterrotation.setPID(8, .00000001, 13);
+		shooterrotation.setPID(9, .00000001, 13);
 		shooterrotation.enableControl(); // Enable PID control on the talon
-		shooterrotation.setSetpoint(setpoint);
+		shooterrotation.reverseOutput(false);
+		//shooterrotation.setangle(0.0);
 	}
 	// Put methods for controlling this subsystem
 	// here. Call these from Command
@@ -72,12 +73,14 @@ public class ShooterRotation extends Subsystem {//rotate the shooter and setup t
 		return Robot.shooterrotation.getangle();
 	}
 	public void setangle(double angle){	//ASSUMING 299 CENTER, AND 210 RIGHT-11.5 DEGREES, AND 395 +11.5 DEGREES
+		if (Math.abs(Hood.getPosition())<(Hood.bottompoint-40)){
 		angle = Math.min(rotateRange[1], Math.max(rotateRange[0], angle));
-		shooterrotation.setSetpoint(angle*7.74+299.0);
+		shooterrotation.setSetpoint(angle*7.74+295);
+		}
 	}
 	
 	public double getangle(){
-		return (shooterrotation.getPosition() - 299.0) / 7.74;
+		return (shooterrotation.getPosition() - 295) / 7.74;
 	}
 	public void ledLight(){
 		/*if(getShooterAngle() > centerTolerance){

@@ -23,7 +23,7 @@ public class Camera extends Subsystem {			//This manages the OpenCV camera by ge
 	Servo cameraServos[] = new Servo[2];
 	
 	private static final double servoRange[][] = {{0.0, 0.89},{0.19, 0.567}};
-	private static final double servoRangeSearch[][] = {{0.0, 0.89},{0.3, 0.53}};
+	private static final double servoRangeSearch[][] = {{0.0, 0.89},{0.32, 0.49}};
 	
     private static final double cameraHeight = 19.5;				//42.5 on robot //in
     private static final double goalHeight = 90.0;					//height of the middle of the goal
@@ -35,9 +35,9 @@ public class Camera extends Subsystem {			//This manages the OpenCV camera by ge
     //x servo angle pointed straight forward
     private static final double baseX = 0.41;
     //x and y search speeds
-    private static final double inc[] = {0.026,0.015};
+    private static final double inc[] = {0.027,0.016};
     //starting servo angles
-    private static double[] servoAngles = {baseX, 0.5};				//initial Servo angles (0.0-1.0 scale)
+    private static double[] servoAngles = {baseX, calibrationAngle};				//initial Servo angles (0.0-1.0 scale)
     
     /*                         SWAGADELIC CAMERA STUFF                              */
     
@@ -170,6 +170,8 @@ public class Camera extends Subsystem {			//This manages the OpenCV camera by ge
     	for(int i = 0;i < 2;i++){
     		cameraServos[i].set(servoAngles[i]);											//Set Servos
     	}
+    	SmartDashboard.putNumber("x Servo",servoAngles[0]);
+    	SmartDashboard.putNumber("y Servo",servoAngles[1]);
     	lastServoSet = System.currentTimeMillis();
     }
     
