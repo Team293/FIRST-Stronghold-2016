@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class SimpleAim extends Command {
 	private double azimuth = 0.0;
-	double[] Hoodangle={83,83,83,83,65,66,74,75,79,80,83,78,75,83};
+	double[] Hoodangle={83,83,83,83,85,86,74,75,81,80,83,78,75,83};
 	/////////////////////0  1  2  3  4  5  6  7  8  9 10 11 12 13
 	private boolean continuous = false;
 	private long wasAimedAt = -1100;
@@ -25,7 +25,7 @@ public class SimpleAim extends Command {
     	
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	Robot.drivetrain.setPID(0.024, 0.001, 0.01);
+    	Robot.drivetrain.setPID(0.00001, 0.0, 0.0);
 		requires(Robot.shooterrotation);
 		requires(Robot.drivetrain);
 		requires(Robot.ledHighGoal);

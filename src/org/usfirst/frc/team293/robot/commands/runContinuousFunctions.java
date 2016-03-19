@@ -33,6 +33,7 @@ public class runContinuousFunctions extends Command {
     	SmartDashboard.putNumber("Camera Coord Distance", Robot.Camera.getDistance());
     	SmartDashboard.putNumber("Camera Coord Azimuth", Robot.Camera.getAzimuth());
     	SmartDashboard.putNumber("ShooterAngle",Robot.shooterrotation.getangle());
+    	SmartDashboard.putNumber("timer", Robot.lifterdrivetrain.timer());
      Robot.shooterwheel.printShooter();
        	//SmartDashboard.putNumber("Iaccum",Hood.getI());
       	SmartDashboard.putNumber("Hood Angle", Hood.getPosition());

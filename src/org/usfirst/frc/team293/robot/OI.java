@@ -8,6 +8,7 @@ import org.usfirst.frc.team293.robot.commands.HoodRestPosition;
 import org.usfirst.frc.team293.robot.commands.LiftCenterWheel;
 
 import org.usfirst.frc.team293.robot.commands.LowGoal;
+import org.usfirst.frc.team293.robot.commands.ManualCam;
 import org.usfirst.frc.team293.robot.commands.ManualHood;
 import org.usfirst.frc.team293.robot.commands.RotateShooter;
 import org.usfirst.frc.team293.robot.commands.RunShooterWheel;
@@ -15,6 +16,7 @@ import org.usfirst.frc.team293.robot.commands.RunShooterWheelSlow;
 import org.usfirst.frc.team293.robot.commands.ShootHighGoal;
 import org.usfirst.frc.team293.robot.commands.SimpleAim;
 import org.usfirst.frc.team293.robot.commands.StopShooterWheel;
+import org.usfirst.frc.team293.robot.commands.SwitchPosition;
 import org.usfirst.frc.team293.robot.commands.aimAndShoot;
 import org.usfirst.frc.team293.robot.RobotMap;
 
@@ -49,6 +51,7 @@ public class OI {
 	JoystickButton portcullis=new JoystickButton(launchpad,RobotMap.portButt[0]);
 	JoystickButton lowGoal = new JoystickButton(launchpad,RobotMap.lowButt[0]);
 	JoystickButton AutoAimandShoot= new JoystickButton(launchpad,RobotMap.autoAimAndShootButt[0]);
+	JoystickButton Camtoggle=new JoystickButton(launchpad,RobotMap.noButt1[0]);
 	 /////////////////////instantiate buttons Launchpad2
 	JoystickButton manualHoodSwitch=new JoystickButton(launchpad2,1);
 	JoystickButton disableHoodSwitch=new JoystickButton(launchpad2,2);
@@ -77,8 +80,9 @@ public class OI {
 	 lowgoalbuttonBackup.toggleWhenPressed(new LowGoal());
 	 feederbutton.toggleWhenPressed(new Feeding());
 	 feederbuttonBackup.toggleWhenPressed(new Feeding());
-	 setcam.whenPressed(new LiftCenterWheel());
-	 setcam.whenReleased(new CenterWheelDrop());
+	 setcam.whenPressed(new CenterWheelDrop());
+	 setcam.whenReleased(new LiftCenterWheel());
+	 Camtoggle.toggleWhenPressed(new ManualCam());
 	 RPMFastSwitch.whenPressed(new RunShooterWheel());
 	 setshooterwheelBackup.whenPressed(new RunShooterWheel());
 	 RPMSlowSwitch.whenPressed(new RunShooterWheelSlow());

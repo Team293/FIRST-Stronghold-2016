@@ -22,13 +22,13 @@ public class Camera extends Subsystem {			//This manages the OpenCV camera by ge
 	private int[] servoPins = new int[2];
 	Servo cameraServos[] = new Servo[2];
 	
-	private static final double servoRange[][] = {{0.0, 0.89},{0.19, 0.567}};
-	private static final double servoRangeSearch[][] = {{0.0, 0.89},{0.32, 0.49}};
+	private static final double servoRange[][] = {{0.15, 0.74},{0.19, 0.567}};
+	private static final double servoRangeSearch[][] = {{0.15, 0.74},{0.32, 0.49}};
 	
     private static final double cameraHeight = 19.5;				//42.5 on robot //in
     private static final double goalHeight = 90.0;					//height of the middle of the goal
-    private static final double calibrationDist = 100.0;			//distance that calibrationAngle was taken at
-    private static final double calibrationAngle = 0.394;			//angle of Y servo
+    private static final double calibrationDist = 80.0;			//distance that calibrationAngle was taken at
+    private static final double calibrationAngle = 0.345;			//angle of Y servo
     //calculates base y angle
     private static final double baseY = Math.toDegrees(Math.atan((goalHeight - cameraHeight)/calibrationDist))
     		+ 170.0*calibrationAngle;
@@ -89,6 +89,7 @@ public class Camera extends Subsystem {			//This manages the OpenCV camera by ge
     			}
     		}
    			lastReading = System.currentTimeMillis();					//set time for the last reading
+   			SmartDashboard.putNumber("goal x",goalCoordinates[0]);
    			if(goalCoordinates[0] == -1){
    				return -1;												//if can't see goal, return -1
    			}

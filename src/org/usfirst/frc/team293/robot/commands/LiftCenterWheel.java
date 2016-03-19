@@ -18,6 +18,7 @@ public class LiftCenterWheel extends Command {		//Toggles the Drivetrain Center 
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Robot.lifterdrivetrain.timer.start();
     	Robot.ledCenterWheel.on();
 
     }
@@ -36,6 +37,7 @@ public class LiftCenterWheel extends Command {		//Toggles the Drivetrain Center 
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.lifterdrivetrain.timer.reset();
     	Robot.ledCenterWheel.off();
 
     }
@@ -43,6 +45,6 @@ public class LiftCenterWheel extends Command {		//Toggles the Drivetrain Center 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	end();
+    	Robot.lifterdrivetrain.lifterMotor.set(0);
     }
 }
