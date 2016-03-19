@@ -15,7 +15,7 @@ public class FollowGoal extends Command {
 	private static final int Dt = 50;
 	private static boolean lost = false;
 	private static long timeLost = 0;
-	private static final int timeToLost = 1200;
+	private static final int timeToLost = 1600;
 	
     public FollowGoal(double[] xGains,double[] yGains) {
         // Use requires() here to declare subsystem dependencies
@@ -47,6 +47,7 @@ public class FollowGoal extends Command {
         	SmartDashboard.putNumber("Distance", Robot.Camera.getDistance());
         	lost = false;
     		lastTime = System.currentTimeMillis();
+    		Robot.continuousfunctions.setCanSeeSwag(true);
     	}else if(lost && System.currentTimeMillis() - lastTime > Dt && System.currentTimeMillis() - timeLost > timeToLost){
     		Robot.Camera.search();
     		Robot.Camera.setServos();

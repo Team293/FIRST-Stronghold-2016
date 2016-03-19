@@ -25,7 +25,7 @@ public class SimpleAim extends Command {
     	
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	Robot.drivetrain.setPID(0.00001, 0.0, 0.0);
+    	Robot.drivetrain.setPID(0.0001, 0.0, 0.0);
 		requires(Robot.shooterrotation);
 		requires(Robot.drivetrain);
 		requires(Robot.ledHighGoal);
