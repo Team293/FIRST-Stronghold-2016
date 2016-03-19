@@ -4,22 +4,28 @@ import org.usfirst.frc.team293.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
+import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
  *
  */
 public class LifterDriveTrain extends Subsystem {//the lifter center wheel on the drivetrain
-	private CANTalon lifterMotor;
-	boolean state;
+	public static CANTalon lifterMotor;
+	public boolean position;
+	boolean wheelSetUp = true;
+	boolean itsoffthetape;
+	DigitalInput DriveLimit;
+	public Timer timer=new Timer();
+
     public LifterDriveTrain(){
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	lifterMotor = new CANTalon(RobotMap.lifterMotor);
-	// lifterMotor.changeControlMode(TalonControlMode.Position);//Change
-	// control mode of talon, default is PercentVbus (-1.0 to 1.0)
-	lifterMotor.setFeedbackDevice(FeedbackDevice.AnalogPot);
-	
+	lifterMotor.enableBrakeMode(true);
+	DriveLimit=new DigitalInput(RobotMap.Drivetrainlimit);	//the Reflective Banner Sensor
 	
 	
     }
@@ -28,36 +34,44 @@ public class LifterDriveTrain extends Subsystem {//the lifter center wheel on th
         //setDefaultCommand(new MySpecialCommand());
     }
 
-	public boolean startliftdrivetrain() {
+	public void lift() {	//This powers up the motor to start lifting
+		
+		if(wheelSetUp==false){
 		lifterMotor.set(.5);
-		state=false;
-		return state;
-	}
-	public boolean stopliftdrivetrain(){
-		if (lifterMotor.getAnalogInRaw()>2.5) {
-			state=true;
+		if (DriveLimit.get()==true){
+			itsoffthetape=true;
 		}
-		return state;
+		if(itsoffthetape==true && DriveLimit.get()==false&&timer.get()>.2){
+			lifterMotor.set(0);
+			itsoffthetape=false;
+			wheelSetUp=true;
+			
+			
+		}
 	}
-
-	public boolean startdropdrivetrain() {
+	}
+	public void drop() {
+		
+		if(wheelSetUp==true){
 		lifterMotor.set(-.5);
-		state=false;
-		return state;
+		if (DriveLimit.get()==true){
+			itsoffthetape=true;
+		}
+		if(itsoffthetape==true && DriveLimit.get()==false&&timer.get()>.2){
+			lifterMotor.set(0);
+			itsoffthetape=false;
+			wheelSetUp=false;
+			//timer.stop();
+			timer.reset();
+		}
+	}
 	}
 	
-	public boolean stopdropdrivetrain(){
-		if (.01<lifterMotor.getAnalogInRaw()) {
-			state=true;
-		}
-		return state;
+	public boolean issetUp(){
+		return wheelSetUp;
+	}
+	public double timer(){
+		return timer.get();
 	}
 
-	public void lift() {
-		lifterMotor.set(1);
-
-		// lifterMotor.get //probably should use this....
-		// lifterMotor.set(0);//https://wpilib.screenstepslive.com/s/3120/m/7912/l/85776-analog-triggers
-	}
 }
-

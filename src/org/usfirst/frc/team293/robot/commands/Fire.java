@@ -1,6 +1,7 @@
 package org.usfirst.frc.team293.robot.commands;
 
 import org.usfirst.frc.team293.robot.Robot;
+//import org.usfirst.frc.team293.robot.subsystems.Arduino;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -13,12 +14,15 @@ public class Fire extends Command {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.feeder);
-    	setTimeout(1);
+    	requires(Robot.ledHighGoal);
+    	requires(Robot.hood);
+    	setTimeout(2);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.feeder.outsidefeederset(-1);
+//    	Robot.ledStrip.writeByte(Arduino.FIRE);
+    	Robot.feeder.outsidefeederset(1);
     	Robot.feeder.insidefeederset(-1);
     }
 
@@ -28,6 +32,7 @@ public class Fire extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
+    	Robot.ledManual.off();
     	 return isTimedOut();
     }
 
@@ -35,11 +40,12 @@ public class Fire extends Command {
     protected void end() {
     	Robot.feeder.outsidefeederset(0);
     	Robot.feeder.insidefeederset(0);
-    	
+    	new RotateShooter();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	end();
     }
 }

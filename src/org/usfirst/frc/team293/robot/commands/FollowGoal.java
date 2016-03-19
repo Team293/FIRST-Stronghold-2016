@@ -11,11 +11,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class FollowGoal extends Command {
 	private double[] xGainsFollow, yGainsFollow;
-	private long lastTime = System.currentTimeMillis();
-	private static int Dt = 50;
-	private boolean lost = false;
-	private long timeLost = 0;
-	private int timeToLost = 500;
+	private static long lastTime = System.currentTimeMillis();
+	private static final int Dt = 50;
+	private static boolean lost = false;
+	private static long timeLost = 0;
+	private static final int timeToLost = 1200;
 	
     public FollowGoal(double[] xGains,double[] yGains) {
         // Use requires() here to declare subsystem dependencies
@@ -35,8 +35,12 @@ public class FollowGoal extends Command {
     	if(newData == -1 && !lost){
     		lost = true;
     		timeLost = System.currentTimeMillis();
+    		Robot.continuousfunctions.setCanSeeSwag(false);
     	}
-    	if(newData == 1 || System.currentTimeMillis() - lastTime > Dt && !lost){
+    	if(newData == 1 || (System.currentTimeMillis() - lastTime > Dt && !lost)){
+    		if(lost && newData == 1){
+    			Robot.continuousfunctions.setCanSeeSwag(true);
+    		}
     		Robot.Camera.updatePID(newData);
     		Robot.Camera.setServos();
     		SmartDashboard.putNumber("Azimuth", Robot.Camera.getAzimuth());
@@ -48,7 +52,6 @@ public class FollowGoal extends Command {
     		Robot.Camera.setServos();
     		lastTime = System.currentTimeMillis();
     	}
-    	SmartDashboard.putBoolean("Lost", lost);
     }
 
     // Make this return true when this Command no longer needs to run execute()

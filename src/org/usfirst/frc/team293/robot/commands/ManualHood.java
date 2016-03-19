@@ -2,6 +2,7 @@ package org.usfirst.frc.team293.robot.commands;
 
 import org.usfirst.frc.team293.robot.OI;
 import org.usfirst.frc.team293.robot.Robot;
+import org.usfirst.frc.team293.robot.subsystems.Hood;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -9,23 +10,27 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  *
  */
-public class TankDriveWithJoystick extends Command {
+public class ManualHood extends Command {
 
-    public TankDriveWithJoystick() {
+    public ManualHood() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.drivetrain);
+    	requires(Robot.hood);
+    	
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	//Robot.drivetrain.disable();
-    	Robot.continuousfunctions.setTeleop(true);
+    	
+    	Hood.enable();
+    	
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.drivetrain.tankdrive(OI.getJoystick1(),OI.getJoystick2());
+    	//Hood.setPosition(886-(222*(((-OI.getHoodDial())+1)/2)));
+ 
+    	//SmartDashboard.putNumber("anglesetpoint");
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -35,12 +40,10 @@ public class TankDriveWithJoystick extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	 Robot.drivetrain.tankdrive(0, 0);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	end();
     }
 }

@@ -11,15 +11,17 @@ public class RobotMap {
      public static int 
      leftMotor = 0,  //splitter
      rightMotor = 1, //splitter
-     outsideFeeder=2,
-     insideFeeder=3;
+     outsideFeeder=3,
+     insideFeeder=2;
+     
+     //shooterwheel1= 
     
      //TalonSRX Stuff
      public static int 
-     shooterwheel=0,
-     hoodMotor=1,
-     shooterRotation=2,
-     lifterMotor=3;
+     shooterwheel=2,
+     hoodMotor=4,
+     shooterRotation=3 ,
+     lifterMotor=1;
      
      //TalonSRX Sensors
      /*
@@ -29,18 +31,62 @@ public class RobotMap {
      drivetrainLifterMotor Potentiometer
      
      */
+     //Butt stuff ([0] = button number, [1] = LED number)
+     
+     public static final int[]
+    	     feederButt={2,11},
+    	     noButt1={9,9},
+    	     aimButt={5,3},
+    	     manualButt={4,4},
+    	     lowButt={10,10},
+    	     camButt={11,1},
+    	     autoAimAndShootButt={3,5},
+    	     portButt={1,6},
+    	     wheelButt={8,8},
+    	     climbButt={6,7};
+     
+     //Hood Knobber
+     public static final int inDaHood = 5;			//We Back
+     public static final int HVUKNO = 6;			//We Back
+    		 
+     
      //Servos
-     public static int
+     public static final int
      drivercamera=7,
      horizontalvisioncamera=8,
-     verticalvisioncamera=9;
+     verticalvisioncamera=6;
      
      //Sensors
-     public static int
+     public static final int
      //digital sensors
      leftEncoderone=0,
      leftEncodertwo=1,
      rightEncoderone=2,
      rightEncodertwo=3,
-     opticallimit=4;  
+     opticallimit=4,
+     Drivetrainlimit=5;
+     
+     //Flash time
+     public static final int
+     flashnorm=300,
+     flashfast=200;
+     /**************Power Stuff*************
+      
+      * Right Side:
+      RightDrive 2,3
+      Feeder 4
+      Lifter
+      Hood
+      
+      
+      *Left Side:
+     Leftdrive 12, 13
+     Feeder 11
+     Shooterwheel
+     ShooterRotation
+     
+     Arduino 12v 500ma
+     
+     Pi in the 5v 2a
+     */
 }

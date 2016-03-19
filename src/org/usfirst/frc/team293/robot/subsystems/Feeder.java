@@ -2,7 +2,6 @@ package org.usfirst.frc.team293.robot.subsystems;
 
 import org.usfirst.frc.team293.robot.RobotMap;
 
-import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.VictorSP;
@@ -11,7 +10,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 /**
  *
  */
-public class Feeder extends Subsystem {//The pair of front feeders
+public class Feeder extends Subsystem {	//The pair of front feeders
 	private SpeedController outsidefeeder, insidefeeder;
 	private DigitalInput opticallimit;
 

@@ -1,7 +1,6 @@
 package org.usfirst.frc.team293.robot.commands;
 
 import org.usfirst.frc.team293.robot.Robot;
-import org.usfirst.frc.team293.robot.subsystems.DriverCamera;
 
 import edu.wpi.first.wpilibj.command.Command;
 

@@ -6,9 +6,9 @@ import edu.wpi.first.wpilibj.SerialPort.Port;
 public class Serial {
 
 	public SerialPort serial;
-//////////////this is for the IMU on one pi on the onboard RS232, and the other port on the MXP serial
+//***********************this is for the IMU on one pi on the onboard RS232, and the other port on the MXP serial
 	public Serial(Port port, int speed) {
-		serial = new SerialPort(115200, port);
+		serial = new SerialPort(speed, port);
 		serial.setReadBufferSize(1);// to try data immediately sent to
 									// smartdashboard
 		this.serial.reset();

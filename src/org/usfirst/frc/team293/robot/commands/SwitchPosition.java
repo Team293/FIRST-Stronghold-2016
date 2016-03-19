@@ -8,38 +8,53 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class Climb extends Command {
-
-    public Climb() {//this is going to lift up from the center wheel
+public class SwitchPosition extends Command {
+	private boolean status=false;
+	private boolean pastlift=false;
+	private boolean point=false;
+    public SwitchPosition() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	//requires(Robot.lifterdrivetrain);
-    	requires(Robot.ledClimb);
+    	requires(Robot.lifterdrivetrain);
+    	requires(Robot.ledCenterWheel);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.ledClimb.on();
+    	pastlift=Robot.lifterdrivetrain.issetUp();
+    	Robot.ledCenterWheel.on();
+    	point=false;
     }
 
     // Called repeatedly when this Command is scheduled to run
-    protected void execute() {
-    	Robot.ledClimb.flash(RobotMap.flashnorm);
+    protected void execute() {	
+    	if(Robot.lifterdrivetrain.issetUp()==true){
+    		Robot.lifterdrivetrain.drop();
+    	}
+    	if(Robot.lifterdrivetrain.issetUp()==false){
+    		Robot.lifterdrivetrain.lift();
+    		
+    	}
+    	Robot.ledCenterWheel.flash(RobotMap.flashnorm);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+    	if(pastlift==true){
+    		point=(!Robot.lifterdrivetrain.issetUp());
+    	}
+    	if(pastlift==false){
+    		point=Robot.lifterdrivetrain.issetUp();
+    	}
+    	return point;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.ledClimb.off();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	end();
     }
 }
