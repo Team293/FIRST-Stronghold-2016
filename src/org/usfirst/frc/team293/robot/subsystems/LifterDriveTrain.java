@@ -41,7 +41,7 @@ public class LifterDriveTrain extends Subsystem {							//the lifter center whee
 public void lift1() {	//This powers up the motor to start lifting
 	pos = position();
 	if(pos != 1){
-		lifterMotor.set(-.9);
+		lifterMotor.set(-1);
 		/*if (DriveLimitDown.get()==true){
 			itsoffthetape=true;
 		}
@@ -61,7 +61,7 @@ public void lift1() {	//This powers up the motor to start lifting
 public void drop1() {
 	pos = position();
 	if(pos != -1){
-		lifterMotor.set(.9);
+		lifterMotor.set(1);
 		/*if (DriveLimit.get()==true){
 			itsoffthetape=true;
 		}
