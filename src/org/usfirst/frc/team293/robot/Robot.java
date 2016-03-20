@@ -73,7 +73,7 @@ public class Robot extends IterativeRobot {
 		
 ///////////instantiate subsystems
     	//LED Buttons
-    	ledShooterWheels= new LEDButtons(RobotMap.noButt1[1]);
+    	ledShooterWheels = new LEDButtons(RobotMap.selfWheelButt[1]);
     	ledClimb= new LEDButtons(RobotMap.climbButt[1]);
     	ledFeeder= new LEDButtons(RobotMap.feederButt[1]);
     	ledLowGoal = new LEDButtons(RobotMap.lowButt[1]);
@@ -121,14 +121,14 @@ public class Robot extends IterativeRobot {
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
     public void autonomousInit() {
-    	//autonomousCommand.start();
+    	autonomousCommand.start();
     }
 
     /**
      * This function is called periodically during autonomous
      */
     public void autonomousPeriodic() {
-       // Scheduler.getInstance().run();
+      Scheduler.getInstance().run();
        
     }
 
@@ -147,7 +147,7 @@ public class Robot extends IterativeRobot {
         Scheduler.getInstance().run();
     }
     public void teleopDisable(){
-    	Robot.lifterdrivetrain.drop();
+    	//Robot.lifterdrivetrain.drop();
     }
     
     /**

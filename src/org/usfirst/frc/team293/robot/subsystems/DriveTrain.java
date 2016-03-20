@@ -148,26 +148,27 @@ public class DriveTrain extends Subsystem {		//this does the TankDrive as well a
 				driving = true;
 			}
 			//drive.drive(-0.5, output);
-			
-			drive.arcadeDrive(-0.5, -output);
 		}else{
 			driving = false;
 		}
+		drive.arcadeDrive(0.3, -output);
 		// TODO Auto-generated method stub
 	}
+	
+	
 
 	public void turnToAngle() {			//Turning, speed is set to 0, output is set for turning
 		//constrain max turn speed
 		if(output > 0){
-			output = Math.min(output, 0.4);
+			output = Math.min(output, 1.6);
 		}else{
-			output = Math.max(output, -0.4);
+			output = Math.max(output, -1.6);
 		}
 		//constrain min turn speed
 		if(output > 0){
-			output = Math.max(output, 0.05);
+			output = Math.max(output, 0.3);
 		}else{
-			output = Math.min(output, -0.05);
+			output = Math.min(output, -0.3);
 		}
 		//turn
 		drive.arcadeDrive(0.0, -output);
