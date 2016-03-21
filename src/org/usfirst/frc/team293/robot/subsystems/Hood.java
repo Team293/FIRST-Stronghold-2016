@@ -16,7 +16,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Hood extends Subsystem {//the hood that aims up and down and manipulates.  PID
 	private static CANTalon Hood;
 	
-	public static int bottompoint=889;
+	public static int bottompoint=880;
 	private static final double UP = 10.0;
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
@@ -36,15 +36,15 @@ public class Hood extends Subsystem {//the hood that aims up and down and manipu
 	public void initDefaultCommand() {
 		
 		// Set the default command for a subsystem here.
-		 setDefaultCommand(new DefaultHoodResting());
+		 //setDefaultCommand(new ManualHood());
 	}
 
 	public static void setPosition(double i) {
 		if (i>bottompoint){
 			i=bottompoint;
 		}
-		if (i<bottompoint-226){
-			i=bottompoint-226;
+		if (i<bottompoint-350){
+			i=bottompoint-350;
 		}
 		Hood.enableControl();
 		Hood.setSetpoint(i);

@@ -25,7 +25,11 @@ public class SimpleAim extends Command {
     	
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
+<<<<<<< HEAD
     	Robot.drivetrain.setPID(0.0001, 0.0, 0.0);
+=======
+    	Robot.drivetrain.setPID(0.1, 0.0, 0.001);
+>>>>>>> origin/master
 		requires(Robot.shooterrotation);
 		requires(Robot.drivetrain);
 		requires(Robot.ledHighGoal);
@@ -48,13 +52,14 @@ public class SimpleAim extends Command {
     protected void execute() {
     	if (Robot.Camera.canSeeSwagadelia()){				//if robot can see goal
     		azimuth = Robot.Camera.getAzimuth();			//get goal yaw
-    		Robot.shooterrotation.setangle(Robot.shooterrotation.getangle()-azimuth);	//set shooter rotation
+    		//Robot.shooterrotation.setangle(Robot.shooterrotation.getangle()-azimuth);	//set shooter rotation
     	}
     	
     	//if azimuth is more than 9.5 degrees from the midline of the robot and the IMU is working
-    	if(azimuth > Robot.shooterrotation.getangle() + ShooterRotation.rotateRange[1] - 0.4
-    			|| azimuth < Robot.shooterrotation.getangle() + ShooterRotation.rotateRange[0] + 0.4
-    			&& Robot.drivetrain.returnAttitude()[0] != -1.0){
+    	//if(azimuth > Robot.shooterrotation.getangle() + ShooterRotation.rotateRange[1] - 0.4
+    	//		|| azimuth < Robot.shooterrotation.getangle() + ShooterRotation.rotateRange[0] + 0.4
+    	//		&& Robot.drivetrain.returnAttitude()[0] != -1.0){
+    	if(Robot.drivetrain.returnAttitude()[0] != -1.0){
     		//get true angle of goal (relative to IMU angle)
     		double absoluteAngle = azimuth + Robot.drivetrain.getAttitude()[0] - Robot.shooterrotation.getangle();
     		//compensate for 0-360 degree discontinuity
@@ -72,9 +77,14 @@ public class SimpleAim extends Command {
     	//if IMU is not working
     	if(Robot.drivetrain.returnAttitude()[0] == -1.0){
     		//if shooter is all the way left turn left all the way right turn right
-    		if(Robot.shooterrotation.getangle() > ShooterRotation.rotateRange[1] - 0.7){
+    		/*if(Robot.shooterrotation.getangle() > ShooterRotation.rotateRange[1] - 0.7){
     			Robot.drivetrain.turnLeft();
     		}else if(Robot.shooterrotation.getangle() < ShooterRotation.rotateRange[0] + 0.7){
+    			Robot.drivetrain.turnRight();
+    		}*/
+    		if(azimuth < -0.8){
+    			Robot.drivetrain.turnLeft();
+    		}else if(azimuth > 0.8){
     			Robot.drivetrain.turnRight();
     		}
     		SmartDashboard.putBoolean("using Backup", true);

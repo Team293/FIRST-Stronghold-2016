@@ -12,21 +12,24 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 /**
  *
  */
-public class LifterDriveTrain extends Subsystem {//the lifter center wheel on the drivetrain
+public class LifterDriveTrain extends Subsystem {							//the lifter center wheel on the drivetrain
 	public static CANTalon lifterMotor;
 	public boolean position;
 	boolean wheelSetUp = true;
 	boolean itsoffthetape;
-	DigitalInput DriveLimit;
-	public Timer timer=new Timer();
+	private DigitalInput DriveLimit;
+	public DigitalInput DriveLimitDown;
+	//public Timer timer=new Timer();
+	private boolean up = true;
+	int pos = 0;
 
     public LifterDriveTrain(){
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	lifterMotor = new CANTalon(RobotMap.lifterMotor);
 	lifterMotor.enableBrakeMode(true);
-	DriveLimit=new DigitalInput(RobotMap.Drivetrainlimit);	//the Reflective Banner Sensor
-	
+	DriveLimitDown=new DigitalInput(5);	//the Reflective Banner Sensor
+	DriveLimit = new DigitalInput(12);
 	
     }
     public void initDefaultCommand() {
@@ -34,44 +37,77 @@ public class LifterDriveTrain extends Subsystem {//the lifter center wheel on th
         //setDefaultCommand(new MySpecialCommand());
     }
 
-	public void lift() {	//This powers up the motor to start lifting
-		
-		if(wheelSetUp==false){
-		lifterMotor.set(.5);
-		if (DriveLimit.get()==true){
+
+public void lift1() {	//This powers up the motor to start lifting
+	pos = position();
+	if(pos != 1){
+		lifterMotor.set(-1);
+		/*if (DriveLimitDown.get()==true){
 			itsoffthetape=true;
 		}
-		if(itsoffthetape==true && DriveLimit.get()==false&&timer.get()>.2){
+		if(itsoffthetape && !DriveLimit.get() && timer.get()>.2){
 			lifterMotor.set(0);
 			itsoffthetape=false;
 			wheelSetUp=true;
-			
-			
-		}
+			timer.reset();
+		}*/
+	}else{
+		lifterMotor.set(0);
+		//itsoffthetape=false;
+		//wheelSetUp=true;
+		//timer.reset();
 	}
-	}
-	public void drop() {
-		
-		if(wheelSetUp==true){
-		lifterMotor.set(-.5);
-		if (DriveLimit.get()==true){
+}
+public void drop1() {
+	pos = position();
+	if(pos != -1){
+		lifterMotor.set(1);
+		/*if (DriveLimit.get()==true){
 			itsoffthetape=true;
 		}
-		if(itsoffthetape==true && DriveLimit.get()==false&&timer.get()>.2){
+		if(itsoffthetape && !DriveLimitDown.get() && timer.get()>.2){
 			lifterMotor.set(0);
 			itsoffthetape=false;
 			wheelSetUp=false;
-			//timer.stop();
 			timer.reset();
-		}
+		}*/
+	}else{
+		lifterMotor.set(0);
+		//itsoffthetape=false;
+		//wheelSetUp=false;
+		//timer.reset();
 	}
+}
+
+public void stopMotor(){
+	lifterMotor.set(0);
+}
+	
+public boolean change(){
+	pos = position();
+	if(pos == -1){
+		up = true;
+	}else{
+		up = false;
+	}
+	return up;
 	}
 	
-	public boolean issetUp(){
-		return wheelSetUp;
+public boolean issetUp(){
+	if(!DriveLimit.get()){
+		wheelSetUp = true;
+	}else if(!DriveLimitDown.get()){
+		wheelSetUp = false;
 	}
-	public double timer(){
-		return timer.get();
+	return wheelSetUp;
+}
+	
+	public int position(){
+		if(DriveLimit.get()){
+			return 1;
+		}else if(!DriveLimitDown.get()){
+			return -1;
+		}
+		return 0;
 	}
-
 }

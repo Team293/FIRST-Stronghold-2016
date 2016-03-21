@@ -24,8 +24,9 @@ public class Feeding extends Command {
     protected void initialize() {
     	Robot.shooterrotation.setangle(0);
     	Robot.feeder.outsidefeederset(1);
-    	Robot.feeder.insidefeederset(-.3);
+    	Robot.feeder.insidefeederset(-.5);
     	Robot.ledFeeder.on();
+    	Robot.hood.setPosition(818);
     }
 
     // Called repeatedly when this Command is scheduled to run

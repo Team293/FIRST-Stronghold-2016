@@ -51,7 +51,8 @@ public class OI {
 	JoystickButton portcullis=new JoystickButton(launchpad,RobotMap.portButt[0]);
 	JoystickButton lowGoal = new JoystickButton(launchpad,RobotMap.lowButt[0]);
 	JoystickButton AutoAimandShoot= new JoystickButton(launchpad,RobotMap.autoAimAndShootButt[0]);
-	JoystickButton Camtoggle=new JoystickButton(launchpad,RobotMap.noButt1[0]);
+	JoystickButton Camtoggle=new JoystickButton(launchpad,RobotMap.selfWheelButt[0]);
+	JoystickButton CamToggleDriver = new JoystickButton(joy1,3);
 	 /////////////////////instantiate buttons Launchpad2
 	JoystickButton manualHoodSwitch=new JoystickButton(launchpad2,1);
 	JoystickButton disableHoodSwitch=new JoystickButton(launchpad2,2);
@@ -71,36 +72,33 @@ public class OI {
 	JoystickButton rightTrigger = new JoystickButton(joy1,1);
 	JoystickButton leftTrigger = new JoystickButton(joy2,1);
 		
+	manualHoodSwitch.whileActive(new ManualHood());
+	disableHoodSwitch.whileActive(new HoodRestPosition());
 	
-	manualHoodSwitch.toggleWhenPressed(new ManualHood());
-	disableHoodSwitch.whenActive(new HoodRestPosition());
-	
-	 climb.toggleWhenPressed(new Climb());
+	// climb.toggleWhenPressed(new Climb());
 	 lowGoal.toggleWhenPressed(new LowGoal());
 	 lowgoalbuttonBackup.toggleWhenPressed(new LowGoal());
 	 feederbutton.toggleWhenPressed(new Feeding());
 	 feederbuttonBackup.toggleWhenPressed(new Feeding());
-	 setcam.whenPressed(new CenterWheelDrop());
-	 setcam.whenReleased(new LiftCenterWheel());
-	 Camtoggle.toggleWhenPressed(new ManualCam());
+	 Camtoggle.toggleWhenPressed(new SwitchPosition());
+	 CamToggleDriver.toggleWhenPressed(new SwitchPosition());
 	 RPMFastSwitch.whenPressed(new RunShooterWheel());
 	 setshooterwheelBackup.whenPressed(new RunShooterWheel());
 	 RPMSlowSwitch.whenPressed(new RunShooterWheelSlow());
 	 RPMFastSwitch.whenReleased(new StopShooterWheel());
 	 RPMSlowSwitch.whenReleased(new StopShooterWheel());
 	 setshooterwheelBackup.whenReleased(new StopShooterWheel());
-	 centerwheellift.toggleWhenPressed(new LiftCenterWheel());
 	 
 
 	 aimbutton.toggleWhenPressed(new SimpleAim(true));
 	 aimbuttonBackup.toggleWhenPressed(new SimpleAim(true));
 	 leftTrigger.whenPressed(new SimpleAim(true));
-	 manualshoot.toggleWhenPressed(new ShootHighGoal());
-	 manualshootBackup.toggleWhenPressed(new ShootHighGoal());
+	 manualshoot.toggleWhenPressed(new Fire());
+	 manualshootBackup.whenPressed(new ShootHighGoal());
 	 rightTrigger.toggleWhenPressed(new ShootHighGoal());
 	 
 	 AutoAimandShoot.toggleWhenPressed(new aimAndShoot());
-	 aimAndShootButton.toggleWhenPressed(new aimAndShoot());
+	 //aimAndShootButton.toggleWhenPressed(new aimAndShoot());
 	 
 	 
 	 }

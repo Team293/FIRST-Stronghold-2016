@@ -25,15 +25,22 @@ public class Camera extends Subsystem {			//This manages the OpenCV camera by ge
 	private static final double servoRange[][] = {{0.15, 0.74},{0.19, 0.567}};
 	private static final double servoRangeSearch[][] = {{0.15, 0.74},{0.32, 0.49}};
 	
+<<<<<<< HEAD
     private static final double cameraHeight = 19.5;				//42.5 on robot //in
     private static final double goalHeight = 90.0;					//height of the middle of the goal
     private static final double calibrationDist = 80.0;				//distance that calibrationAngle was taken at
     private static final double calibrationAngle = 0.345;			//angle of Y servo
+=======
+    private static final double cameraHeight = 19.5;				//19.5 on robot //in
+    private static final double goalHeight = 100.0;					//height of the middle of the goal
+    private static final double calibrationDist = 80.0;			//distance that calibrationAngle was taken at
+    private static final double calibrationAngle = 0.369;			//angle of Y servo
+>>>>>>> origin/master
     //calculates base y angle
     private static final double baseY = Math.toDegrees(Math.atan((goalHeight - cameraHeight)/calibrationDist))
     		+ 170.0*calibrationAngle;
     //x servo angle pointed straight forward
-    private static final double baseX = 0.41;
+    private static final double baseX = 0.402;
     //x and y search speeds
     private static final double inc[] = {0.024,0.015};
     //starting servo angles

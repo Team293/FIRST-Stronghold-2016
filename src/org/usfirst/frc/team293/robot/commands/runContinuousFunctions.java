@@ -27,21 +27,33 @@ public class runContinuousFunctions extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	SmartDashboard.putBoolean("BottomCam",Robot.lifterdrivetrain.DriveLimitDown.get());
     	SmartDashboard.putNumber("Azimuth IMU",Robot.drivetrain.getAttitude()[0]);
+    	int pos = Robot.lifterdrivetrain.position();
+    	SmartDashboard.putBoolean("Wheel is in Middle", pos == 0);
+    	if(pos == 1){
+    		Robot.ledShooterWheels.on();
+    	}else if(pos == 0){
+    		Robot.ledShooterWheels.flash(RobotMap.flashnorm);
+    	}else{
+    		Robot.ledShooterWheels.off();
+    	}
     	//SmartDashboard.putNumber("angle vel", Robot.shooterrotation.getVel());
     	Robot.shooterwheel.printShooter();
     	SmartDashboard.putNumber("Camera Coord Distance", Robot.Camera.getDistance());
     	SmartDashboard.putNumber("Camera Coord Azimuth", Robot.Camera.getAzimuth());
+    	SmartDashboard.putBoolean("Aimed Enough", Math.abs(Robot.Camera.getAzimuth()) < 0.6);
     	SmartDashboard.putNumber("ShooterAngle",Robot.shooterrotation.getangle());
-    	SmartDashboard.putNumber("timer", Robot.lifterdrivetrain.timer());
-     Robot.shooterwheel.printShooter();
+    	//SmartDashboard.putNumber("timer", Robot.lifterdrivetrain.timer());
+    	Robot.shooterwheel.printShooter();
        	//SmartDashboard.putNumber("Iaccum",Hood.getI());
       	SmartDashboard.putNumber("Hood Angle", Hood.getPosition());
     	SmartDashboard.putNumber("Error", 850-Hood.getPosition());
     	if(Robot.Camera.isAimed()){
     		Robot.ledManual.on();
     	}else{
-    		Robot.ledManual.off();
+    		Robot.ledManual.flash((int)(Robot.Camera.getAzimuth() * 30.0));
+    		//Robot.ledManual.off();
     	}
     	if(Robot.continuousfunctions.isAiming()){
     		Robot.ledHighGoal.flash(RobotMap.flashnorm);

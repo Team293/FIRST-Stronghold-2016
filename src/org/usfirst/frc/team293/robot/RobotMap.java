@@ -11,7 +11,7 @@ public class RobotMap {
      public static int 
      leftMotor = 0,  //splitter
      rightMotor = 1, //splitter
-     outsideFeeder=3,
+     outsideFeeder=5,
      insideFeeder=2;
      
      //shooterwheel1= 
@@ -35,7 +35,7 @@ public class RobotMap {
      
      public static final int[]
     	     feederButt={2,11},
-    	     noButt1={9,9},
+    	     selfWheelButt={9,9},
     	     aimButt={5,3},
     	     manualButt={4,4},
     	     lowButt={10,10},
@@ -63,8 +63,9 @@ public class RobotMap {
      leftEncodertwo=1,
      rightEncoderone=2,
      rightEncodertwo=3,
-     opticallimit=4,
-     Drivetrainlimit=5;
+     opticallimit=4;
+     //Drivetrainlimit=6,
+    // Drivetrainlimitdown=5;
      
      //Flash time
      public static final int
