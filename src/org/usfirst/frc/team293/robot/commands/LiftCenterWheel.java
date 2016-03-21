@@ -2,6 +2,7 @@ package org.usfirst.frc.team293.robot.commands;
 
 import org.usfirst.frc.team293.robot.Robot;
 import org.usfirst.frc.team293.robot.RobotMap;
+import org.usfirst.frc.team293.robot.subsystems.LifterDriveTrain;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -47,6 +48,6 @@ public class LiftCenterWheel extends Command {		//Toggles the Drivetrain Center 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	Robot.lifterdrivetrain.lifterMotor.set(0);
+    	LifterDriveTrain.lifterMotor.set(0);
     }
 }

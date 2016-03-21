@@ -2,6 +2,7 @@ package org.usfirst.frc.team293.robot.commands;
 
 import org.usfirst.frc.team293.robot.Robot;
 import org.usfirst.frc.team293.robot.RobotMap;
+import org.usfirst.frc.team293.robot.subsystems.Hood;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -26,7 +27,7 @@ public class Feeding extends Command {
     	Robot.feeder.outsidefeederset(1);
     	Robot.feeder.insidefeederset(-.5);
     	Robot.ledFeeder.on();
-    	Robot.hood.setPosition(818);
+    	Hood.setPosition(818);
     }
 
     // Called repeatedly when this Command is scheduled to run

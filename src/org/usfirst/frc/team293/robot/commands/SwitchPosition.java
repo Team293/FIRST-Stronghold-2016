@@ -32,10 +32,10 @@ public class SwitchPosition extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {	
     	if(!up){
-    		Robot.lifterdrivetrain.drop1();
+    		Robot.lifterdrivetrain.drop();
     	}
     	if(up){
-    		Robot.lifterdrivetrain.lift1();
+    		Robot.lifterdrivetrain.lift();
     	}
     }
 
@@ -43,9 +43,9 @@ public class SwitchPosition extends Command {
     protected boolean isFinished() {
     	SmartDashboard.putNumber("Cam Pos", Robot.lifterdrivetrain.position());
     	if(up){
-    		return Robot.lifterdrivetrain.position() == 1;
+    		return Robot.lifterdrivetrain.position() == 1;					//is up
     	}else{
-    		return Robot.lifterdrivetrain.position() == -1;
+    		return Robot.lifterdrivetrain.position() == -1;					//is down
     	}
     }
 

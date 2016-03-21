@@ -24,10 +24,10 @@ public class RunShooterWheelSlow extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    Robot.shooterwheel.setSlowShooterRPM();
-    Robot.drivercamera.Lookup();
-    Robot.ledShooterWheels.on();
-    Robot.continuousfunctions.setShooterOn(true);
+    	Robot.shooterwheel.setSlowShooterRPM();
+    	Robot.drivercamera.Lookup();
+    	Robot.ledShooterWheels.on();
+    	Robot.continuousfunctions.setShooterOn(true);
     }
 
     // Called repeatedly when this Command is scheduled to run

@@ -21,7 +21,6 @@ public class Fire extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-//    	Robot.ledStrip.writeByte(Arduino.FIRE);
     	Robot.feeder.outsidefeederset(1);
     	Robot.feeder.insidefeederset(-1);
     }
@@ -32,12 +31,12 @@ public class Fire extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	Robot.ledManual.off();
     	 return isTimedOut();
     }
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.ledManual.off();
     	Robot.feeder.outsidefeederset(0);
     	Robot.feeder.insidefeederset(0);
     	new RotateShooter();

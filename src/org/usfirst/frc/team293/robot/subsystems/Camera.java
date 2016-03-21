@@ -195,7 +195,8 @@ public class Camera extends Subsystem {			//This manages the OpenCV camera by ge
     }
     public boolean whenstaringatSwagadelia(){
     	boolean staring = false;
-    	if(Math.abs(goalCoordinates[0] - goalCenter[0]) < 30.0 && Math.abs(goalCoordinates[1] - goalCenter[1]) < 25.0){
+    	if(Math.abs(goalCoordinates[0] - goalCenter[0]) < 30.0 
+    			&& Math.abs(goalCoordinates[1] - goalCenter[1]) < 25.0){
     		staring=true;
     	}
     	else{

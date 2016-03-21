@@ -19,7 +19,7 @@ public class DefaultHoodResting extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Hood.setPosition(825);
+    	Hood.setPosition(Hood.restPosition);
     }
 
     // Called repeatedly when this Command is scheduled to run

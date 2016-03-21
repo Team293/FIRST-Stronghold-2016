@@ -8,7 +8,8 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class ManualDriveStraight extends Command {
-
+	private final double speed = 0.9;
+	
     public ManualDriveStraight(int time) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
@@ -22,7 +23,7 @@ public class ManualDriveStraight extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.drivetrain.tankdrive(0.9, 0.9);
+    	Robot.drivetrain.tankdrive(speed, speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()

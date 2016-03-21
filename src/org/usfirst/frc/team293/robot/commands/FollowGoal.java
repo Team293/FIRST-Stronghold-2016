@@ -48,11 +48,16 @@ public class FollowGoal extends Command {
         	lost = false;
     		lastTime = System.currentTimeMillis();
     		Robot.continuousfunctions.setCanSeeSwag(true);
-    	}else if(lost && System.currentTimeMillis() - lastTime > Dt && System.currentTimeMillis() - timeLost > timeToLost){
+    	}else if(needToSearch()){
     		Robot.Camera.search();
     		Robot.Camera.setServos();
     		lastTime = System.currentTimeMillis();
     	}
+    }
+    
+    private boolean needToSearch(){
+    	return (lost && System.currentTimeMillis() - lastTime > Dt 
+    			&& System.currentTimeMillis() - timeLost > timeToLost);
     }
 
     // Make this return true when this Command no longer needs to run execute()

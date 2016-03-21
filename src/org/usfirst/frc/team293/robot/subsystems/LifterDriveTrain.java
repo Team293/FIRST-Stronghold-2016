@@ -38,76 +38,43 @@ public class LifterDriveTrain extends Subsystem {							//the lifter center whee
     }
 
 
-public void lift1() {	//This powers up the motor to start lifting
-	pos = position();
-	if(pos != 1){
-		lifterMotor.set(-1);
-		/*if (DriveLimitDown.get()==true){
-			itsoffthetape=true;
-		}
-		if(itsoffthetape && !DriveLimit.get() && timer.get()>.2){
-			lifterMotor.set(0);
-			itsoffthetape=false;
-			wheelSetUp=true;
-			timer.reset();
-		}*/
-	}else{
-		lifterMotor.set(0);
-		//itsoffthetape=false;
-		//wheelSetUp=true;
-		//timer.reset();
-	}
-}
-public void drop1() {
-	pos = position();
-	if(pos != -1){
-		lifterMotor.set(1);
-		/*if (DriveLimit.get()==true){
-			itsoffthetape=true;
-		}
-		if(itsoffthetape && !DriveLimitDown.get() && timer.get()>.2){
-			lifterMotor.set(0);
-			itsoffthetape=false;
-			wheelSetUp=false;
-			timer.reset();
-		}*/
-	}else{
-		lifterMotor.set(0);
-		//itsoffthetape=false;
-		//wheelSetUp=false;
-		//timer.reset();
-	}
-}
+    public void lift() {	//This powers up the motor to start lifting
+    	pos = position();
+    	if(pos != 1){
+    		lifterMotor.set(-1);
+    	}else{
+    		lifterMotor.set(0);
+    	}
+    }
+    public void drop() {
+    	pos = position();
+    	if(pos != -1){
+    		lifterMotor.set(1);
+    	}else{
+    		lifterMotor.set(0);
+    	}
+    }
 
-public void stopMotor(){
-	lifterMotor.set(0);
-}
+    public void stopMotor(){
+    	lifterMotor.set(0);
+    }
 	
-public boolean change(){
-	pos = position();
-	if(pos == -1){
-		up = true;
-	}else{
-		up = false;
-	}
-	return up;
-	}
+    public boolean change(){
+    	pos = position();
+    	if(pos == -1){
+    		up = true;
+    	}else{
+    		up = false;
+    	}
+    	return up;
+    }
 	
-public boolean issetUp(){
-	if(!DriveLimit.get()){
-		wheelSetUp = true;
-	}else if(!DriveLimitDown.get()){
-		wheelSetUp = false;
-	}
-	return wheelSetUp;
-}
-	
-	public int position(){
-		if(DriveLimit.get()){
-			return 1;
-		}else if(!DriveLimitDown.get()){
-			return -1;
-		}
-		return 0;
-	}
+    public int position(){
+    	if(DriveLimit.get()){
+    		return 1;
+    	}else if(!DriveLimitDown.get()){
+    		return -1;
+    	}
+    	return 0;
+    }
 }

@@ -16,10 +16,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class ShooterRotation extends Subsystem {//rotate the shooter and setup that PID
 	private static CANTalon shooterrotation;
-	private static AnalogPotentiometer pot;
 	public static final double[] rotateRange = {-10.0,10.0};
-	private static final double hoodLum = 2.0;							//Max angle inside hood
-	private static final double wumbo = 15.0;							//Degrees per Second
+	private static final double hoodLum = 2.0,							//Max angle inside hood
+	wumbo = 15.0;														//Degrees per Second
 	private static long lastTime = System.currentTimeMillis();
 	
 	private static final double centerTolerance = 0.7;
@@ -44,8 +43,7 @@ public class ShooterRotation extends Subsystem {//rotate the shooter and setup t
 		setDefaultCommand(new RotateShooter());
 	}
 
-	public void setsetpoint(double angle) {	//this can only happen if we are above 10 degrees
-
+	public void setsetpoint(double angle) {			//this can only happen if we are above 10 degrees
 		shooterrotation.setSetpoint(angle);
 	}
 	public double getsetpoint(){
@@ -73,9 +71,9 @@ public class ShooterRotation extends Subsystem {//rotate the shooter and setup t
 		return Robot.shooterrotation.getangle();
 	}
 	public void setangle(double angle){	//ASSUMING 299 CENTER, AND 210 RIGHT-11.5 DEGREES, AND 395 +11.5 DEGREES
-		if (Math.abs(Hood.getPosition())<(Hood.bottompoint-40)){
-		angle = Math.min(rotateRange[1], Math.max(rotateRange[0], angle));
-		shooterrotation.setSetpoint(angle*7.74+295);
+		if (!Robot.hood.isDown()){
+			angle = Math.min(rotateRange[1], Math.max(rotateRange[0], angle));
+			shooterrotation.setSetpoint(angle*7.74+295);
 		}
 	}
 	

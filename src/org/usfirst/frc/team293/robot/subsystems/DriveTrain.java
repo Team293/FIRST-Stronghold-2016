@@ -44,6 +44,9 @@ public class DriveTrain extends Subsystem {		//this does the TankDrive as well a
 	private double correctedDist = 0.0;
 	private static final int[][] encoderPorts = {{6,7},{8,9}};
 	double setpointWanted;
+	private static final double maxTurnSpeed = 1.0,
+			minTurnSpeed = 0.05,
+			normTurnSpeed = 0.2;
 	
 	public DriveTrain(){
 		leftMotor = new VictorSP(RobotMap.leftMotor);
@@ -160,26 +163,26 @@ public class DriveTrain extends Subsystem {		//this does the TankDrive as well a
 	public void turnToAngle() {			//Turning, speed is set to 0, output is set for turning
 		//constrain max turn speed
 		if(output > 0){
-			output = Math.min(output, 1.6);
+			output = Math.min(output, maxTurnSpeed);
 		}else{
-			output = Math.max(output, -1.6);
+			output = Math.max(output, -maxTurnSpeed);
 		}
 		//constrain min turn speed
 		if(output > 0){
-			output = Math.max(output, 0.3);
+			output = Math.max(output, minTurnSpeed);
 		}else{
-			output = Math.min(output, -0.3);
+			output = Math.min(output, -minTurnSpeed);
 		}
 		//turn
 		drive.arcadeDrive(0.0, -output);
 	}
 	
 	public void turnLeft(){
-		drive.arcadeDrive(0.0,0.07);
+		drive.arcadeDrive(0.0,normTurnSpeed);
 	}
 	
 	public void turnRight(){
-		drive.arcadeDrive(0.0,-0.07);
+		drive.arcadeDrive(0.0,-normTurnSpeed);
 	}
 	
 	public void stop(){

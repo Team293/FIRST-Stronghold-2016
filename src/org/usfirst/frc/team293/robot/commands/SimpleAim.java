@@ -19,7 +19,7 @@ public class SimpleAim extends Command {
 	private boolean continuous = false;
 	private long wasAimedAt = -1100;
 	private final long aimTime = 1000;
-	boolean aimed = false;
+	private boolean aimed = false;
     public SimpleAim(boolean cont) {
     	//double[] Hoodangle= new double[11];
     	
@@ -51,10 +51,8 @@ public class SimpleAim extends Command {
     		//Robot.shooterrotation.setangle(Robot.shooterrotation.getangle()-azimuth);	//set shooter rotation
     	}
     	
-    	//if azimuth is more than 9.5 degrees from the midline of the robot and the IMU is working
-    	//if(azimuth > Robot.shooterrotation.distFromLeft() - 0.4
-    	//		|| azimuth < Robot.shooterrotation.distFromRight() + 0.4
-    	//		&& Robot.drivetrain.returnAttitude()[0] != -1.0){
+    	//if azimuth is more than 9.6 degrees from the midline of the robot and the IMU is working
+    	//if(IMUDrivetrainTurn()){
     	if(Robot.drivetrain.IMUData()){
     		//get true angle of goal (relative to IMU angle)
     		double absoluteAngle = getGoalAbsoluteAngle();
@@ -120,6 +118,12 @@ public class SimpleAim extends Command {
 			absAngle += 360.0;
 		}
 		return absAngle;
+    }
+    
+    private boolean IMUDrivetrainTurn(){
+    	return ((azimuth > Robot.shooterrotation.distFromLeft() - 0.4
+    	    			|| azimuth < Robot.shooterrotation.distFromRight() + 0.4)
+    	    			&& Robot.drivetrain.returnAttitude()[0] != -1.0);
     }
     
     // Called once after isFinished returns true

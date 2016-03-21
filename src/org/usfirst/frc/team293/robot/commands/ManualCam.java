@@ -1,6 +1,7 @@
 package org.usfirst.frc.team293.robot.commands;
 
 import org.usfirst.frc.team293.robot.Robot;
+import org.usfirst.frc.team293.robot.subsystems.LifterDriveTrain;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -17,7 +18,7 @@ public class ManualCam extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.lifterdrivetrain.lifterMotor.set(.3);
+    	LifterDriveTrain.lifterMotor.set(.3);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -32,12 +33,12 @@ public class ManualCam extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.lifterdrivetrain.lifterMotor.set(0);
+    	LifterDriveTrain.lifterMotor.set(0);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	Robot.lifterdrivetrain.lifterMotor.set(0);
+    	LifterDriveTrain.lifterMotor.set(0);
     }
 }
