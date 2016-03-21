@@ -34,9 +34,7 @@ public class OI {
 	///////////instantiate joysticks
 	 private static Joystick joy1 = new Joystick(0);
 	 private static Joystick joy2=new Joystick(1);
-	 
 	 public static Joystick launchpad=new Joystick(2);
-	 
 	 public static Joystick launchpad2=new Joystick(3);
 
 	 

@@ -106,4 +106,20 @@ public class ShooterRotation extends Subsystem {//rotate the shooter and setup t
 			}
 		}*/
 	}
+	
+	public boolean atLeftSide(){
+		return getangle() > rotateRange[1] - 0.7;
+	}
+	
+	public boolean atRightSide(){
+		return getangle() < rotateRange[0] + 0.7;
+	}
+	
+	public double distFromLeft(){
+		return Robot.shooterrotation.getangle() + ShooterRotation.rotateRange[1];
+	}
+	
+	public double distFromRight(){
+		return Robot.shooterrotation.getangle() + ShooterRotation.rotateRange[0];
+	}
 }

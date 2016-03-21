@@ -52,30 +52,23 @@ public class SimpleAim extends Command {
     	}
     	
     	//if azimuth is more than 9.5 degrees from the midline of the robot and the IMU is working
-    	//if(azimuth > Robot.shooterrotation.getangle() + ShooterRotation.rotateRange[1] - 0.4
-    	//		|| azimuth < Robot.shooterrotation.getangle() + ShooterRotation.rotateRange[0] + 0.4
+    	//if(azimuth > Robot.shooterrotation.distFromLeft() - 0.4
+    	//		|| azimuth < Robot.shooterrotation.distFromRight() + 0.4
     	//		&& Robot.drivetrain.returnAttitude()[0] != -1.0){
-    	if(Robot.drivetrain.returnAttitude()[0] != -1.0){
+    	if(Robot.drivetrain.IMUData()){
     		//get true angle of goal (relative to IMU angle)
-    		double absoluteAngle = azimuth + Robot.drivetrain.getAttitude()[0] - Robot.shooterrotation.getangle();
-    		//compensate for 0-360 degree discontinuity
-    		if(absoluteAngle > 360.0){
-				absoluteAngle -= 360.0;
-			}else if(absoluteAngle < 0.0){
-				absoluteAngle += 360.0;
-			}
+    		double absoluteAngle = getGoalAbsoluteAngle();
     		//turn robot to point at goal
     		Robot.drivetrain.setSetpoint(absoluteAngle);
     		Robot.drivetrain.PID();
 			Robot.drivetrain.turnToAngle();
 			SmartDashboard.putBoolean("using Backup", false);
-    	}
+    	}else{
     	//if IMU is not working
-    	if(Robot.drivetrain.returnAttitude()[0] == -1.0){
     		//if shooter is all the way left turn left all the way right turn right
-    		/*if(Robot.shooterrotation.getangle() > ShooterRotation.rotateRange[1] - 0.7){
+    		/*if(Robot.shooterrotation.atLeftSide()){
     			Robot.drivetrain.turnLeft();
-    		}else if(Robot.shooterrotation.getangle() < ShooterRotation.rotateRange[0] + 0.7){
+    		}else if(Robot.shooterrotation.atRightSide()){
     			Robot.drivetrain.turnRight();
     		}*/
     		if(azimuth < -0.8){
@@ -117,7 +110,18 @@ public class SimpleAim extends Command {
     	}
         return false;
     }
-
+    
+    public double getGoalAbsoluteAngle(){
+    	double absAngle = azimuth + Robot.drivetrain.returnAttitude()[0] - Robot.shooterrotation.getangle();
+    	//compensate for 0-360 degree discontinuity
+		if(absAngle > 360.0){
+			absAngle -= 360.0;
+		}else if(absAngle < 0.0){
+			absAngle += 360.0;
+		}
+		return absAngle;
+    }
+    
     // Called once after isFinished returns true
     protected void end() {
     	Robot.continuousfunctions.setAiming(false);

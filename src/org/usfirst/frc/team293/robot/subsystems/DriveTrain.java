@@ -206,5 +206,8 @@ public class DriveTrain extends Subsystem {		//this does the TankDrive as well a
 		lastDist = dist;
 	}
 	
+	public boolean IMUData(){
+		return getAttitude()[0] != -1.0;
+	}
 }
 
