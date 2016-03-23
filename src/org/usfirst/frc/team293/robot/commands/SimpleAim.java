@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class SimpleAim extends Command {
 	private double azimuth = 0.0;
+	private static final double angleError = 0.8;
 	double[] Hoodangle={83,83,83,83,85,86,74,75,81,80,83,78,75,83};
 	/////////////////////0  1  2  3  4  5  6  7  8  9 10 11 12 13
 	private boolean continuous = false;
@@ -64,14 +65,9 @@ public class SimpleAim extends Command {
     	}else{
     	//if IMU is not working
     		//if shooter is all the way left turn left all the way right turn right
-    		/*if(Robot.shooterrotation.atLeftSide()){
+    		if(azimuth < -angleError){
     			Robot.drivetrain.turnLeft();
-    		}else if(Robot.shooterrotation.atRightSide()){
-    			Robot.drivetrain.turnRight();
-    		}*/
-    		if(azimuth < -0.8){
-    			Robot.drivetrain.turnLeft();
-    		}else if(azimuth > 0.8){
+    		}else if(azimuth > angleError){
     			Robot.drivetrain.turnRight();
     		}
     		SmartDashboard.putBoolean("using Backup", true);

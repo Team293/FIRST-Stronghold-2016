@@ -161,17 +161,11 @@ public class DriveTrain extends Subsystem {		//this does the TankDrive as well a
 	
 
 	public void turnToAngle() {			//Turning, speed is set to 0, output is set for turning
-		//constrain max turn speed
+		//constrain turn speed
 		if(output > 0){
-			output = Math.min(output, maxTurnSpeed);
+			output = Math.min(Math.max(output, minTurnSpeed), maxTurnSpeed);
 		}else{
-			output = Math.max(output, -maxTurnSpeed);
-		}
-		//constrain min turn speed
-		if(output > 0){
-			output = Math.max(output, minTurnSpeed);
-		}else{
-			output = Math.min(output, -minTurnSpeed);
+			output = Math.max(Math.min(output,-minTurnSpeed), -maxTurnSpeed);
 		}
 		//turn
 		drive.arcadeDrive(0.0, -output);
