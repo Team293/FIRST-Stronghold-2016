@@ -204,7 +204,7 @@ public class Camera extends Subsystem {			//This manages the OpenCV camera by ge
     	}
     	return staring;
     }
-    public void shooterRotcompensation(boolean first){		//compensates for shooter and drivetrain rotation
+  /*  public void shooterRotcompensation(boolean first){		//compensates for shooter and drivetrain rotation
     	double az = Robot.drivetrain.getAttitude()[0];		//get azimuth
     	if(first){											//if it is running for the first time
     		lastAngle = Robot.shooterrotation.getangle();	//get base shooter rotation angle
@@ -228,6 +228,6 @@ public class Camera extends Subsystem {			//This manages the OpenCV camera by ge
     	//set last stuff
     	lastAngle = Robot.shooterrotation.getangle();
     	lastAzimuth = az;
-    }
+    }*/
 }
 

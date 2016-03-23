@@ -37,7 +37,7 @@ public class SimpleAim extends Command {
     protected void initialize() {
     	//Hood.setPosition(800);
     	Robot.drivetrain.initsensor();						//initialize values of IMU to -1
-    	Robot.Camera.shooterRotcompensation(true);			//initialize camera servo compensation initial values
+    //	Robot.Camera.shooterRotcompensation(true);			//initialize camera servo compensation initial values
     	Robot.drivetrain.resetPID();						//reset Integral of drivetrain
     	SmartDashboard.putBoolean("Using Aiming Backup", false);
     	Robot.continuousfunctions.setAiming(true);
@@ -77,7 +77,7 @@ public class SimpleAim extends Command {
     		SmartDashboard.putBoolean("using Backup", true);
     	}
     	//compensate for shooter rotation and drivetrain rotation
-    	Robot.Camera.shooterRotcompensation(false);
+    //	Robot.Camera.shooterRotcompensation(false);
     	
     	///////////////////////////Distance Stuff///////////////////////////////////
     	int distance=(((int) Robot.Camera.getDistance())/12);
