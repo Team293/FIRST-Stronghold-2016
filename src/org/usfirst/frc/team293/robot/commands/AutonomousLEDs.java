@@ -1,6 +1,7 @@
 package org.usfirst.frc.team293.robot.commands;
 
 import org.usfirst.frc.team293.robot.Robot;
+import org.usfirst.frc.team293.robot.subsystems.Arduino;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
@@ -18,6 +19,10 @@ public class AutonomousLEDs extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	if(Robot.color == DriverStation.Alliance.Blue){
+    		Robot.ledStrip.writeByte(Arduino.AutoBlue);
+    	}
+    	else{
+    		Robot.ledStrip.writeByte(Arduino.AutoRed);
     	}
     }
 
