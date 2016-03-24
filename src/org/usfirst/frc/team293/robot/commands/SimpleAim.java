@@ -35,9 +35,8 @@ public class SimpleAim extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	//Hood.setPosition(800);
     	Robot.drivetrain.initsensor();						//initialize values of IMU to -1
-    //	Robot.Camera.shooterRotcompensation(true);			//initialize camera servo compensation initial values
+    	Robot.Camera.shooterRotcompensation(true);			//initialize camera servo compensation initial values
     	Robot.drivetrain.resetPID();						//reset Integral of drivetrain
     	SmartDashboard.putBoolean("Using Aiming Backup", false);
     	Robot.continuousfunctions.setAiming(true);
@@ -48,11 +47,6 @@ public class SimpleAim extends Command {
     protected void execute() {
     	if (Robot.Camera.canSeeSwagadelia()){				//if robot can see goal
     		azimuth = Robot.Camera.getAzimuth();			//get goal yaw
-    		//Robot.shooterrotation.setangle(Robot.shooterrotation.getangle()-azimuth);	//set shooter rotation
-    	}
-    	
-    	//if azimuth is more than 9.6 degrees from the midline of the robot and the IMU is working
-    	//if(IMUDrivetrainTurn()){
     	if(Robot.drivetrain.IMUData()){
     		//get true angle of goal (relative to IMU angle)
     		double absoluteAngle = getGoalAbsoluteAngle();
@@ -61,14 +55,8 @@ public class SimpleAim extends Command {
     		Robot.drivetrain.PID();
 			Robot.drivetrain.turnToAngle();
 			SmartDashboard.putBoolean("using Backup", false);
-    	}else{
-    	//if IMU is not working
-    		//if shooter is all the way left turn left all the way right turn right
-    		/*if(Robot.shooterrotation.atLeftSide()){
-    			Robot.drivetrain.turnLeft();
-    		}else if(Robot.shooterrotation.atRightSide()){
-    			Robot.drivetrain.turnRight();
-    		}*/
+    	}
+    	else{
     		if(azimuth < -0.8){
     			Robot.drivetrain.turnLeft();
     		}else if(azimuth > 0.8){
@@ -77,7 +65,7 @@ public class SimpleAim extends Command {
     		SmartDashboard.putBoolean("using Backup", true);
     	}
     	//compensate for shooter rotation and drivetrain rotation
-    //	Robot.Camera.shooterRotcompensation(false);
+    	Robot.Camera.shooterRotcompensation(false);
     	
     	///////////////////////////Distance Stuff///////////////////////////////////
     	int distance=(((int) Robot.Camera.getDistance())/12);
@@ -86,6 +74,7 @@ public class SimpleAim extends Command {
     		SmartDashboard.putNumber("AUTO aim angle", (Hood.bottompoint-Hoodangle[distance]));
     	}
     	SmartDashboard.putNumber("AUTO AIM DISTANCE FROM array", distance);
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()

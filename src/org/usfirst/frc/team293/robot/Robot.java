@@ -1,7 +1,10 @@
 
 package org.usfirst.frc.team293.robot;
 
-import org.usfirst.frc.team293.robot.commands.Autonomous;
+import org.usfirst.frc.team293.robot.commands.AutonomousHighShoot;
+//import org.usfirst.frc.team293.robot.commands.Autonomous;
+import org.usfirst.frc.team293.robot.commands.AutonomousManualBackwards;
+import org.usfirst.frc.team293.robot.commands.AutonomousManualForwards;
 import org.usfirst.frc.team293.robot.subsystems.Arduino;
 //import org.usfirst.frc.team293.robot.subsystems.Arduino;
 import org.usfirst.frc.team293.robot.subsystems.Camera;
@@ -17,6 +20,8 @@ import org.usfirst.frc.team293.robot.subsystems.ShooterWheel;
 import org.usfirst.frc.team293.robot.subsystems.continuousFunctions;
 import org.usfirst.frc.team293.robot.RobotMap;
 
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
@@ -33,7 +38,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
  * directory.
  */
 public class Robot extends IterativeRobot {
-
+	public static DriverStation.Alliance color;
+	
+	Command autonomousCommand;
+	SendableChooser autoChooser;
 	//public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	///////////instantiate subsystems
 	public static OI oi;
@@ -62,13 +70,14 @@ public class Robot extends IterativeRobot {
 	
 	public static continuousFunctions continuousfunctions;
 	
-    Command autonomousCommand;//instantiate auto command
-    SendableChooser chooser;
+//    Command autonomousCommand;//instantiate auto command
+   // SendableChooser chooser;
 
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
      */
+
     public void robotInit() {
 		
 ///////////instantiate subsystems
@@ -92,9 +101,18 @@ public class Robot extends IterativeRobot {
         logging				=new Logging();
         Camera				=new Camera();
         oi					=new OI();
-        autonomousCommand	=new Autonomous();
+       // autonomousCommand	=new Autonomous();
         ledStrip			=new Arduino();
         continuousfunctions	=new continuousFunctions();
+        
+        ////////////////autonomous Chooser
+        
+        autoChooser=new SendableChooser();
+        autoChooser.addDefault("Backwards Manual", new AutonomousManualBackwards());
+        autoChooser.addObject("Fowards Manual", new AutonomousManualForwards());
+        autoChooser.addObject("AutonomousHighShoot", new AutonomousHighShoot());
+        
+        color=DriverStation.getInstance().getAlliance();
         
     }
 	
@@ -122,6 +140,8 @@ public class Robot extends IterativeRobot {
 	 */
     public void autonomousInit() {
     	autonomousCommand.start();
+    	
+    	color=DriverStation.getInstance().getAlliance();
     }
 
     /**

@@ -204,10 +204,10 @@ public class Camera extends Subsystem {			//This manages the OpenCV camera by ge
     	}
     	return staring;
     }
-  /*  public void shooterRotcompensation(boolean first){		//compensates for shooter and drivetrain rotation
+    public void shooterRotcompensation(boolean first){		//compensates for shooter and drivetrain rotation
     	double az = Robot.drivetrain.getAttitude()[0];		//get azimuth
     	if(first){											//if it is running for the first time
-    		lastAngle = Robot.shooterrotation.getangle();	//get base shooter rotation angle
+    		
     		lastAzimuth = az;								//get base IMU angle
     	}
     	double change = az - lastAzimuth;					//get change in IMU angle
@@ -220,14 +220,13 @@ public class Camera extends Subsystem {			//This manages the OpenCV camera by ge
     		change = 0;
     	}
     	//translate changes to changes in servo values
-    	double vals[] = {baseX + (getAzimuth() + Robot.shooterrotation.getangle() - lastAngle - change)/170.0
+    	double vals[] = {baseX + (getAzimuth() - change)/170.0
     			,servoAngles[1]};
     	//move servos
     	setServoValues(vals);
     	setServos();
     	//set last stuff
-    	lastAngle = Robot.shooterrotation.getangle();
     	lastAzimuth = az;
-    }*/
+    }
 }
 
