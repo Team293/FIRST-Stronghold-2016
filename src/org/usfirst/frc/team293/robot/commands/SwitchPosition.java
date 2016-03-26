@@ -33,10 +33,10 @@ public class SwitchPosition extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {	
     	if(previousPosition==2){
-    		Robot.lifterdrivetrain.lift();
+    		Robot.lifterdrivetrain.drop();
     	}
     	if(previousPosition==0){
-    		Robot.lifterdrivetrain.drop();
+    		Robot.lifterdrivetrain.lift();
     	}
     	if(previousPosition==1){
     		Robot.lifterdrivetrain.lift();
@@ -47,10 +47,10 @@ public class SwitchPosition extends Command {
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
     	if(previousPosition==2){
-    		done=Robot.lifterdrivetrain.lift();
+    		done=Robot.lifterdrivetrain.drop();
     	}
     	if(previousPosition==0){
-    		done=Robot.lifterdrivetrain.drop();
+    		done=Robot.lifterdrivetrain.lift();
     	}
     	if(previousPosition==1){
     		done=Robot.lifterdrivetrain.lift();

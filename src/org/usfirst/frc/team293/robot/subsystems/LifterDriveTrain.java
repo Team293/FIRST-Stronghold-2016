@@ -22,8 +22,8 @@ public class LifterDriveTrain extends Subsystem {							//the lifter center whee
 	private boolean up = true;
 	int pos = 0;
 	
-	private static double bottomposition=300;
-	private static double topposition=350;
+	private static double bottomposition=150;
+	private static double topposition=200;
 
     public LifterDriveTrain(){
     // Put methods for controlling this subsystem
@@ -42,16 +42,16 @@ public class LifterDriveTrain extends Subsystem {							//the lifter center whee
 
 
     public boolean lift() {	//This powers up the motor to start lifting
-    	lifterMotor.set(-.5);
-    	if(lifterMotor.getAnalogInRaw()==bottomposition){
+    	lifterMotor.set(.3);
+    	if(lifterMotor.getAnalogInRaw()>=bottomposition){
     		lifterMotor.set(0);
     		finished=true;
     	}
     	return finished;
     }
     public boolean drop() {
-    	lifterMotor.set(.5);
-    	if(lifterMotor.getAnalogInRaw()==topposition){
+    	lifterMotor.set(-.3);
+    	if(lifterMotor.getAnalogInRaw()<=topposition){
     		lifterMotor.set(0);
     		finished=true;
     	}
