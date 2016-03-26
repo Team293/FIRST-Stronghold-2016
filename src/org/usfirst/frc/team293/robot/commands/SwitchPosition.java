@@ -13,7 +13,8 @@ public class SwitchPosition extends Command {
 	//private boolean status=false;
 	//private boolean pastlift=false;
 	//private boolean point=false;
-	boolean up = true;
+	boolean done = true;
+	int previousPosition;
     public SwitchPosition() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
@@ -23,35 +24,44 @@ public class SwitchPosition extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.ledCenterWheel.on();
-    	Robot.lifterdrivetrain.position();
-    	up = Robot.lifterdrivetrain.change();
-    	SmartDashboard.putBoolean("going up", up);
+    	Robot.lifterdrivetrain.finished=false;
+    	done=false;
+    	previousPosition=Robot.lifterdrivetrain.isattop();
+
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {	
-    	if(!up){
-    		Robot.lifterdrivetrain.drop();
-    	}
-    	if(up){
+    	if(previousPosition==2){
     		Robot.lifterdrivetrain.lift();
     	}
+    	if(previousPosition==0){
+    		Robot.lifterdrivetrain.drop();
+    	}
+    	if(previousPosition==1){
+    		Robot.lifterdrivetrain.lift();
+    	}
+
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	SmartDashboard.putNumber("Cam Pos", Robot.lifterdrivetrain.position());
-    	if(up){
-    		return Robot.lifterdrivetrain.position() == 1;					//is up
-    	}else{
-    		return Robot.lifterdrivetrain.position() == -1;					//is down
+    	if(previousPosition==2){
+    		done=Robot.lifterdrivetrain.lift();
     	}
+    	if(previousPosition==0){
+    		done=Robot.lifterdrivetrain.drop();
+    	}
+    	if(previousPosition==1){
+    		done=Robot.lifterdrivetrain.lift();
+    	}
+		return done;
+ 
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.lifterdrivetrain.stopMotor();
+
     }
 
     // Called when another command which requires one or more of the same

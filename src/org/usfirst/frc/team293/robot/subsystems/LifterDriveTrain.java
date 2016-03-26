@@ -14,22 +14,25 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class LifterDriveTrain extends Subsystem {							//the lifter center wheel on the drivetrain
 	public static CANTalon lifterMotor;
-	public boolean position;
+	public int position;
 	boolean wheelSetUp = true;
-	boolean itsoffthetape;
-	private DigitalInput DriveLimit;
-	public DigitalInput DriveLimitDown;
+	public boolean finished;
+	public boolean intendedposition;
 	//public Timer timer=new Timer();
 	private boolean up = true;
 	int pos = 0;
+	
+	private static double bottomposition=300;
+	private static double topposition=350;
 
     public LifterDriveTrain(){
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	lifterMotor = new CANTalon(RobotMap.lifterMotor);
 	lifterMotor.enableBrakeMode(true);
-	DriveLimitDown=new DigitalInput(5);	//the Reflective Banner Sensor
-	DriveLimit = new DigitalInput(12);
+	lifterMotor.setFeedbackDevice(FeedbackDevice.AnalogPot);
+	lifterMotor.changeControlMode(TalonControlMode.PercentVbus);
+
 	
     }
     public void initDefaultCommand() {
@@ -38,43 +41,39 @@ public class LifterDriveTrain extends Subsystem {							//the lifter center whee
     }
 
 
-    public void lift() {	//This powers up the motor to start lifting
-    	pos = position();
-    	if(pos != 1){
-    		lifterMotor.set(-1);
-    	}else{
+    public boolean lift() {	//This powers up the motor to start lifting
+    	lifterMotor.set(-.5);
+    	if(lifterMotor.getAnalogInRaw()==bottomposition){
     		lifterMotor.set(0);
+    		finished=true;
     	}
+    	return finished;
     }
-    public void drop() {
-    	pos = position();
-    	if(pos != -1){
-    		lifterMotor.set(1);
-    	}else{
+    public boolean drop() {
+    	lifterMotor.set(.5);
+    	if(lifterMotor.getAnalogInRaw()==topposition){
     		lifterMotor.set(0);
+    		finished=true;
     	}
+    	return true;
     }
 
     public void stopMotor(){
     	lifterMotor.set(0);
     }
 	
-    public boolean change(){
-    	pos = position();
-    	if(pos == -1){
-    		up = true;
-    	}else{
-    		up = false;
+    public int isattop(){   //returns position of the cam at the current time.
+    	double angle=lifterMotor.getAnalogInRaw();
+    	if (angle>(bottomposition-10)&&angle<(bottomposition+10)){
+    		position=2;		//at bottom
     	}
-    	return up;
-    }
-	
-    public int position(){
-    	if(DriveLimit.get()){
-    		return 1;
-    	}else if(!DriveLimitDown.get()){
-    		return -1;
+    	if (angle>(topposition-10)&&angle<(topposition+10)){
+    		position=0;		//at top
     	}
-    	return 0;
+    	else{
+    		position=1;		//in the middle uh oh.
+    	}
+    	return position;
     }
+    
 }
