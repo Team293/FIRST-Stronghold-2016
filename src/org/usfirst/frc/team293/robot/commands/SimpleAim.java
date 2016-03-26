@@ -16,6 +16,7 @@ public class SimpleAim extends Command {
 	private double azimuth = 0.0;
 	private static final double angleError = 0.8;
 	double[] Hoodangle={83,83,83,83,85,86,74,75,81,80,83,78,75,83};
+	
 	/////////////////////0  1  2  3  4  5  6  7  8  9 10 11 12 13
 	private boolean continuous = false;
 	private long wasAimedAt = -1100;
@@ -36,7 +37,6 @@ public class SimpleAim extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	//Hood.setPosition(800);
     	Robot.drivetrain.initsensor();						//initialize values of IMU to -1
     	Robot.Camera.shooterRotcompensation(true);			//initialize camera servo compensation initial values
     	Robot.drivetrain.resetPID();						//reset Integral of drivetrain
@@ -49,11 +49,6 @@ public class SimpleAim extends Command {
     protected void execute() {
     	if (Robot.Camera.canSeeSwagadelia()){				//if robot can see goal
     		azimuth = Robot.Camera.getAzimuth();			//get goal yaw
-    		//Robot.shooterrotation.setangle(Robot.shooterrotation.getangle()-azimuth);	//set shooter rotation
-    	}
-    	
-    	//if azimuth is more than 9.6 degrees from the midline of the robot and the IMU is working
-    	//if(IMUDrivetrainTurn()){
     	if(Robot.drivetrain.IMUData()){
     		//get true angle of goal (relative to IMU angle)
     		double absoluteAngle = getGoalAbsoluteAngle();
@@ -77,11 +72,12 @@ public class SimpleAim extends Command {
     	
     	///////////////////////////Distance Stuff///////////////////////////////////
     	int distance=(((int) Robot.Camera.getDistance())/12);
-    	if(distance < Hoodangle.length){
-    		Hood.setPosition(Hood.bottompoint-Hoodangle[distance]);
-    		SmartDashboard.putNumber("AUTO aim angle", (Hood.bottompoint-Hoodangle[distance]));
+    	if(distance < Robot.hood.Hoodangle.length){
+    		Hood.setPosition(Hood.bottompoint-Robot.hood.Hoodangle[distance]);
+    		SmartDashboard.putNumber("AUTO aim angle", (Hood.bottompoint-Robot.hood.Hoodangle[distance]));
     	}
     	SmartDashboard.putNumber("AUTO AIM DISTANCE FROM array", distance);
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
