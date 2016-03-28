@@ -3,7 +3,9 @@ package org.usfirst.frc.team293.robot.commands;
 import org.usfirst.frc.team293.robot.Robot;
 import org.usfirst.frc.team293.robot.RobotMap;
 import org.usfirst.frc.team293.robot.subsystems.Arduino;
+import org.usfirst.frc.team293.robot.subsystems.Camera;
 import org.usfirst.frc.team293.robot.subsystems.Hood;
+import org.usfirst.frc.team293.robot.subsystems.LifterDriveTrain;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -69,7 +71,9 @@ public class runContinuousFunctions extends Command {
     	if(Robot.continuousfunctions.isNewData()){
     		if(Robot.continuousfunctions.isShooterOn()){
     			if(Robot.continuousfunctions.isAiming()){
-    				Robot.ledStrip.writeByte(Arduino.ShooterOnAiming);
+    				byte x = (byte) ((byte)Robot.Camera.getAzimuth() / 4);
+    				x = (byte) Math.max(Math.min(x, 5), -5);
+    				Robot.ledStrip.writeByte(x);
     			}else if(Robot.continuousfunctions.isCanSeeSwag()){
     				Robot.ledStrip.writeByte(Arduino.ShooterOnCanSeeSwag);
     			}
@@ -89,11 +93,8 @@ public class runContinuousFunctions extends Command {
     		if(Robot.continuousfunctions.isAfterShooting()){
     			Robot.ledStrip.writeByte(Arduino.aftershooting);
     		}
-    		if(Robot.continuousfunctions.isDrivetrainUp()){
-    			Robot.ledStrip.writeByte(Arduino.DrivetrainUp);
-    		}else{
-    			Robot.ledStrip.writeByte(Arduino.DrivetrainDown);
-    		}
+    		byte wheelPos = (byte) ((LifterDriveTrain.lifterMotor.getAnalogInRaw() - 150) / 8);
+    		Robot.ledStrip.writeByte(wheelPos);
     		if(Robot.continuousfunctions.isPARTY()){
     			Robot.ledStrip.writeByte(Arduino.PARTY);
     		}
