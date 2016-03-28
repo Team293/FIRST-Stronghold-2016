@@ -47,7 +47,7 @@ public class SwitchPosition extends Command {
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
     	if(previousPosition==2){
-    		done=Robot.lifterdrivetrain.drop();
+    		done=Robot.lifterdrivetrain.drop();		//put this in execute ^^^^
     	}
     	if(previousPosition==0){
     		done=Robot.lifterdrivetrain.lift();
