@@ -59,7 +59,6 @@ public class SimpleAim extends Command {
 			SmartDashboard.putBoolean("using Backup", false);
     	}else{
     	//if IMU is not working
-    		//if shooter is all the way left turn left all the way right turn right
     		if(azimuth < -angleError){
     			Robot.drivetrain.turnLeft();
     		}else if(azimuth > angleError){

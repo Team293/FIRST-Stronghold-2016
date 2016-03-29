@@ -45,8 +45,8 @@ public class DriveTrain extends Subsystem {		//this does the TankDrive as well a
 	private static final int[][] encoderPorts = {{6,7},{8,9}};
 	double setpointWanted;
 	private static final double maxTurnSpeed = 1.0,
-			minTurnSpeed = 0.05,
-			normTurnSpeed = 0.2;
+								minTurnSpeed = 0.05,
+								normTurnSpeed = 0.2;
 	
 	public DriveTrain(){
 		leftMotor = new VictorSP(RobotMap.leftMotor);

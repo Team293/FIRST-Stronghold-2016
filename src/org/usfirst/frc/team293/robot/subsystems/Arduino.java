@@ -9,18 +9,17 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Arduino extends Subsystem {						//so this sends stuff to the Arduino through i2c
 	/******************************CODES*******************************/
 	public static final byte
-	AutoRed=1,	//red pulsing if on red alliance
-	AutoBlue=2,	//blue pulsing if on blue alliance
-	TeleopNoBallShooteroff=3,  //yellow
-	TeleopNoBallShooteron=4,//pulsing yellow
-	ShooterOnCanSeeSwag=5,//green pulsing
-	ShooterOnAiming=6,//green flashing
-	aftershooting=7,  //Fast Rainbow maybe for a second or two for swag?
+	AutoRed=(byte) 255,	//red pulsing if on red alliance
+	AutoBlue=(byte) 254,	//blue pulsing if on blue alliance
+	TeleopNoBallShooteroff=(byte) 253,  //yellow
+	TeleopNoBallShooteron=(byte) 252,//pulsing yellow
+	ShooterOnCanSeeSwag=(byte) 251,//green pulsing
+	aftershooting=(byte) 250,  //Fast Rainbow maybe for a second or two for swag?
 	//SHOOTER ON MANUAL AIM NEED TO MAKE!  =8
 	
 	///Drivetrain Codes, Probably only a few strips
-	DrivetrainUp=21,			//red pulsing
-	DrivetrainDown=22,  		//purple pulsing
+	DrivetrainUp=(byte) 231,			//red pulsing
+	DrivetrainDown=(byte) 230,  		//purple pulsing
 	
 	//all LEDS
 	PARTY = 15, 				//before a match, or when the robot isn't enabled

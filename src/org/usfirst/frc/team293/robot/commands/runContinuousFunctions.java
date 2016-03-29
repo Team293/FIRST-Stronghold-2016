@@ -71,19 +71,17 @@ public class runContinuousFunctions extends Command {
     	if(Robot.continuousfunctions.isNewData()){
     		if(Robot.continuousfunctions.isShooterOn()){
     			if(Robot.continuousfunctions.isAiming()){
-    				byte x = (byte) ((byte)Robot.Camera.getAzimuth() / 4);
+    				byte x = (byte) (Robot.Camera.getAzimuth() / 4);
     				x = (byte) Math.max(Math.min(x, 5), -5);
     				Robot.ledStrip.writeByte(x);
     			}else if(Robot.continuousfunctions.isCanSeeSwag()){
     				Robot.ledStrip.writeByte(Arduino.ShooterOnCanSeeSwag);
     			}
-    		}
-    		if(Robot.continuousfunctions.isAutoBlue()){
+    		}else if(Robot.continuousfunctions.isAutoBlue()){
     			Robot.ledStrip.writeByte(Arduino.AutoBlue);
-    		}else{
+    		}else if(!Robot.continuousfunctions.isTeleop()){
     			Robot.ledStrip.writeByte(Arduino.AutoRed);
-    		}
-    		if(Robot.continuousfunctions.isTeleop() && !Robot.continuousfunctions.isHasBall()){
+    		}else if(Robot.continuousfunctions.isTeleop() && !Robot.continuousfunctions.isHasBall()){
     			if(Robot.continuousfunctions.isShooterOn()){
     				Robot.ledStrip.writeByte(Arduino.TeleopNoBallShooteron);
     			}else{
@@ -93,13 +91,13 @@ public class runContinuousFunctions extends Command {
     		if(Robot.continuousfunctions.isAfterShooting()){
     			Robot.ledStrip.writeByte(Arduino.aftershooting);
     		}
-    		byte wheelPos = (byte) ((LifterDriveTrain.lifterMotor.getAnalogInRaw() - 150) / 8);
-    		Robot.ledStrip.writeByte(wheelPos);
     		if(Robot.continuousfunctions.isPARTY()){
     			Robot.ledStrip.writeByte(Arduino.PARTY);
     		}
     		Robot.continuousfunctions.setNewData(false);
     	}
+    	byte wheelPos = (byte) ((LifterDriveTrain.lifterMotor.getAnalogInRaw() - 150) / 8);
+		Robot.ledStrip.writeByte(wheelPos);
     }
 
     // Make this return true when this Command no longer needs to run execute()
