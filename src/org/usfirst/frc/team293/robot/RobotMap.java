@@ -35,15 +35,15 @@ public class RobotMap {
      
      public static final int[]
     	     feederButt={2,11},
-    	     selfWheelButt={9,9},
+    	     downWheelButt={9,9},
     	     aimButt={5,3},
     	     manualButt={4,4},
     	     lowButt={10,10},
     	     camButt={11,1},
     	     autoAimAndShootButt={3,5},
     	     portButt={1,6},
-    	     wheelButt={8,8},
-    	     climbButt={6,7};
+    	     upWheelButt={8,8},
+    	     driverAimButt={6,7};
      
      //Hood Knobber
      public static final int inDaHood = 5;			//We Back

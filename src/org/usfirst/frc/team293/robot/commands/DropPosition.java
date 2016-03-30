@@ -10,12 +10,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  *
  */
-public class SwitchPosition extends Command {
+public class DropPosition extends Command {
 	//private boolean status=false;
 	//private boolean pastlift=false;
 	//private boolean point=false;
 
-    public SwitchPosition() {
+    public DropPosition() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	//this.up = up;
@@ -26,7 +26,7 @@ public class SwitchPosition extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
 
-    	Robot.lifterdrivetrain.lifterMotor.set(.5);
+    	Robot.lifterdrivetrain.lifterMotor.set(-.5);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -37,7 +37,7 @@ public class SwitchPosition extends Command {
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
     
-		return (LifterDriveTrain.lifterMotor.getAnalogInRaw()>170);
+		return (LifterDriveTrain.lifterMotor.getAnalogInRaw()<70);
     }
 
     // Called once after isFinished returns true

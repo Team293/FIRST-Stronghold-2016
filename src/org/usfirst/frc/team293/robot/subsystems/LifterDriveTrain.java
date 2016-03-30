@@ -22,8 +22,8 @@ public class LifterDriveTrain extends Subsystem {							//the lifter center whee
 	private boolean up = true;
 	int pos = 0;
 	
-	private static double bottomposition=150;
-	private static double topposition=200;
+	private static double bottomposition=140;
+	private static double topposition=220;
 
     public LifterDriveTrain(){
     // Put methods for controlling this subsystem

@@ -168,7 +168,7 @@ public class DriveTrain extends Subsystem {		//this does the TankDrive as well a
 			output = Math.max(Math.min(output,-minTurnSpeed), -maxTurnSpeed);
 		}
 		//turn
-		drive.arcadeDrive(0.0, -output);
+		drive.arcadeDrive(0.0, output);
 	}
 	
 	public void turnLeft(){

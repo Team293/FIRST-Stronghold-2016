@@ -82,13 +82,13 @@ public class Robot extends IterativeRobot {
 		
 ///////////instantiate subsystems
     	//LED Buttons
-    	ledShooterWheels = new LEDButtons(RobotMap.selfWheelButt[1]);
-    	ledClimb= new LEDButtons(RobotMap.climbButt[1]);
+    	ledShooterWheels = new LEDButtons(RobotMap.downWheelButt[1]);
+    	ledClimb= new LEDButtons(RobotMap.driverAimButt[1]);
     	ledFeeder= new LEDButtons(RobotMap.feederButt[1]);
     	ledLowGoal = new LEDButtons(RobotMap.lowButt[1]);
     	ledHighGoal = new LEDButtons(RobotMap.aimButt[1]);
     	ledManual = new LEDButtons(RobotMap.manualButt[1]);
-    	ledCenterWheel= new LEDButtons(RobotMap.wheelButt[1]);    	
+    	ledCenterWheel= new LEDButtons(RobotMap.upWheelButt[1]);    	
     	
         drivetrain			=new DriveTrain();
         hood				=new Hood();

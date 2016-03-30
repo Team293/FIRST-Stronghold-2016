@@ -2,6 +2,7 @@ package org.usfirst.frc.team293.robot;
 
 import org.usfirst.frc.team293.robot.commands.CenterWheelDrop;
 import org.usfirst.frc.team293.robot.commands.Climb;
+import org.usfirst.frc.team293.robot.commands.DropPosition;
 import org.usfirst.frc.team293.robot.commands.Feeding;
 import org.usfirst.frc.team293.robot.commands.Fire;
 import org.usfirst.frc.team293.robot.commands.HoodRestPosition;
@@ -18,6 +19,7 @@ import org.usfirst.frc.team293.robot.commands.SimpleAim;
 import org.usfirst.frc.team293.robot.commands.StopShooterWheel;
 import org.usfirst.frc.team293.robot.commands.SwitchPosition;
 import org.usfirst.frc.team293.robot.commands.aimAndShoot;
+import org.usfirst.frc.team293.robot.commands.driverAim;
 import org.usfirst.frc.team293.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -44,12 +46,12 @@ public class OI {
 	JoystickButton aimbutton=new JoystickButton(launchpad,RobotMap.aimButt[0]);
 	JoystickButton manualshoot=new JoystickButton(launchpad,RobotMap.manualButt[0]);
 	JoystickButton setcam=new JoystickButton(launchpad,RobotMap.camButt[0]);
-	JoystickButton climb=new JoystickButton(launchpad,RobotMap.climbButt[0]);
-	JoystickButton centerwheellift=new JoystickButton(launchpad,RobotMap.wheelButt[0]);
+	JoystickButton driverAim=new JoystickButton(launchpad,RobotMap.driverAimButt[0]);
 	JoystickButton portcullis=new JoystickButton(launchpad,RobotMap.portButt[0]);
 	JoystickButton lowGoal = new JoystickButton(launchpad,RobotMap.lowButt[0]);
 	JoystickButton AutoAimandShoot= new JoystickButton(launchpad,RobotMap.autoAimAndShootButt[0]);
-	JoystickButton Camtoggle=new JoystickButton(launchpad,RobotMap.selfWheelButt[0]);
+	JoystickButton CamtoggleUp=new JoystickButton(launchpad,RobotMap.upWheelButt[0]);
+	JoystickButton CamtoggleDown=new JoystickButton(launchpad,RobotMap.downWheelButt[0]);
 	JoystickButton CamToggleDriver = new JoystickButton(joy1,3);
 	 /////////////////////instantiate buttons Launchpad2
 	JoystickButton manualHoodSwitch=new JoystickButton(launchpad2,1);
@@ -78,8 +80,9 @@ public class OI {
 	 lowgoalbuttonBackup.toggleWhenPressed(new LowGoal());
 	 feederbutton.toggleWhenPressed(new Feeding());
 	 feederbuttonBackup.toggleWhenPressed(new Feeding());
-	 Camtoggle.toggleWhenPressed(new SwitchPosition());
-	 CamToggleDriver.toggleWhenPressed(new SwitchPosition());
+	 CamtoggleUp.toggleWhenPressed(new SwitchPosition());
+	 CamtoggleDown.toggleWhenPressed(new DropPosition());
+	 //CamToggleDriver.toggleWhenPressed(new SwitchPosition());
 	 RPMFastSwitch.whenPressed(new RunShooterWheel());
 	 setshooterwheelBackup.whenPressed(new RunShooterWheel());
 	 RPMSlowSwitch.whenPressed(new RunShooterWheelSlow());
@@ -90,6 +93,7 @@ public class OI {
 
 	 aimbutton.toggleWhenPressed(new SimpleAim(true));
 	 aimbuttonBackup.toggleWhenPressed(new SimpleAim(true));
+	 driverAim.toggleWhenPressed(new driverAim());
 	 leftTrigger.whenPressed(new SimpleAim(true));
 	 manualshoot.toggleWhenPressed(new Fire());
 	 manualshootBackup.whenPressed(new ShootHighGoal());
@@ -107,7 +111,7 @@ public class OI {
 	    	return joy2.getY();
 	    }
 	    public static double getHoodDial(){
-	    	double raw = launchpad2.getRawAxis(RobotMap.inDaHood);
+	    	double raw=launchpad.getRawAxis(RobotMap.HVUKNO);
 	    	return (raw);
 	    }
 	    public static double getRotationDial(){

@@ -96,7 +96,7 @@ public class runContinuousFunctions extends Command {
     		}
     		Robot.continuousfunctions.setNewData(false);
     	}
-    	byte wheelPos = (byte) ((LifterDriveTrain.lifterMotor.getAnalogInRaw() - 150) / 8);
+    	byte wheelPos = (byte) ((LifterDriveTrain.lifterMotor.getAnalogInRaw() - 140) / 14);
 		Robot.ledStrip.writeByte(wheelPos);
     }
 
