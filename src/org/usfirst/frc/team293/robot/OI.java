@@ -11,7 +11,6 @@ import org.usfirst.frc.team293.robot.commands.LiftCenterWheel;
 import org.usfirst.frc.team293.robot.commands.LowGoal;
 import org.usfirst.frc.team293.robot.commands.ManualCam;
 import org.usfirst.frc.team293.robot.commands.ManualHood;
-import org.usfirst.frc.team293.robot.commands.RotateShooter;
 import org.usfirst.frc.team293.robot.commands.RunShooterWheel;
 import org.usfirst.frc.team293.robot.commands.RunShooterWheelSlow;
 import org.usfirst.frc.team293.robot.commands.ShootHighGoal;

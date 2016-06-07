@@ -76,7 +76,7 @@ public class runContinuousFunctions extends Command {
     	if(!Robot.Camera.canSeeSwagadelia()){
     		Robot.ledHighGoal.on();
     	}
-    	Robot.shooterrotation.ledLight();
+    	//Robot.shooterrotation.ledLight();
     	if(!Robot.feeder.boulderoptical()){
     		Robot.ledFeeder.on();
     		if(!hasBall){

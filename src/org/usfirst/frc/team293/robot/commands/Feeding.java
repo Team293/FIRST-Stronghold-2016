@@ -16,7 +16,7 @@ public class Feeding extends Command {
     	requires(Robot.feeder);
     	requires(Robot.ledFeeder);
     	requires(Robot.drivercamera);
-    	requires(Robot.shooterrotation);
+    	
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }

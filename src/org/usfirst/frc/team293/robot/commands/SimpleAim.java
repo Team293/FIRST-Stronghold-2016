@@ -4,7 +4,7 @@ import org.usfirst.frc.team293.robot.OI;
 import org.usfirst.frc.team293.robot.Robot;
 //import org.usfirst.frc.team293.robot.subsystems.Camera;
 import org.usfirst.frc.team293.robot.subsystems.Hood;
-import org.usfirst.frc.team293.robot.subsystems.ShooterRotation;
+
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -28,7 +28,7 @@ public class SimpleAim extends Command {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	Robot.drivetrain.setPID(0.02, 0.0, 0.001);
-		requires(Robot.shooterrotation);
+		
 		requires(Robot.drivetrain);
 		requires(Robot.ledHighGoal);
 		requires(Robot.hood);
@@ -101,7 +101,7 @@ public class SimpleAim extends Command {
     }
     
     public double getGoalAbsoluteAngle(){
-    	double absAngle = azimuth + Robot.drivetrain.returnAttitude()[0] - Robot.shooterrotation.getangle();
+    	double absAngle = azimuth + Robot.drivetrain.returnAttitude()[0];
     	//compensate for 0-360 degree discontinuity
 		if(absAngle > 360.0){
 			absAngle -= 360.0;
@@ -112,15 +112,15 @@ public class SimpleAim extends Command {
     }
     
     private boolean IMUDrivetrainTurn(){
-    	return ((azimuth > Robot.shooterrotation.distFromLeft() - 0.4
-    	    			|| azimuth < Robot.shooterrotation.distFromRight() + 0.4)
+    	return ((azimuth >  - 0.4
+    	    			|| azimuth< + 0.4)
     	    			&& Robot.drivetrain.returnAttitude()[0] != -1.0);
     }
     
     // Called once after isFinished returns true
     protected void end() {
     	Robot.continuousfunctions.setAiming(false);
-    	new RotateShooter();
+    	
     }
 
     // Called when another command which requires one or more of the same

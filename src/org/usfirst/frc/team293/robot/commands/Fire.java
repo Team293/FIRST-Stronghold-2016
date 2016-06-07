@@ -15,7 +15,7 @@ public class Fire extends Command {
         // eg. requires(chassis);
     	requires(Robot.feeder);
     	requires(Robot.ledHighGoal);
-    	requires(Robot.hood);
+
     	setTimeout(2);
     }
 
@@ -39,7 +39,7 @@ public class Fire extends Command {
     	Robot.ledManual.off();
     	Robot.feeder.outsidefeederset(0);
     	Robot.feeder.insidefeederset(0);
-    	new RotateShooter();
+    	
     }
 
     // Called when another command which requires one or more of the same

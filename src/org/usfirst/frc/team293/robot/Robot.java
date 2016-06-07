@@ -16,7 +16,7 @@ import org.usfirst.frc.team293.robot.subsystems.Hood;
 import org.usfirst.frc.team293.robot.subsystems.LEDButtons;
 import org.usfirst.frc.team293.robot.subsystems.LifterDriveTrain;
 import org.usfirst.frc.team293.robot.subsystems.Logging;
-import org.usfirst.frc.team293.robot.subsystems.ShooterRotation;
+
 import org.usfirst.frc.team293.robot.subsystems.ShooterWheel;
 import org.usfirst.frc.team293.robot.subsystems.continuousFunctions;
 import org.usfirst.frc.team293.robot.RobotMap;
@@ -52,7 +52,7 @@ public class Robot extends IterativeRobot {
 	public static DriveTrain drivetrain;
 	public static Feeder feeder;
 	public static Hood hood;
-	public static ShooterRotation shooterrotation;
+	
 	public static ShooterWheel shooterwheel;
 	public static LifterDriveTrain lifterdrivetrain;
 	public static Camera Camera;
@@ -100,7 +100,7 @@ public class Robot extends IterativeRobot {
        
         drivercamera		=new DriverCamera();
         feeder				=new Feeder();
-        shooterrotation		=new ShooterRotation();
+   
         shooterwheel		=new ShooterWheel();
         logging				=new Logging();
         Camera				=new Camera();
