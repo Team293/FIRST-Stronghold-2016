@@ -18,7 +18,7 @@ public class ManualCam extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	LifterDriveTrain.lifterMotor.set(.3);
+    	LifterDriveTrain.lifterMotor.set(.8);
     }
 
     // Called repeatedly when this Command is scheduled to run

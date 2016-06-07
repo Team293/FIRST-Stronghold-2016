@@ -19,9 +19,9 @@ public class RobotMap {
      //TalonSRX Stuff
      public static int 
      shooterwheel=2,
-     hoodMotor=4,
+     hoodMotor=1,
      shooterRotation=3 ,
-     lifterMotor=1;
+     lifterMotor=4;
      
      //TalonSRX Sensors
      /*

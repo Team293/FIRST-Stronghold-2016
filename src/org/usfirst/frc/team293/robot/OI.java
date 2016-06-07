@@ -94,10 +94,10 @@ public class OI {
 	 aimbutton.toggleWhenPressed(new SimpleAim(true));
 	 aimbuttonBackup.toggleWhenPressed(new SimpleAim(true));
 	 driverAim.toggleWhenPressed(new driverAim());
-	 leftTrigger.whenPressed(new SimpleAim(true));
+	 leftTrigger.whenPressed(new DropPosition());
 	 manualshoot.toggleWhenPressed(new Fire());
 	 manualshootBackup.whenPressed(new ShootHighGoal());
-	 rightTrigger.toggleWhenPressed(new ShootHighGoal());
+	 rightTrigger.toggleWhenPressed(new SwitchPosition());
 	 
 	 AutoAimandShoot.toggleWhenPressed(new aimAndShoot());
 	 //aimAndShootButton.toggleWhenPressed(new aimAndShoot());

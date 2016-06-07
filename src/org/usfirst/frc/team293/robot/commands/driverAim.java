@@ -33,6 +33,10 @@ public class driverAim extends Command {
     			SmartDashboard.putNumber("AUTO aim angle", (Hood.bottompoint-Robot.hood.Hoodangle[distance]));
     		}
     		SmartDashboard.putNumber("AUTO AIM DISTANCE FROM array", distance);
+    		
+    		
+   
+    		
     	}
     }
 

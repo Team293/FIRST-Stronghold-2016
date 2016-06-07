@@ -28,7 +28,7 @@ public class ManualHood extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Hood.setPosition(886-(365*(((-OI.getHoodDial())+1)/2)));
+    	Hood.setPosition(900-(410)*(((-OI.getHoodDial())+1)/2));
  
     	//SmartDashboard.putNumber("anglesetpoint");
     }

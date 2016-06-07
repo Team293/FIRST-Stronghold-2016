@@ -10,12 +10,12 @@ import edu.wpi.first.wpilibj.command.Command;
 public class ManualDriveStraight extends Command {
 	public double speed1;
 	
-    public ManualDriveStraight(int time, double speed) {
+    public ManualDriveStraight() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.drivetrain);
-    	speed=speed1;
-    	setTimeout(time);
+
+    	setTimeout(6);
     }
 
     // Called just before this Command runs the first time
@@ -24,7 +24,7 @@ public class ManualDriveStraight extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.drivetrain.tankdrive(speed1,speed1);
+    	Robot.drivetrain.tankdrive(-.9,-.9);
     }
 
     // Make this return true when this Command no longer needs to run execute()

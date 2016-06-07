@@ -5,6 +5,7 @@ import org.usfirst.frc.team293.robot.commands.AutonomousHighShoot;
 //import org.usfirst.frc.team293.robot.commands.Autonomous;
 import org.usfirst.frc.team293.robot.commands.AutonomousManualBackwards;
 import org.usfirst.frc.team293.robot.commands.AutonomousManualForwards;
+import org.usfirst.frc.team293.robot.commands.ManualDriveStraight;
 import org.usfirst.frc.team293.robot.subsystems.Arduino;
 //import org.usfirst.frc.team293.robot.subsystems.Arduino;
 import org.usfirst.frc.team293.robot.subsystems.Camera;
@@ -38,10 +39,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
  * directory.
  */
 public class Robot extends IterativeRobot {
+	
+	
 	public static DriverStation.Alliance color;
 	
-	Command autonomousCommand;
-	SendableChooser autoChooser;
+	//Command autonomousCommand;
+	//SendableChooser autoChooser;
 	//public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	///////////instantiate subsystems
 	public static OI oi;
@@ -55,6 +58,7 @@ public class Robot extends IterativeRobot {
 	public static Camera Camera;
 	public static Logging logging;
 	public static Arduino ledStrip;
+	
 	
 	public static LEDButtons ledShooterWheels;
 	public static LEDButtons ledLowGoal;
@@ -70,8 +74,8 @@ public class Robot extends IterativeRobot {
 	
 	public static continuousFunctions continuousfunctions;
 	
-//    Command autonomousCommand;//instantiate auto command
-   // SendableChooser chooser;
+   Command autonomousCommand;//instantiate auto command
+   SendableChooser autoChooser;
 
     /**
      * This function is run when the robot is first started up and should be
@@ -101,18 +105,18 @@ public class Robot extends IterativeRobot {
         logging				=new Logging();
         Camera				=new Camera();
         oi					=new OI();
-       // autonomousCommand	=new Autonomous();
+        autonomousCommand	=new ManualDriveStraight();
         ledStrip			=new Arduino();
         continuousfunctions	=new continuousFunctions();
         
         ////////////////autonomous Chooser
         
-        autoChooser=new SendableChooser();
+        autoChooser = new SendableChooser();
         autoChooser.addDefault("Backwards Manual", new AutonomousManualBackwards());
         autoChooser.addObject("Fowards Manual", new AutonomousManualForwards());
         autoChooser.addObject("AutonomousHighShoot", new AutonomousHighShoot());
-        
-        color=DriverStation.getInstance().getAlliance();
+       // autoChooser.addObject(   
+        //color=DriverStation.getInstance().getAlliance();
         
     }
 	
@@ -139,7 +143,7 @@ public class Robot extends IterativeRobot {
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
     public void autonomousInit() {
-    	autonomousCommand.start();
+    autonomousCommand.start();
     	
     	color=DriverStation.getInstance().getAlliance();
     }
@@ -148,8 +152,7 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during autonomous
      */
     public void autonomousPeriodic() {
-      Scheduler.getInstance().run();
-       
+    	 Scheduler.getInstance().run();
     }
 
     public void teleopInit() {

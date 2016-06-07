@@ -23,7 +23,7 @@ public class ShooterWheel extends Subsystem {
 		super();
 		// speed=SmartDashboard.getNumber("SetShooterPercentage");
 		shooterwheel = new CANTalon(RobotMap.shooterwheel);
-		shooterwheel.changeControlMode(TalonControlMode.Speed);
+		shooterwheel.changeControlMode(TalonControlMode.PercentVbus);
 		shooterwheel.setFeedbackDevice(FeedbackDevice.EncFalling);
 		shooterwheel.reverseOutput(false);
 		shooterwheel.reverseSensor(false);
@@ -43,11 +43,11 @@ public class ShooterWheel extends Subsystem {
 
 	public void setShooterRPM() {
 		shooterwheel.enableControl();
-		shooterwheel.setSetpoint(3400);
+		shooterwheel.set(.95);
 	}
 	public void setSlowShooterRPM(){
 		shooterwheel.enableControl();
-		shooterwheel.setSetpoint(3000);
+		shooterwheel.setSetpoint(.65);
 	}
 
 	public void disableShooter() {

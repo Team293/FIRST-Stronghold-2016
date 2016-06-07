@@ -26,7 +26,9 @@ public class DropPosition extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
 
-    	Robot.lifterdrivetrain.lifterMotor.set(-.5);
+    	Robot.lifterdrivetrain.lifterMotor.set(-1);
+       	Robot.ledCenterWheel.on();
+    	Robot.ledClimb.on();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -36,13 +38,16 @@ public class DropPosition extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    
-		return (LifterDriveTrain.lifterMotor.getAnalogInRaw()<70);
+   
+		return (LifterDriveTrain.lifterMotor.getAnalogInRaw()>460);
+		
     }
 
     // Called once after isFinished returns true
     protected void end() {
+    	SmartDashboard.putBoolean("CamIsDown",true);
     	Robot.lifterdrivetrain.stopMotor();
+    	Robot.ledClimb.off();
     }
 
     // Called when another command which requires one or more of the same

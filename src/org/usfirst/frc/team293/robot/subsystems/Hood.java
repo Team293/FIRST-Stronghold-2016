@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class Hood extends Subsystem {//the hood that aims up and down and manipulates.  PID
 	private static CANTalon Hood;
-	public double[] Hoodangle={83,83,83,83,85,86,74,79,81,80,83,78,75,83};
+	public double[] Hoodangle={83,83,83,83,85,86,84,84,81,80,83,78,75,83};
 	public static final int restPosition = 825,
 			bottompoint=890;
 	// Put methods for controlling this subsystem

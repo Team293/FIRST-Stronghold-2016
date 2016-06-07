@@ -23,11 +23,11 @@ public class Feeding extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.shooterrotation.setangle(0);
+    	// shooterrotation.setangle(0);
     	Robot.feeder.outsidefeederset(1);
     	Robot.feeder.insidefeederset(-.5);
     	Robot.ledFeeder.on();
-    	Hood.setPosition(818);
+    	Hood.setPosition(768);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -47,7 +47,7 @@ public class Feeding extends Command {
     	Robot.feeder.insidefeederset(0);
     	Robot.drivercamera.Lookup();
     	Robot.ledFeeder.off();
-    	new RotateShooter();
+    	//new RotateShooter();
     }
 
     // Called when another command which requires one or more of the same
