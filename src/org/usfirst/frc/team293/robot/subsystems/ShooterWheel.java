@@ -47,7 +47,7 @@ public class ShooterWheel extends Subsystem {
 	}
 	public void setSlowShooterRPM(){
 		shooterwheel.enableControl();
-		shooterwheel.setSetpoint(.65);
+		shooterwheel.setSetpoint(SmartDashboard.getNumber("SPEED2017", -.55));
 	}
 
 	public void disableShooter() {

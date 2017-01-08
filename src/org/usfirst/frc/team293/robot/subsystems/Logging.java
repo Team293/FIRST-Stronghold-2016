@@ -40,7 +40,7 @@ public class Logging extends Subsystem {//for logging PDP current
     	pdp.clearStickyFaults();						//clear that bizarre sticky fault thing
     }
     
-    public void generateCSV(String fileName){
+  /*  public void generateCSV(String fileName){
     	try {
 			writer = new FileWriter(fileName);
 			writer.append("ShotNum,Distance,Range,Good\n");
@@ -58,6 +58,6 @@ public class Logging extends Subsystem {//for logging PDP current
     	writer.append(Integer.toString(range));
     	writer.append(",");
     	writer.append(Boolean.toString(good));
-    }
+    }*/
 }
 

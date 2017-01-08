@@ -36,7 +36,7 @@ public class Hood extends Subsystem {//the hood that aims up and down and manipu
 	public void initDefaultCommand() {
 		
 		// Set the default command for a subsystem here.
-		 //setDefaultCommand(new ManualHood());
+		 setDefaultCommand(new ManualHood());
 	}
 
 	public static void setPosition(double i) {

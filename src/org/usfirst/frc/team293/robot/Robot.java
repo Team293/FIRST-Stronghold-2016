@@ -30,6 +30,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -43,8 +44,8 @@ public class Robot extends IterativeRobot {
 	
 	public static DriverStation.Alliance color;
 	
-	//Command autonomousCommand;
-	//SendableChooser autoChooser;
+	Command autonomousCommand;
+	SendableChooser autoChooser;
 	//public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	///////////instantiate subsystems
 	public static OI oi;
@@ -73,9 +74,7 @@ public class Robot extends IterativeRobot {
 	public static Preferences prefs;
 	
 	public static continuousFunctions continuousfunctions;
-	
-   Command autonomousCommand;//instantiate auto command
-   SendableChooser autoChooser;
+
 
     /**
      * This function is run when the robot is first started up and should be
@@ -105,7 +104,7 @@ public class Robot extends IterativeRobot {
         logging				=new Logging();
         Camera				=new Camera();
         oi					=new OI();
-        autonomousCommand	=new ManualDriveStraight();
+        //autonomousCommand	=new AutonomousDriveForward(-.9,-.9);
         ledStrip			=new Arduino();
         continuousfunctions	=new continuousFunctions();
         
@@ -115,7 +114,8 @@ public class Robot extends IterativeRobot {
         autoChooser.addDefault("Backwards Manual", new AutonomousManualBackwards());
         autoChooser.addObject("Fowards Manual", new AutonomousManualForwards());
         autoChooser.addObject("AutonomousHighShoot", new AutonomousHighShoot());
-       // autoChooser.addObject(   
+        SmartDashboard.putData("Autonomous mode chooser", autoChooser);
+        // autoChooser.addObject(   
         //color=DriverStation.getInstance().getAlliance();
         
     }
@@ -143,16 +143,17 @@ public class Robot extends IterativeRobot {
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
     public void autonomousInit() {
-    autonomousCommand.start();
+    autonomousCommand=(Command) autoChooser.getSelected();
+   autonomousCommand.start();
     	
-    	color=DriverStation.getInstance().getAlliance();
+    //	color=DriverStation.getInstance().getAlliance();
     }
 
     /**
      * This function is called periodically during autonomous
      */
     public void autonomousPeriodic() {
-    	 Scheduler.getInstance().run();
+    	 //Scheduler.getInstance().run();
     }
 
     public void teleopInit() {

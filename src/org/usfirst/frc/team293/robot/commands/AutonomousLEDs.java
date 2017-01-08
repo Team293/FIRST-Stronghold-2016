@@ -18,12 +18,12 @@ public class AutonomousLEDs extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	//if(Robot.color == DriverStation.Alliance.Blue){
-    		//Robot.ledStrip.writeByte(Arduino.AutoBlue);
-    	//}
-    	//else{
-    		//Robot.ledStrip.writeByte(Arduino.AutoRed);
-    //	}
+    	if(Robot.color == DriverStation.Alliance.Blue){
+    		Robot.ledStrip.writeByte(Arduino.AutoBlue);
+    	}
+    	else{
+    		Robot.ledStrip.writeByte(Arduino.AutoRed);
+    	}
     }
 
     // Called repeatedly when this Command is scheduled to run
